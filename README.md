@@ -1,0 +1,35 @@
+<h1 align="center">
+
+Moonshot :full_moon_with_face:
+
+</h1>
+
+## Objective
+Creating a cryptocurrency app programmatically connecting to a third party API [CoinGecko](https://www.coingecko.com/en/api) for up-to-date market information and rates. 
+Results will be displayed in a tableView with screen navigation handled by a tabNavigator.
+
+## User Stories
+
+```
+
+```
+
+```
+
+```
+
+## Progress 
+
+## Improvements
+
+## Installation
+
+1. Clone repository
+
+## Screenshots
+
+##Tech Stack
+Swift
+
+## Collaborators
+@mattybwoy

@@ -13,6 +13,7 @@
 		341578B72739679000179049 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 341578B52739679000179049 /* Main.storyboard */; };
 		341578B92739679200179049 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 341578B82739679200179049 /* Assets.xcassets */; };
 		341578BC2739679200179049 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 341578BA2739679200179049 /* LaunchScreen.storyboard */; };
+		341578C42739685900179049 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 341578C32739685900179049 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		341578B82739679200179049 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		341578BB2739679200179049 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		341578BD2739679200179049 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		341578C32739685900179049 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +42,7 @@
 		341578A32739679000179049 = {
 			isa = PBXGroup;
 			children = (
+				341578C32739685900179049 /* README.md */,
 				341578AE2739679000179049 /* Moonshot */,
 				341578AD2739679000179049 /* Products */,
 			);
@@ -127,6 +130,7 @@
 			files = (
 				341578BC2739679200179049 /* LaunchScreen.storyboard in Resources */,
 				341578B92739679200179049 /* Assets.xcassets in Resources */,
+				341578C42739685900179049 /* README.md in Resources */,
 				341578B72739679000179049 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,7 +310,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -334,7 +338,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
