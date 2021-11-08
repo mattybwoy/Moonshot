@@ -7,10 +7,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class WatchListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .gray
+        title = "Watchlist"
+    
         // Do any additional setup after loading the view.
     }
 
