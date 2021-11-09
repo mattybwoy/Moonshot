@@ -16,6 +16,7 @@
 		341578C42739685900179049 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 341578C32739685900179049 /* README.md */; };
 		341578CA273982A800179049 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341578C9273982A800179049 /* ViewController.swift */; };
 		34526E0627399E6000ECD673 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34526E0527399E6000ECD673 /* TabViewController.swift */; };
+		34526E08273B00E600ECD673 /* Astrolab.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34526E07273B00E600ECD673 /* Astrolab.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		341578C32739685900179049 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		341578C9273982A800179049 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		34526E0527399E6000ECD673 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
+		34526E07273B00E600ECD673 /* Astrolab.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Astrolab.ttf; path = Moonshot/Astrolab.ttf; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				341578C9273982A800179049 /* ViewController.swift */,
 				341578B32739679000179049 /* WatchListViewController.swift */,
 				34526E0527399E6000ECD673 /* TabViewController.swift */,
+				34526E07273B00E600ECD673 /* Astrolab.ttf */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 				341578B92739679200179049 /* Assets.xcassets in Resources */,
 				341578C42739685900179049 /* README.md in Resources */,
 				341578B72739679000179049 /* Main.storyboard in Resources */,
+				34526E08273B00E600ECD673 /* Astrolab.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

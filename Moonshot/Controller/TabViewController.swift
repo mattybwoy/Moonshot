@@ -14,6 +14,8 @@ class TabViewController: UITabBarController, UITabBarControllerDelegate {
 
         self.delegate = self
         view.backgroundColor = .gray
+        tabBar.backgroundColor = .darkGray
+        tabBar.tintColor = .systemYellow
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -21,12 +23,12 @@ class TabViewController: UITabBarController, UITabBarControllerDelegate {
            
            // Create Tab one
            let tabOne = ViewController()
-           let tabOneBarItem = UITabBarItem(title: "Market", image: UIImage(named: "defaultImage.png"), selectedImage: UIImage(systemName: "line.dash"))
+           let tabOneBarItem = UITabBarItem(title: "Market", image: UIImage(systemName: "list.bullet"), selectedImage: UIImage(systemName: "list.bullet"))
            tabOne.tabBarItem = tabOneBarItem
-           
+        
            // Create Tab two
            let tabTwo = WatchListViewController()
-           let tabTwoBarItem2 = UITabBarItem(title: "Watchlist", image: UIImage(named: "defaultImage2.png"), selectedImage: UIImage(systemName: "star"))
+           let tabTwoBarItem2 = UITabBarItem(title: "Watchlist", image: UIImage(systemName: "star"), selectedImage: UIImage(systemName: "star"))
            
            tabTwo.tabBarItem = tabTwoBarItem2
            

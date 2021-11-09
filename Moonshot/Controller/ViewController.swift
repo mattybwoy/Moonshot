@@ -11,9 +11,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.title = "Market"
-        // Do any additional setup after loading the view.
+        addTitle()
     }
     
 
@@ -26,5 +25,14 @@ class ViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    func addTitle() {
+        let label = UILabel(frame: CGRect(x: 0, y: 80, width: 300, height: 30))
+        label.center = CGPoint(x: 210, y: 100)
+        label.textAlignment = .center
+        label.font = UIFont(name: "Astrolab", size: 30)
+        label.textColor = .systemYellow
+        label.text = "Moonshot"
+        self.view.addSubview(label)
+    }
 
 }
