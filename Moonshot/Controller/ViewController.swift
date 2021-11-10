@@ -9,22 +9,14 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var dataManager = DataManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Market"
         addTitle()
-    }
+        dataManager.loadCoins()    }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     func addTitle() {
         let label = UILabel(frame: CGRect(x: 0, y: 80, width: 300, height: 30))
         label.center = CGPoint(x: 210, y: 100)
@@ -35,4 +27,5 @@ class ViewController: UIViewController {
         self.view.addSubview(label)
     }
 
+    
 }

@@ -16,6 +16,7 @@ class TabViewController: UITabBarController, UITabBarControllerDelegate {
         view.backgroundColor = .gray
         tabBar.backgroundColor = .darkGray
         tabBar.tintColor = .systemYellow
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Astrolab", size: 10)!], for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

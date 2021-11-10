@@ -17,6 +17,8 @@
 		341578CA273982A800179049 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341578C9273982A800179049 /* ViewController.swift */; };
 		34526E0627399E6000ECD673 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34526E0527399E6000ECD673 /* TabViewController.swift */; };
 		34526E08273B00E600ECD673 /* Astrolab.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34526E07273B00E600ECD673 /* Astrolab.ttf */; };
+		34526E0A273BD85200ECD673 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34526E09273BD85200ECD673 /* DataManager.swift */; };
+		34526E0C273BD96800ECD673 /* Coins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34526E0B273BD96800ECD673 /* Coins.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		341578C9273982A800179049 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		34526E0527399E6000ECD673 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		34526E07273B00E600ECD673 /* Astrolab.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Astrolab.ttf; path = Moonshot/Astrolab.ttf; sourceTree = SOURCE_ROOT; };
+		34526E09273BD85200ECD673 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		34526E0B273BD96800ECD673 /* Coins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coins.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,8 @@
 		341578C727397FF300179049 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				34526E09273BD85200ECD673 /* DataManager.swift */,
+				34526E0B273BD96800ECD673 /* Coins.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -177,7 +183,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				341578B42739679000179049 /* WatchListViewController.swift in Sources */,
+				34526E0A273BD85200ECD673 /* DataManager.swift in Sources */,
 				341578B02739679000179049 /* AppDelegate.swift in Sources */,
+				34526E0C273BD96800ECD673 /* Coins.swift in Sources */,
 				341578CA273982A800179049 /* ViewController.swift in Sources */,
 				34526E0627399E6000ECD673 /* TabViewController.swift in Sources */,
 				341578B22739679000179049 /* SceneDelegate.swift in Sources */,
