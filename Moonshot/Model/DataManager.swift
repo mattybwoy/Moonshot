@@ -19,7 +19,7 @@ class DataManager {
     var coins = [Coins]()
     var delegate: CoinManagerDelegate?
     
-    func loadCoins() {
+    func loadCoins(completed: @escaping () -> ()) {
         if let url = URL(string: baseURL) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
@@ -29,7 +29,10 @@ class DataManager {
                 }
                 if let data = data {
                     self.coins = self.parseJSON(data)
-                    
+                    print(self.coins)
+                    DispatchQueue.main.async {
+                        completed()
+                    }
                     self.delegate?.didUpdateCoin(coins: self.coins)
                 }
             }
@@ -41,9 +44,6 @@ class DataManager {
         let decoder = JSONDecoder()
         do {
             let coins = try decoder.decode([Coins].self, from: data)
-            coins.forEach { coin in
-                print("\(coin.id): current price \(coin.current_price)")
-            }
             return coins
         } catch {
             print(error)

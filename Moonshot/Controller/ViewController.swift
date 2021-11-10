@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var dataManager = DataManager()
     private var tableView: UITableView = UITableView()
@@ -17,10 +17,13 @@ class ViewController: UIViewController, UITableViewDataSource {
         self.title = "Market"
         setupTableView()
         addTitle()
-        dataManager.loadCoins()
+        dataManager.loadCoins {
+            self.tableView.reloadData()
+        }
     }
     
     func setupTableView() {
+        tableView.delegate = self
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
@@ -50,7 +53,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CoinCell.reuseIdentifier, for: indexPath) as! CoinCell
-        cell.title.text = "\(dataManager.coins[indexPath.row].id)"
+        cell.textLabel?.text = "\(dataManager.coins[indexPath.row].id)"
         return cell
     }
     
