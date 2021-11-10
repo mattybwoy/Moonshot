@@ -9,5 +9,5 @@ import Foundation
 
 struct Coins: Decodable {
     let id: String
-
+    let current_price: Double
 }

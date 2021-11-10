@@ -7,15 +7,31 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource {
 
     var dataManager = DataManager()
+    private var tableView: UITableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Market"
+        setupTableView()
         addTitle()
-        dataManager.loadCoins()    }
+        dataManager.loadCoins()
+    }
+    
+    func setupTableView() {
+        tableView.dataSource = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        tableView.register(CoinCell.self, forCellReuseIdentifier: CoinCell.reuseIdentifier)
+    }
     
     func addTitle() {
         let label = UILabel(frame: CGRect(x: 0, y: 80, width: 300, height: 30))
@@ -27,5 +43,62 @@ class ViewController: UIViewController {
         self.view.addSubview(label)
     }
 
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataManager.coins.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CoinCell.reuseIdentifier, for: indexPath) as! CoinCell
+        cell.title.text = "\(dataManager.coins[indexPath.row].id)"
+        return cell
+    }
+    
+    
+}
+
+class CoinCell: UITableViewCell {
+    static let reuseIdentifier = "coincell"
+    
+    lazy var title: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        return label
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+    
+    private func setup() {
+        addSubview(title)
+        NSLayoutConstraint.activate([
+            title.leadingAnchor.constraint(equalTo: leadingAnchor),
+            title.trailingAnchor.constraint(equalTo: trailingAnchor),
+            title.topAnchor.constraint(equalTo: topAnchor),
+            title.bottomAnchor.constraint(equalTo: bottomAnchor)])
+    }
+    
+}
+
+extension ViewController: CoinManagerDelegate {
+    func didUpdateCoin(coins: [Coins]) {
+        DispatchQueue.main.async {
+            coins.forEach { coin in
+                self.title = coin.id
+            }
+            
+        }
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error)
+    }
+    
     
 }
