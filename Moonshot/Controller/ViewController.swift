@@ -23,7 +23,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func setupTableView() {
-        //tableView.delegate = self
+        tableView.delegate = self
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
@@ -60,6 +60,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        <#code#>
 //    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let favoriteAction = UITableViewRowAction(style: .normal, title: "Favourite") { _, indexPath in
+            self.dataManager.favoriteCoins.append(self.dataManager.coins[indexPath.row])
+        }
+        return [favoriteAction]
+    }
     
     
 }

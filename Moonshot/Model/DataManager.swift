@@ -18,6 +18,7 @@ class DataManager {
     let baseURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd"
     var coins = [Coins]()
     var delegate: CoinManagerDelegate?
+    var favoriteCoins = [Coins]()
     
     func loadCoins(completed: @escaping () -> ()) {
         if let url = URL(string: baseURL) {
