@@ -69,6 +69,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let favoriteAction = UITableViewRowAction(style: .normal, title: "Favourite") { _, indexPath in
             self.dataManager.favoriteCoins.append(self.dataManager.coins[indexPath.row])
         }
+        favoriteAction.backgroundColor = .systemYellow
         return [favoriteAction]
     }
     
