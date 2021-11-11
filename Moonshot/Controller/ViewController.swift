@@ -23,13 +23,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func setupTableView() {
-        tableView.delegate = self
+        //tableView.delegate = self
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 130),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -85),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
@@ -53,8 +53,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CoinCell.reuseIdentifier, for: indexPath) as! CoinCell
-        cell.textLabel?.text = "\(dataManager.coins[indexPath.row].id)"
+        cell.textLabel?.text = "\(dataManager.coins[indexPath.row].name)"
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        <#code#>
     }
     
     
@@ -89,19 +93,19 @@ class CoinCell: UITableViewCell {
     
 }
 
-extension ViewController: CoinManagerDelegate {
-    func didUpdateCoin(coins: [Coins]) {
-        DispatchQueue.main.async {
-            coins.forEach { coin in
-                self.title = coin.id
-            }
-            
-        }
-    }
-    
-    func didFailWithError(error: Error) {
-        print(error)
-    }
-    
-    
-}
+//extension ViewController: CoinManagerDelegate {
+//    func didUpdateCoin(coins: [Coins]) {
+//        DispatchQueue.main.async {
+//            coins.forEach { coin in
+//                self.title = coin.id
+//            }
+//
+//        }
+//    }
+//
+//    func didFailWithError(error: Error) {
+//        print(error)
+//    }
+//
+//
+//}

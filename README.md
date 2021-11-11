@@ -10,6 +10,7 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 
 ## Progress
 - Initial screens created for displaying market data and a watchlist
+- List of coins displayed in Market tab
 
 ## Improvements
 
