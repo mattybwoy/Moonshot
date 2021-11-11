@@ -16,6 +16,7 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         view.backgroundColor = .gray
         title = "Watchlist"
         addTitle()
+        createTableView()
     }
 
     func addTitle() {
@@ -39,7 +40,7 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        tableView.register(CoinCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
     
