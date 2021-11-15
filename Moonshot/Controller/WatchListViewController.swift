@@ -7,7 +7,9 @@
 
 import UIKit
 
-class WatchListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class WatchListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CoinAccount {
+    
+    var dataManager: DataManager?
 
     private var tableView: UITableView = UITableView()
     
@@ -17,6 +19,9 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         title = "Watchlist"
         addTitle()
         createTableView()
+        dataManager?.delegate = self
+        print(dataManager?.favoriteCoins.count)
+
     }
 
     func addTitle() {
@@ -45,14 +50,26 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        guard let favouriteCoinCount = dataManager?.favoriteCoins.count else { return 0 }
+        print(dataManager?.favoriteCoins.count)
+        return favouriteCoinCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "\(indexPath)"
+        cell.textLabel?.text = "\(dataManager?.favoriteCoins[indexPath.row].name)"
         return cell
     }
     
 }
 
+extension WatchListViewController: CoinManagerDelegate {
+    
+    func didFailWithError(error: Error) {
+        print(error)
+    }
+    
+    func coinUpdate(dataManager: DataManager) {
+        tableView.reloadData()
+    }
+}

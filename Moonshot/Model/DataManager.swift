@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 protocol CoinManagerDelegate {
-    func didUpdateCoin(coins: [Coins])
     func didFailWithError(error: Error)
+    func coinUpdate(dataManager: DataManager)
 }
 
 class DataManager {
@@ -34,7 +34,6 @@ class DataManager {
                     DispatchQueue.main.async {
                         completed()
                     }
-                    self.delegate?.didUpdateCoin(coins: self.coins)
                 }
             }
             task.resume()

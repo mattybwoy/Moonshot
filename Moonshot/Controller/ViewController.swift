@@ -7,9 +7,17 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
-    var dataManager = DataManager()
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CoinAccount, CoinManagerDelegate {
+    var dataManager: DataManager? = DataManager()
+    
+    func didFailWithError(error: Error) {
+        print(error)
+    }
+    
+    func coinUpdate(dataManager: DataManager) {
+        tableView.reloadData()
+    }
+    
     private var tableView: UITableView = UITableView()
     
     override func viewDidLoad() {
@@ -17,9 +25,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.title = "Market"
         setupTableView()
         addTitle()
-        dataManager.loadCoins {
+        dataManager?.loadCoins {
             self.tableView.reloadData()
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print(dataManager?.favoriteCoins.count)
     }
     
     func setupTableView() {
@@ -48,18 +60,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataManager.coins.count
+        guard let coinCount = dataManager?.coins.count else { return 0 }
+        return coinCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CoinCell.reuseIdentifier, for: indexPath) as! CoinCell
-        cell.textLabel?.text = "\(dataManager.coins[indexPath.row].name)"
+        cell.textLabel?.text = "\(dataManager!.coins[indexPath.row].name)     \(dataManager!.coins[indexPath.row].current_price)"
         return cell
     }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        <#code#>
-//    }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -67,7 +76,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let favoriteAction = UITableViewRowAction(style: .normal, title: "Favourite") { _, indexPath in
-            self.dataManager.favoriteCoins.append(self.dataManager.coins[indexPath.row])
+            self.dataManager?.favoriteCoins.append((self.dataManager?.coins[indexPath.row])!)
+            print(self.dataManager!.favoriteCoins)
         }
         favoriteAction.backgroundColor = .systemYellow
         return [favoriteAction]
@@ -104,20 +114,3 @@ class CoinCell: UITableViewCell {
     }
     
 }
-
-//extension ViewController: CoinManagerDelegate {
-//    func didUpdateCoin(coins: [Coins]) {
-//        DispatchQueue.main.async {
-//            coins.forEach { coin in
-//                self.title = coin.id
-//            }
-//
-//        }
-//    }
-//
-//    func didFailWithError(error: Error) {
-//        print(error)
-//    }
-//
-//
-//}

@@ -8,10 +8,11 @@
 import UIKit
 
 class TabViewController: UITabBarController, UITabBarControllerDelegate {
+    
+    var dataManager: DataManager? = DataManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.delegate = self
         view.backgroundColor = .gray
         tabBar.backgroundColor = .darkGray
@@ -32,7 +33,6 @@ class TabViewController: UITabBarController, UITabBarControllerDelegate {
            let tabTwoBarItem2 = UITabBarItem(title: "Watchlist", image: UIImage(systemName: "star"), selectedImage: UIImage(systemName: "star"))
            
            tabTwo.tabBarItem = tabTwoBarItem2
-           
            
            self.viewControllers = [tabOne, tabTwo]
        }
