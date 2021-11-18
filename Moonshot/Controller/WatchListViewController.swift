@@ -19,7 +19,7 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         title = "Watchlist"
         addTitle()
         createTableView()
-        dataManager?.delegate = self
+        //viewController.delegate = self
         print(dataManager?.favoriteCoins.count)
 
     }
@@ -51,7 +51,7 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let favouriteCoinCount = dataManager?.favoriteCoins.count else { return 0 }
-        print(dataManager?.favoriteCoins.count)
+        print(favouriteCoinCount)
         return favouriteCoinCount
     }
     
@@ -64,12 +64,13 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
 }
 
 extension WatchListViewController: CoinManagerDelegate {
+    func coinUpdate(favourite: [Coins]) {
+        print(favourite.count)
+        tableView.reloadData()
+    }
     
     func didFailWithError(error: Error) {
         print(error)
     }
-    
-    func coinUpdate(dataManager: DataManager) {
-        tableView.reloadData()
-    }
+
 }

@@ -7,18 +7,19 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CoinAccount, CoinManagerDelegate {
+protocol CoinManagerDelegate {
+    func didFailWithError(error: Error)
+    func coinUpdate(favourite: [Coins])
+}
+
+class MarketViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CoinAccount {
     var dataManager: DataManager? = DataManager()
     
-    func didFailWithError(error: Error) {
-        print(error)
-    }
-    
-    func coinUpdate(dataManager: DataManager) {
-        tableView.reloadData()
-    }
+    var delegate: CoinManagerDelegate?
     
     private var tableView: UITableView = UITableView()
+    
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +39,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.delegate = self
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.refreshControl = refreshControl
+        refreshControl.tintColor = .systemCyan
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching Market Data...")
+        refreshControl.addTarget(self, action: #selector(refreshMarketData(_:)), for: .valueChanged)
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 130),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -85),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -48,9 +53,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.register(CoinCell.self, forCellReuseIdentifier: CoinCell.reuseIdentifier)
     }
     
+    @objc private func refreshMarketData(_ sender: Any) {
+        dataManager?.loadCoins {
+            self.tableView.reloadData()
+        }
+        self.refreshControl.endRefreshing()
+        
+    }
+    
+    
     func addTitle() {
-        let label = UILabel(frame: CGRect(x: 0, y: 80, width: 300, height: 30))
-        label.center = CGPoint(x: 210, y: 100)
+        let label = UILabel(frame: CGRect(x: 0, y: 70, width: 300, height: 30))
+        label.center = CGPoint(x: 210, y: 80)
         label.textAlignment = .center
         label.font = UIFont(name: "Astrolab", size: 30)
         label.textColor = .systemYellow
@@ -76,8 +90,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let favoriteAction = UITableViewRowAction(style: .normal, title: "Favourite") { _, indexPath in
-            self.dataManager?.favoriteCoins.append((self.dataManager?.coins[indexPath.row])!)
-            print(self.dataManager!.favoriteCoins)
+            self.dataManager?.favoriteCoins.append((self.dataManager!.coins[indexPath.row]))
+            print(self.dataManager?.favoriteCoins)
         }
         favoriteAction.backgroundColor = .systemYellow
         return [favoriteAction]

@@ -24,7 +24,7 @@ class TabViewController: UITabBarController, UITabBarControllerDelegate {
            super.viewWillAppear(animated)
            
            // Create Tab one
-           let tabOne = ViewController()
+           let tabOne = MarketViewController()
            let tabOneBarItem = UITabBarItem(title: "Market", image: UIImage(systemName: "list.bullet"), selectedImage: UIImage(systemName: "list.bullet"))
            tabOne.tabBarItem = tabOneBarItem
         

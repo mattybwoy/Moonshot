@@ -8,16 +8,11 @@
 import Foundation
 import UIKit
 
-protocol CoinManagerDelegate {
-    func didFailWithError(error: Error)
-    func coinUpdate(dataManager: DataManager)
-}
-
 class DataManager {
     
     let baseURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd"
     var coins = [Coins]()
-    var delegate: CoinManagerDelegate?
+    
     var favoriteCoins = [Coins]()
     
     func loadCoins(completed: @escaping () -> ()) {
@@ -25,7 +20,6 @@ class DataManager {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
                 if error != nil {
-                    self.delegate?.didFailWithError(error: error!)
                     return
                 }
                 if let data = data {
@@ -34,6 +28,7 @@ class DataManager {
                     DispatchQueue.main.async {
                         completed()
                     }
+                    
                 }
             }
             task.resume()
