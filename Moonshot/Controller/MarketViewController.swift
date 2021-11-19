@@ -16,6 +16,7 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
     var dataManager: DataManager? = DataManager()
     
     var delegate: CoinManagerDelegate?
+    var favoriteCoins = [Coins]()
     
     private var tableView: UITableView = UITableView()
     
@@ -26,13 +27,14 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
         self.title = "Market"
         setupTableView()
         addTitle()
+        view.backgroundColor = .darkGray
         dataManager?.loadCoins {
             self.tableView.reloadData()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print(dataManager?.favoriteCoins.count)
+        //print(dataManager?.favoriteCoins.count)
     }
     
     func setupTableView() {
@@ -59,7 +61,7 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
             if(velocity.y < -0.2)
             {
                 dataManager?.loadCoins {
-                    self.tableView.reloadData()
+                self.tableView.reloadData()
                 }
                 self.refreshControl.endRefreshing()
             }
@@ -84,6 +86,8 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CoinCell.reuseIdentifier, for: indexPath) as! CoinCell
         cell.textLabel?.text = "\(dataManager!.coins[indexPath.row].name)     \(dataManager!.coins[indexPath.row].current_price)"
+        cell.backgroundColor = .darkGray
+        cell.textLabel?.textColor = .systemYellow
         return cell
     }
     
@@ -93,8 +97,10 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let favoriteAction = UITableViewRowAction(style: .normal, title: "Favourite") { _, indexPath in
-            self.dataManager?.favoriteCoins.append((self.dataManager!.coins[indexPath.row]))
-            print(self.dataManager?.favoriteCoins)
+            //self.dataManager?.favoriteCoins.append((self.dataManager!.coins[indexPath.row]))
+            self.favoriteCoins.append(self.dataManager!.coins[indexPath.row])
+            self.delegate?.coinUpdate(favourite: self.favoriteCoins)
+            //print(self.dataManager?.favoriteCoins)
         }
         favoriteAction.backgroundColor = .systemYellow
         return [favoriteAction]

@@ -14,9 +14,9 @@ class TabViewController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
-        view.backgroundColor = .gray
-        tabBar.backgroundColor = .darkGray
+        view.backgroundColor = .darkGray
         tabBar.tintColor = .systemYellow
+        tabBar.barTintColor = .darkGray
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Astrolab", size: 10)!], for: .normal)
     }
     
@@ -31,9 +31,7 @@ class TabViewController: UITabBarController, UITabBarControllerDelegate {
            // Create Tab two
            let tabTwo = WatchListViewController()
            let tabTwoBarItem2 = UITabBarItem(title: "Watchlist", image: UIImage(systemName: "star"), selectedImage: UIImage(systemName: "star"))
-           
            tabTwo.tabBarItem = tabTwoBarItem2
-           
            self.viewControllers = [tabOne, tabTwo]
        }
        

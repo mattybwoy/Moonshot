@@ -15,12 +15,11 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
+        view.backgroundColor = .darkGray
         title = "Watchlist"
         addTitle()
         createTableView()
-        print(dataManager?.favoriteCoins.count)
-
+        //print(dataManager?.favoriteCoins.count)
     }
 
     func addTitle() {
@@ -34,7 +33,7 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func createTableView() {
-        //tableView.delegate = self
+        tableView.delegate = self
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
@@ -49,14 +48,15 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let favouriteCoinCount = dataManager?.favoriteCoins.count else { return 0 }
-        print(favouriteCoinCount)
-        return favouriteCoinCount
+        //guard let favouriteCoinCount = dataManager?.favoriteCoins.count else { return 0 }
+        //print(favouriteCoinCount)
+        //return favouriteCoinCount
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "\(dataManager?.favoriteCoins[indexPath.row].name)"
+        //cell.textLabel?.text = "\(dataManager?.favoriteCoins[indexPath.row].name)"
         return cell
     }
     
