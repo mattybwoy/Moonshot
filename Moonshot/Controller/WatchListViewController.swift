@@ -19,7 +19,6 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         title = "Watchlist"
         addTitle()
         createTableView()
-        //viewController.delegate = self
         print(dataManager?.favoriteCoins.count)
 
     }

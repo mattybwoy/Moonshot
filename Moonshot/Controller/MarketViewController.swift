@@ -40,8 +40,10 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.refreshControl = refreshControl
-        refreshControl.tintColor = .systemCyan
-        refreshControl.attributedTitle = NSAttributedString(string: "Fetching Market Data...")
+        refreshControl.backgroundColor = UIColor.darkGray
+        refreshControl.tintColor = .systemYellow
+        let myAttribute = [NSAttributedString.Key.foregroundColor: UIColor.systemYellow]
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching Market Data...", attributes: myAttribute)
         refreshControl.addTarget(self, action: #selector(refreshMarketData(_:)), for: .valueChanged)
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
