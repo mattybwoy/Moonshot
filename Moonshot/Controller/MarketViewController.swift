@@ -44,7 +44,7 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
         refreshControl.tintColor = .systemYellow
         let myAttribute = [NSAttributedString.Key.foregroundColor: UIColor.systemYellow]
         refreshControl.attributedTitle = NSAttributedString(string: "Fetching Market Data...", attributes: myAttribute)
-        refreshControl.addTarget(self, action: #selector(refreshMarketData(_:)), for: .valueChanged)
+
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
@@ -55,14 +55,15 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.register(CoinCell.self, forCellReuseIdentifier: CoinCell.reuseIdentifier)
     }
     
-    @objc private func refreshMarketData(_ sender: Any) {
-        dataManager?.loadCoins {
-            self.tableView.reloadData()
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+            if(velocity.y < -0.2)
+            {
+                dataManager?.loadCoins {
+                    self.tableView.reloadData()
+                }
+                self.refreshControl.endRefreshing()
+            }
         }
-        self.refreshControl.endRefreshing()
-        
-    }
-    
     
     func addTitle() {
         let label = UILabel(frame: CGRect(x: 0, y: 70, width: 300, height: 30))
