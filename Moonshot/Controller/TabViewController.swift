@@ -8,8 +8,6 @@
 import UIKit
 
 class TabViewController: UITabBarController, UITabBarControllerDelegate {
-    
-    var dataManager: DataManager? = DataManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()

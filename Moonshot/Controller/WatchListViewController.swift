@@ -63,13 +63,9 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
 }
 
 extension WatchListViewController: CoinManagerDelegate {
-    func coinUpdate(favourite: [Coins]) {
+    func coinUpdate(controller: MarketViewController, favourite: [Coins]) {
         print(favourite.count)
         tableView.reloadData()
-    }
-    
-    func didFailWithError(error: Error) {
-        print(error)
     }
 
 }

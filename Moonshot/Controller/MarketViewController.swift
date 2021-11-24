@@ -8,8 +8,7 @@
 import UIKit
 
 protocol CoinManagerDelegate {
-    func didFailWithError(error: Error)
-    func coinUpdate(favourite: [Coins])
+    func coinUpdate(controller: MarketViewController, favourite: [Coins])
 }
 
 class MarketViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CoinAccount {
@@ -88,6 +87,8 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
         cell.textLabel?.text = "\(dataManager!.coins[indexPath.row].name)     \(dataManager!.coins[indexPath.row].current_price)"
         cell.backgroundColor = .darkGray
         cell.textLabel?.textColor = .systemYellow
+        cell.layer.borderColor = UIColor.systemYellow.cgColor
+        cell.layer.borderWidth = 1.0
         return cell
     }
     
@@ -99,7 +100,7 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
         let favoriteAction = UITableViewRowAction(style: .normal, title: "Favourite") { _, indexPath in
             //self.dataManager?.favoriteCoins.append((self.dataManager!.coins[indexPath.row]))
             self.favoriteCoins.append(self.dataManager!.coins[indexPath.row])
-            self.delegate?.coinUpdate(favourite: self.favoriteCoins)
+            self.delegate?.coinUpdate(controller: self, favourite: self.favoriteCoins)
             //print(self.dataManager?.favoriteCoins)
         }
         favoriteAction.backgroundColor = .systemYellow
