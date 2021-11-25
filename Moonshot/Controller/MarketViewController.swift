@@ -75,7 +75,6 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
         label.text = "Moonshot"
         self.view.addSubview(label)
     }
-
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let coinCount = dataManager?.coins.count else { return 0 }
@@ -107,8 +106,8 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
         return [favoriteAction]
     }
     
-    
 }
+
 
 class CoinCell: UITableViewCell {
     static let reuseIdentifier = "coincell"

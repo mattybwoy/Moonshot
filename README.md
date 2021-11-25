@@ -13,6 +13,7 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - List of coins displayed in Market tab
 
 ## Improvements
+- Passing Favourite Coins Data between Tabs
 
 ## Installation
 
