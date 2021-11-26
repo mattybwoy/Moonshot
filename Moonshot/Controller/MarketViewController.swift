@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import DropDown
 
 protocol CoinManagerDelegate {
     func coinUpdate(controller: MarketViewController, favourite: [Coins])
@@ -17,6 +18,16 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
     var delegate: CoinManagerDelegate?
     var favoriteCoins = [Coins]()
     
+    let currencyMenu: DropDown = {
+        let currencyMenu = DropDown()
+        currencyMenu.dataSource = [
+        "itemA",
+        "itemB",
+        "itemC"
+        ]
+        return currencyMenu
+    }()
+    
     private var tableView: UITableView = UITableView()
     
     private let refreshControl = UIRefreshControl()
@@ -26,7 +37,9 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
         self.title = "Market"
         setupTableView()
         addTitle()
+        currencyButton()
         view.backgroundColor = .darkGray
+
         dataManager?.loadCoins {
             self.tableView.reloadData()
         }
@@ -74,6 +87,26 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
         label.textColor = .systemYellow
         label.text = "Moonshot"
         self.view.addSubview(label)
+    }
+    
+    func currencyButton() {
+        let currencySelector = UIButton(frame: CGRect(x: 0, y: 50, width: 100, height: 30))
+        currencySelector.center = CGPoint(x: 65, y: 125)
+        currencySelector.setTitle("Currency", for: .normal)
+        currencySelector.titleLabel?.font = UIFont(name: "Astrolab", size: 10)!
+        currencySelector.titleLabel?.textColor = .systemYellow
+        currencySelector.setTitleColor(.systemYellow, for: .normal)
+        currencySelector.layer.borderWidth = 1
+        currencySelector.layer.borderColor = UIColor.systemYellow.cgColor
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapCurrencySelector))
+        gesture.numberOfTapsRequired = 1
+        gesture.numberOfTouchesRequired = 1
+        currencySelector.addGestureRecognizer(gesture)
+        self.view.addSubview(currencySelector)
+    }
+    
+    @objc func didTapCurrencySelector() {
+        currencyMenu.show()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
