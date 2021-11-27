@@ -110,6 +110,7 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
         currencySelector.layer.borderWidth = 1
         currencySelector.layer.borderColor = UIColor.systemYellow.cgColor
         currencyMenu.anchorView = currencySelector
+        currencyMenu.bottomOffset = CGPoint(x: 0, y: currencySelector.frame.size.height)
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapCurrencySelector))
         gesture.numberOfTapsRequired = 1
         gesture.numberOfTouchesRequired = 1
