@@ -21,10 +21,21 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
     let currencyMenu: DropDown = {
         let currencyMenu = DropDown()
         currencyMenu.dataSource = [
-        "itemA",
-        "itemB",
-        "itemC"
+        "usd",
+        "gbp",
+        "eur",
+        "aud",
+        "cad",
+        "cny",
+        "hkd",
+        "inr",
+        "jpy",
+        "sgd",
+        "twd",
+        "vnd"
         ]
+        currencyMenu.backgroundColor = .darkGray
+        currencyMenu.textColor = .systemYellow
         return currencyMenu
     }()
     
@@ -98,6 +109,7 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
         currencySelector.setTitleColor(.systemYellow, for: .normal)
         currencySelector.layer.borderWidth = 1
         currencySelector.layer.borderColor = UIColor.systemYellow.cgColor
+        currencyMenu.anchorView = currencySelector
         let gesture = UITapGestureRecognizer(target: self, action: #selector(didTapCurrencySelector))
         gesture.numberOfTapsRequired = 1
         gesture.numberOfTouchesRequired = 1
@@ -107,6 +119,9 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
     
     @objc func didTapCurrencySelector() {
         currencyMenu.show()
+        currencyMenu.selectionAction = { index, title in
+            print("index \(index) and \(title)")
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
