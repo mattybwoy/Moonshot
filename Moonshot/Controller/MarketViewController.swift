@@ -21,23 +21,25 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
     let currencyMenu: DropDown = {
         let currencyMenu = DropDown()
         currencyMenu.dataSource = [
-        "usd",
-        "gbp",
-        "eur",
-        "aud",
-        "cad",
-        "cny",
-        "hkd",
-        "inr",
-        "jpy",
-        "sgd",
-        "twd",
-        "vnd"
+        "USD",
+        "GBP",
+        "EUR",
+        "AUD",
+        "CAD",
+        "CNY",
+        "HKD",
+        "INR",
+        "JPY",
+        "SGD",
+        "TWD",
+        "VND"
         ]
         currencyMenu.backgroundColor = .darkGray
         currencyMenu.textColor = .systemYellow
         return currencyMenu
     }()
+    
+    let currencySelector = UIButton(frame: CGRect(x: 0, y: 50, width: 100, height: 30))
     
     private var tableView: UITableView = UITableView()
     
@@ -101,9 +103,8 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func currencyButton() {
-        let currencySelector = UIButton(frame: CGRect(x: 0, y: 50, width: 100, height: 30))
         currencySelector.center = CGPoint(x: 65, y: 125)
-        currencySelector.setTitle("Currency", for: .normal)
+        currencySelector.setTitle("USD", for: .normal)
         currencySelector.titleLabel?.font = UIFont(name: "Astrolab", size: 10)!
         currencySelector.titleLabel?.textColor = .systemYellow
         currencySelector.setTitleColor(.systemYellow, for: .normal)
@@ -122,6 +123,7 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
         currencyMenu.show()
         currencyMenu.selectionAction = { index, title in
             print("index \(index) and \(title)")
+            self.currencySelector.setTitle(title, for: .normal)
         }
     }
     
