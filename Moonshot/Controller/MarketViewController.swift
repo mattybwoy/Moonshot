@@ -124,6 +124,10 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
         currencyMenu.selectionAction = { index, title in
             print("index \(index) and \(title)")
             self.currencySelector.setTitle(title, for: .normal)
+            let newCurrency = title.lowercased()
+            self.dataManager?.changeCurrency(currency: newCurrency, completed: {
+                self.tableView.reloadData()
+            })
         }
     }
     

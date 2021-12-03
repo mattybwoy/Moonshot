@@ -35,6 +35,30 @@ class DataManager {
         }
     }
     
+    var changeURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency="
+    
+    func changeCurrency(currency: String, completed: @escaping () -> ()) {
+        let newCurrency: String = changeURL + currency
+        
+        if let url = URL(string: newCurrency) {
+            let session = URLSession(configuration: .default)
+            let task = session.dataTask(with: url) { (data, response, error) in
+                if error != nil {
+                    return
+                }
+                if let data = data {
+                    self.coins = self.parseJSON(data)
+                    print(self.coins)
+                    DispatchQueue.main.async {
+                        completed()
+                    }
+                    
+                }
+            }
+            task.resume()
+        }
+    }
+    
     func parseJSON(_ data: Data) -> [Coins] {
         let decoder = JSONDecoder()
         do {
