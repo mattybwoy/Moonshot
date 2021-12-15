@@ -12,7 +12,7 @@ protocol CoinManagerDelegate {
     func coinUpdate(controller: MarketViewController, favourite: [Coins])
 }
 
-class MarketViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CoinAccount {
+class MarketViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, CoinAccount {
     var dataManager: DataManager? = DataManager()
     
     var delegate: CoinManagerDelegate?
@@ -91,6 +91,13 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
                 self.refreshControl.endRefreshing()
             }
         }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        if position > (tableView.contentSize.height-100-scrollView.frame.size.height) {
+            print("Loading")
+        }
+    }
     
     func addTitle() {
         let label = UILabel(frame: CGRect(x: 0, y: 70, width: 300, height: 30))

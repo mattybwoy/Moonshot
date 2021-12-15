@@ -14,10 +14,14 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 
 ## Improvements
 - Passing Favourite Coins Data between Tabs
+- Search functionality
+- Market data
+- tableView pagination 
 
 ## Installation
 
 1. Clone repository
+2. Install cocoapods
 
 ## Screenshots
 
