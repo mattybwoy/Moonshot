@@ -9,13 +9,16 @@ import Foundation
 import UIKit
 
 class DataManager {
-    
+    var isPaginating = false
     let baseURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd"
     var coins = [Coins]()
     
     //var favoriteCoins = [Coins]()
     
-    func loadCoins(completed: @escaping () -> ()) {
+    func loadCoins(pagination: Bool = false, completed: @escaping () -> ()) {
+        if pagination {
+            isPaginating = true
+        }
         if let url = URL(string: baseURL) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
@@ -23,12 +26,16 @@ class DataManager {
                     return
                 }
                 if let data = data {
-                    self.coins = self.parseJSON(data)
+                    //self.coins = self.parseJSON(data)
+                    let newCoins = self.parseJSON(data)
+                    self.coins.append(contentsOf: newCoins)
                     print(self.coins)
                     DispatchQueue.main.async {
                         completed()
                     }
-                    
+                    if pagination {
+                        self.isPaginating = false
+                    }
                 }
             }
             task.resume()
@@ -37,7 +44,7 @@ class DataManager {
     
     var changeURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency="
     
-    func changeCurrency(currency: String, completed: @escaping () -> ()) {
+    func changeCurrency(pagination: Bool = false, currency: String, completed: @escaping () -> ()) {
         let newCurrency: String = changeURL + currency
         
         if let url = URL(string: newCurrency) {
@@ -52,7 +59,6 @@ class DataManager {
                     DispatchQueue.main.async {
                         completed()
                     }
-                    
                 }
             }
             task.resume()

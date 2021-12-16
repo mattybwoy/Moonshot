@@ -95,7 +95,12 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
         if position > (tableView.contentSize.height-100-scrollView.frame.size.height) {
-            print("Loading")
+            guard !dataManager!.isPaginating else {
+                return
+            }
+            dataManager?.loadCoins(pagination: true, completed: {
+                self.tableView.reloadData()
+            })
         }
     }
     
