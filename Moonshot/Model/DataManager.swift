@@ -9,24 +9,26 @@ import Foundation
 import UIKit
 
 class DataManager {
+    
+    var pageCount = 0
     var isPaginating = false
-    let baseURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd"
+    let baseURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&page="
     var coins = [Coins]()
     
     //var favoriteCoins = [Coins]()
     
     func loadCoins(pagination: Bool = false, completed: @escaping () -> ()) {
+        pageCount += 1
         if pagination {
             isPaginating = true
         }
-        if let url = URL(string: baseURL) {
+        if let url = URL(string: baseURL + String(pageCount)) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
                 if error != nil {
                     return
                 }
                 if let data = data {
-                    //self.coins = self.parseJSON(data)
                     let newCoins = self.parseJSON(data)
                     self.coins.append(contentsOf: newCoins)
                     print(self.coins)

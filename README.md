@@ -11,12 +11,13 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 ## Progress
 - Initial screens created for displaying market data and a watchlist
 - List of coins displayed in Market tab
+- Coin results now paginating
 
 ## Improvements
 - Passing Favourite Coins Data between Tabs
 - Search functionality
-- Market data
-- tableView pagination 
+- Market data, trends
+- Icon packs
 
 ## Installation
 
