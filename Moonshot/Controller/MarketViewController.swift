@@ -52,7 +52,6 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
         addTitle()
         currencyButton()
         view.backgroundColor = .darkGray
-
         dataManager?.loadCoins {
             self.tableView.reloadData()
         }
@@ -83,7 +82,7 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-            if(velocity.y < -0.2)
+            if (velocity.y < -0.2)
             {
                 dataManager?.loadCoins {
                 self.tableView.reloadData()
@@ -98,7 +97,12 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
             guard !dataManager!.isPaginating else {
                 return
             }
+            self.tableView.tableFooterView = createSpinnerFooter()
+            
             dataManager?.loadCoins(pagination: true, completed: {
+                DispatchQueue.main.async {
+                    self.tableView.tableFooterView = nil
+                }
                 self.tableView.reloadData()
             })
         }
@@ -112,6 +116,17 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
         label.textColor = .systemYellow
         label.text = "Moonshot"
         self.view.addSubview(label)
+    }
+    
+    func createSpinnerFooter() -> UIView {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
+        footerView.backgroundColor = UIColor.darkGray
+        let spinner = UIActivityIndicatorView()
+        spinner.center = footerView.center
+        spinner.color = UIColor.systemYellow
+        footerView.addSubview(spinner)
+        spinner.startAnimating()
+        return footerView
     }
     
     func currencyButton() {
