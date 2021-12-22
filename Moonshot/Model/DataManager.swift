@@ -10,28 +10,31 @@ import UIKit
 
 class DataManager {
     
-    var pageCount = 0
+    var pageCount = 1
+    var currentCurrency: String?
     var isPaginating = false
-    let baseURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&page="
+    let baseURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency="
+    let pageNum = "&page="
     var coins = [Coins]()
     
     //var favoriteCoins = [Coins]()
     
-    func loadCoins(pagination: Bool = false, completed: @escaping () -> ()) {
-        pageCount += 1
+    func loadCoins(pagination: Bool = false, currency: String = "usd", completed: @escaping () -> ()) {
+        
         if pagination {
             isPaginating = true
         }
-        if let url = URL(string: baseURL + String(pageCount)) {
+        currentCurrency = currency
+
+        if let url = URL(string: baseURL + currentCurrency!) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
                 if error != nil {
                     return
                 }
                 if let data = data {
-                    let newCoins = self.parseJSON(data)
-                    self.coins.append(contentsOf: newCoins)
-                    print(self.coins)
+                    self.coins = self.parseJSON(data)
+                    //print(self.coins)
                     DispatchQueue.main.async {
                         completed()
                     }
@@ -44,10 +47,37 @@ class DataManager {
         }
     }
     
-    var changeURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency="
+    func scrollCoin(pagination: Bool = false, completed: @escaping () -> ()) {
+        
+        if pagination {
+            isPaginating = true
+        }
+        
+        if let url = URL(string: baseURL + currentCurrency! + pageNum + String(pageCount)) {
+            let session = URLSession(configuration: .default)
+            let task = session.dataTask(with: url) { (data, response, error) in
+                if error != nil {
+                    return
+                }
+                if let data = data {
+                        let newCoins = self.parseJSON(data)
+                        self.coins.append(contentsOf: newCoins)
+                    //print(self.coins)
+                    DispatchQueue.main.async {
+                        completed()
+                    }
+                    if pagination {
+                        self.isPaginating = false
+                    }
+                }
+            }
+            task.resume()
+        }
+        pageCount += 1
+    }
     
-    func changeCurrency(pagination: Bool = false, currency: String, completed: @escaping () -> ()) {
-        let newCurrency: String = changeURL + currency
+    func reloadCoins(pagination: Bool = false, completed: @escaping () -> ()) {
+        let newCurrency: String = baseURL + currentCurrency!
         
         if let url = URL(string: newCurrency) {
             let session = URLSession(configuration: .default)
@@ -57,7 +87,7 @@ class DataManager {
                 }
                 if let data = data {
                     self.coins = self.parseJSON(data)
-                    print(self.coins)
+                    //print(self.coins)
                     DispatchQueue.main.async {
                         completed()
                     }

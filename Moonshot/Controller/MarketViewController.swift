@@ -84,10 +84,10 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
             if (velocity.y < -0.2)
             {
-                dataManager?.loadCoins {
-                self.tableView.reloadData()
+                dataManager?.reloadCoins {
+                    self.tableView.reloadData()
                 }
-                self.refreshControl.endRefreshing()
+                    self.refreshControl.endRefreshing()
             }
         }
     
@@ -99,7 +99,7 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
             }
             self.tableView.tableFooterView = createSpinnerFooter()
             
-            dataManager?.loadCoins(pagination: true, completed: {
+            dataManager?.scrollCoin(pagination: true, completed: {
                 DispatchQueue.main.async {
                     self.tableView.tableFooterView = nil
                 }
@@ -152,9 +152,12 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
             print("index \(index) and \(title)")
             self.currencySelector.setTitle(title, for: .normal)
             let newCurrency = title.lowercased()
-            self.dataManager?.changeCurrency(currency: newCurrency, completed: {
+            self.dataManager?.loadCoins(currency: newCurrency, completed: {
                 self.tableView.reloadData()
             })
+//            self.dataManager?.changeCurrency(currency: newCurrency, completed: {
+//                self.tableView.reloadData()
+//            })
         }
     }
     
