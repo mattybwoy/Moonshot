@@ -12,7 +12,7 @@ protocol CoinManagerDelegate {
     func coinUpdate(controller: MarketViewController, favourite: [Coins])
 }
 
-class MarketViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, CoinAccount {
+class MarketViewController: UIViewController, CoinAccount {
     var dataManager: DataManager? = DataManager()
     
     var delegate: CoinManagerDelegate?
@@ -59,53 +59,6 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewWillAppear(_ animated: Bool) {
         //print(dataManager?.favoriteCoins.count)
-    }
-    
-    func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.refreshControl = refreshControl
-        refreshControl.backgroundColor = UIColor.darkGray
-        refreshControl.tintColor = .systemYellow
-        let myAttribute = [NSAttributedString.Key.foregroundColor: UIColor.systemYellow]
-        refreshControl.attributedTitle = NSAttributedString(string: "Fetching Market Data...", attributes: myAttribute)
-
-        view.addSubview(tableView)
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -85),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-        tableView.register(CoinCell.self, forCellReuseIdentifier: CoinCell.reuseIdentifier)
-    }
-    
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-            if (velocity.y < -0.2)
-            {
-                dataManager?.reloadCoins {
-                    self.tableView.reloadData()
-                }
-                    self.refreshControl.endRefreshing()
-            }
-        }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let position = scrollView.contentOffset.y
-        if position > (tableView.contentSize.height-100-scrollView.frame.size.height) {
-            guard !dataManager!.isPaginating else {
-                return
-            }
-            self.tableView.tableFooterView = createSpinnerFooter()
-            
-            dataManager?.scrollCoin(pagination: true, completed: {
-                DispatchQueue.main.async {
-                    self.tableView.tableFooterView = nil
-                }
-                self.tableView.reloadData()
-            })
-        }
     }
     
     func addTitle() {
@@ -160,6 +113,59 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
 //            })
         }
     }
+}
+
+
+extension MarketViewController: UIScrollViewDelegate {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+            if (velocity.y < -0.2)
+            {
+                dataManager?.reloadCoins {
+                    self.tableView.reloadData()
+                }
+                    self.refreshControl.endRefreshing()
+            }
+        }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        if position > (tableView.contentSize.height-100-scrollView.frame.size.height) {
+            guard !dataManager!.isPaginating else {
+                return
+            }
+            self.tableView.tableFooterView = createSpinnerFooter()
+            
+            dataManager?.scrollCoin(pagination: true, completed: {
+                DispatchQueue.main.async {
+                    self.tableView.tableFooterView = nil
+                }
+                self.tableView.reloadData()
+            })
+        }
+    }
+}
+
+extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.refreshControl = refreshControl
+        refreshControl.backgroundColor = UIColor.darkGray
+        refreshControl.tintColor = .systemYellow
+        let myAttribute = [NSAttributedString.Key.foregroundColor: UIColor.systemYellow]
+        refreshControl.attributedTitle = NSAttributedString(string: "Fetching Market Data...", attributes: myAttribute)
+
+        view.addSubview(tableView)
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -85),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        tableView.register(CoinCell.self, forCellReuseIdentifier: CoinCell.reuseIdentifier)
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let coinCount = dataManager?.coins.count else { return 0 }
@@ -190,7 +196,6 @@ class MarketViewController: UIViewController, UITableViewDataSource, UITableView
         favoriteAction.backgroundColor = .systemYellow
         return [favoriteAction]
     }
-    
 }
 
 
