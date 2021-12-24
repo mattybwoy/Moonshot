@@ -21,6 +21,7 @@
 		34526E0C273BD96800ECD673 /* Coins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34526E0B273BD96800ECD673 /* Coins.swift */; };
 		34526E0E273D85D600ECD673 /* CoinAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34526E0D273D85D600ECD673 /* CoinAccount.swift */; };
 		34E0C8AC277621CF00CEDA95 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E0C8AB277621CF00CEDA95 /* TrendingViewController.swift */; };
+		34E0C8AE277628A700CEDA95 /* TrendCoins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E0C8AD277628A700CEDA95 /* TrendCoins.swift */; };
 		FCECC74E14E9E1AE4C2E4500 /* Pods_Moonshot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87CFF8B7A389BECBA735E44 /* Pods_Moonshot.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		34526E0B273BD96800ECD673 /* Coins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coins.swift; sourceTree = "<group>"; };
 		34526E0D273D85D600ECD673 /* CoinAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinAccount.swift; sourceTree = "<group>"; };
 		34E0C8AB277621CF00CEDA95 /* TrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
+		34E0C8AD277628A700CEDA95 /* TrendCoins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendCoins.swift; sourceTree = "<group>"; };
 		8238BC482CA5012A620DEE41 /* Pods-Moonshot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moonshot.release.xcconfig"; path = "Target Support Files/Pods-Moonshot/Pods-Moonshot.release.xcconfig"; sourceTree = "<group>"; };
 		AEA2FB348DAD6459F6F0FA74 /* Pods-Moonshot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moonshot.debug.xcconfig"; path = "Target Support Files/Pods-Moonshot/Pods-Moonshot.debug.xcconfig"; sourceTree = "<group>"; };
 		D87CFF8B7A389BECBA735E44 /* Pods_Moonshot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Moonshot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +120,7 @@
 				34526E09273BD85200ECD673 /* DataManager.swift */,
 				34526E0B273BD96800ECD673 /* Coins.swift */,
 				34526E0D273D85D600ECD673 /* CoinAccount.swift */,
+				34E0C8AD277628A700CEDA95 /* TrendCoins.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			files = (
 				341578B42739679000179049 /* WatchListViewController.swift in Sources */,
 				34526E0A273BD85200ECD673 /* DataManager.swift in Sources */,
+				34E0C8AE277628A700CEDA95 /* TrendCoins.swift in Sources */,
 				34526E0E273D85D600ECD673 /* CoinAccount.swift in Sources */,
 				341578B02739679000179049 /* AppDelegate.swift in Sources */,
 				34526E0C273BD96800ECD673 /* Coins.swift in Sources */,

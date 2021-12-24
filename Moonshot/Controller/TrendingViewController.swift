@@ -9,11 +9,17 @@ import UIKit
 
 class TrendingViewController: UIViewController {
 
+    var dataManager: DataManager = DataManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
         title = "Trending"
         addTitle()
+        dataManager.trendingCoins {
+            //print(self.dataManager.trendCoins?.coins.count)
+        }
+        
     }
     
     func addTitle() {
