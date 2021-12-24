@@ -27,10 +27,14 @@ class TabViewController: UITabBarController, UITabBarControllerDelegate {
            tabOne.tabBarItem = tabOneBarItem
         
            // Create Tab two
-           let tabTwo = WatchListViewController()
-           let tabTwoBarItem2 = UITabBarItem(title: "Watchlist", image: UIImage(systemName: "star"), selectedImage: UIImage(systemName: "star"))
-           tabTwo.tabBarItem = tabTwoBarItem2
-           self.viewControllers = [tabOne, tabTwo]
+        let tabTwo = TrendingViewController()
+        let tabTwoBarItem2 = UITabBarItem(title: "Trending", image: UIImage(systemName: "chart.line.uptrend.xyaxis"), selectedImage: UIImage(systemName: "chart.line.uptrend.xyaxis"))
+        tabTwo.tabBarItem = tabTwoBarItem2
+        
+           let tabThree = WatchListViewController()
+           let tabThreeBarItem3 = UITabBarItem(title: "Watchlist", image: UIImage(systemName: "star"), selectedImage: UIImage(systemName: "star"))
+           tabThree.tabBarItem = tabThreeBarItem3
+           self.viewControllers = [tabOne, tabTwo, tabThree]
        }
        
        // UITabBarControllerDelegate method

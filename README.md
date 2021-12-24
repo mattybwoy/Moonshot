@@ -18,6 +18,7 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - Search functionality
 - Market data, trends
 - Icon packs
+- Flesh out Coin cells
 
 ## Installation
 
