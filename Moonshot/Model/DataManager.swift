@@ -109,9 +109,6 @@ class DataManager {
                 }
                 if let data = data {
                     self.trendCoins = self.parseTrendingJSON(data)
-                    
-                    print(self.trendCoins)
-                    
                     DispatchQueue.main.async {
                         completed()
                     }
@@ -137,7 +134,6 @@ class DataManager {
         let decoder = JSONDecoder()
         do {
             let coins = try decoder.decode(TrendCoins.self, from: data)
-            print(coins.coins.count)
             return coins.coins
         } catch {
             print(error)
