@@ -12,6 +12,7 @@ class TrendingViewController: UIViewController {
     var dataManager: DataManager? = DataManager()
     
     private var tableView: UITableView = UITableView()
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +42,12 @@ extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
-
+        tableView.backgroundColor = .darkGray
+        tableView.refreshControl = refreshControl
+        refreshControl.backgroundColor = .darkGray
+        refreshControl.tintColor = .systemYellow
+        let myAttribute = [NSAttributedString.Key.foregroundColor: UIColor.systemYellow]
+        refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...", attributes: myAttribute)
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
