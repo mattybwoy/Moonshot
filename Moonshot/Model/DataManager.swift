@@ -18,7 +18,6 @@ class DataManager {
     let pageNum = "&page="
     var coins = [Coins]()
     var trendCoins = [TrendCoins.coins]()
-    //var trendArray = [TrendCoins]()
     
     //var favoriteCoins = [Coins]()
     
@@ -63,9 +62,8 @@ class DataManager {
                     return
                 }
                 if let data = data {
-                        let newCoins = self.parseJSON(data)
-                        self.coins.append(contentsOf: newCoins)
-                    //print(self.coins)
+                    let newCoins = self.parseJSON(data)
+                    self.coins.append(contentsOf: newCoins)
                     DispatchQueue.main.async {
                         completed()
                     }

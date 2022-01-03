@@ -73,8 +73,8 @@ extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    
 }
+
 
 class TrendingCoinCell: UITableViewCell {
     static let reuseIdentifier = "coincell"

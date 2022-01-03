@@ -13,6 +13,8 @@ protocol CoinManagerDelegate {
 }
 
 class MarketViewController: UIViewController, CoinAccount {
+    var faveCoins: [String]?
+    
     var dataManager: DataManager? = DataManager()
     
     var delegate: CoinManagerDelegate?
@@ -108,9 +110,6 @@ class MarketViewController: UIViewController, CoinAccount {
             self.dataManager?.loadCoins(currency: newCurrency, completed: {
                 self.tableView.reloadData()
             })
-//            self.dataManager?.changeCurrency(currency: newCurrency, completed: {
-//                self.tableView.reloadData()
-//            })
         }
     }
 }

@@ -9,4 +9,5 @@ import Foundation
 
 protocol CoinAccount {
     var dataManager: DataManager? { get set }
+    //var faveCoins: [String]? { get set }
 }

@@ -19,23 +19,24 @@ class TabViewController: UITabBarController, UITabBarControllerDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-           super.viewWillAppear(animated)
-           
-           // Create Tab one
-           let tabOne = MarketViewController()
-           let tabOneBarItem = UITabBarItem(title: "Market", image: UIImage(systemName: "list.bullet"), selectedImage: UIImage(systemName: "list.bullet"))
-           tabOne.tabBarItem = tabOneBarItem
+        super.viewWillAppear(animated)
         
-           // Create Tab two
+        
+        let tabOne = MarketViewController()
+        let tabOneBarItem = UITabBarItem(title: "Market", image: UIImage(systemName: "list.bullet"), selectedImage: UIImage(systemName: "list.bullet"))
+        tabOne.tabBarItem = tabOneBarItem
+        
+        
         let tabTwo = TrendingViewController()
         let tabTwoBarItem2 = UITabBarItem(title: "Trending", image: UIImage(systemName: "chart.line.uptrend.xyaxis"), selectedImage: UIImage(systemName: "chart.line.uptrend.xyaxis"))
         tabTwo.tabBarItem = tabTwoBarItem2
         
-           let tabThree = WatchListViewController()
-           let tabThreeBarItem3 = UITabBarItem(title: "Watchlist", image: UIImage(systemName: "star"), selectedImage: UIImage(systemName: "star"))
-           tabThree.tabBarItem = tabThreeBarItem3
-           self.viewControllers = [tabOne, tabTwo, tabThree]
-       }
+        let tabThree = WatchListViewController()
+        let tabThreeBarItem3 = UITabBarItem(title: "Watchlist", image: UIImage(systemName: "star"), selectedImage: UIImage(systemName: "star"))
+        tabThree.tabBarItem = tabThreeBarItem3
+        
+        self.viewControllers = [tabOne, tabTwo, tabThree]
+    }
        
        // UITabBarControllerDelegate method
        func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
