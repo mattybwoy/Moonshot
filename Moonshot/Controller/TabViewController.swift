@@ -8,7 +8,7 @@
 import UIKit
 
 class TabViewController: UITabBarController, UITabBarControllerDelegate {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
@@ -20,7 +20,6 @@ class TabViewController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         
         let tabOne = MarketViewController()
         let tabOneBarItem = UITabBarItem(title: "Market", image: UIImage(systemName: "list.bullet"), selectedImage: UIImage(systemName: "list.bullet"))

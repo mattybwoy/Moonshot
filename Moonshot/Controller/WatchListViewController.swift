@@ -7,19 +7,29 @@
 
 import UIKit
 
-class WatchListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CoinAccount {
-    
-    var dataManager: DataManager?
+class WatchListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    var myCoins: [String]? = [String]()
+    
     private var tableView: UITableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
         title = "Watchlist"
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveFavouriteCoins(_:)), name: Notification.Name("Favourite"), object: nil)
         addTitle()
         createTableView()
-        //print(dataManager?.favoriteCoins.count)
+        
+    }
+    
+    @objc func didReceiveFavouriteCoins(_ notification: Notification) {
+        let faveCoins = notification.object as! [String]
+        myCoins = faveCoins
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        print(myCoins!)
     }
 
     func addTitle() {
@@ -43,29 +53,49 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(FavouriteCoinCell.self, forCellReuseIdentifier: FavouriteCoinCell.reuseIdentifier)
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //guard let favouriteCoinCount = dataManager?.favoriteCoins.count else { return 0 }
-        //print(favouriteCoinCount)
-        //return favouriteCoinCount
-        return 1
+        guard let favouriteCoinCount = myCoins?.count else { return 0 }
+        return favouriteCoinCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: FavouriteCoinCell.reuseIdentifier, for: indexPath)
         //cell.textLabel?.text = "\(dataManager?.favoriteCoins[indexPath.row].name)"
+        cell.textLabel?.text = "\(myCoins![indexPath.row])"
         return cell
     }
     
 }
 
-extension WatchListViewController: CoinManagerDelegate {
-    func coinUpdate(controller: MarketViewController, favourite: [Coins]) {
-        print(favourite.count)
-        tableView.reloadData()
+class FavouriteCoinCell: UITableViewCell {
+    static let reuseIdentifier = "coincell"
+    
+    lazy var title: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        return label
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
-
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+    
+    private func setup() {
+        addSubview(title)
+        NSLayoutConstraint.activate([
+            title.leadingAnchor.constraint(equalTo: leadingAnchor),
+            title.trailingAnchor.constraint(equalTo: trailingAnchor),
+            title.topAnchor.constraint(equalTo: topAnchor),
+            title.bottomAnchor.constraint(equalTo: bottomAnchor)])
+    }
+    
 }

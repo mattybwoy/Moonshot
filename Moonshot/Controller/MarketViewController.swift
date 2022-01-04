@@ -8,16 +8,11 @@
 import UIKit
 import DropDown
 
-protocol CoinManagerDelegate {
-    func coinUpdate(controller: MarketViewController, favourite: [Coins])
-}
-
-class MarketViewController: UIViewController, CoinAccount {
-    var faveCoins: [String]?
+class MarketViewController: UIViewController {
+    var faveCoins: [String]? = [String]()
     
     var dataManager: DataManager? = DataManager()
     
-    var delegate: CoinManagerDelegate?
     var favoriteCoins = [Coins]()
     
     let currencyMenu: DropDown = {
@@ -187,12 +182,11 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let favoriteAction = UITableViewRowAction(style: .normal, title: "Favourite") { _, indexPath in
-            //self.dataManager?.favoriteCoins.append((self.dataManager!.coins[indexPath.row]))
-            self.favoriteCoins.append(self.dataManager!.coins[indexPath.row])
-            self.delegate?.coinUpdate(controller: self, favourite: self.favoriteCoins)
-            //print(self.dataManager?.favoriteCoins)
+            self.faveCoins?.append(self.dataManager!.coins[indexPath.row].name)
         }
+        
         favoriteAction.backgroundColor = .systemYellow
+        NotificationCenter.default.post(name: Notification.Name("Favourite"), object: self.faveCoins)
         return [favoriteAction]
     }
 }
