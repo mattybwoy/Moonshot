@@ -9,15 +9,16 @@ import Foundation
 import UIKit
 
 class DataManager {
+    static let sharedInstance = DataManager()
     
-    var pageCount = 1
+    var pageCount = 2
     var currentCurrency: String?
     var isPaginating = false
     let baseURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency="
     let trendingURL = "https://api.coingecko.com/api/v3/search/trending"
     let pageNum = "&page="
-    var coins = [Coins]()
-    var trendCoins = [TrendCoins.coins]()
+    var coins: [Coins]?
+    var trendCoins: [TrendCoins.coins]?
     
     //var favoriteCoins = [Coins]()
     
@@ -36,25 +37,21 @@ class DataManager {
                 }
                 if let data = data {
                     self.coins = self.parseJSON(data)
-                    //print(self.coins)
                     DispatchQueue.main.async {
                         completed()
                     }
                     if pagination {
                         self.isPaginating = false
                     }
+                    self.pageCount = 2
                 }
             }
             task.resume()
         }
     }
     
-    func scrollCoin(pagination: Bool = false, completed: @escaping () -> ()) {
-        
-        if pagination {
+    func scrollCoin(pagination: Bool, completed: @escaping () -> ()) {
             isPaginating = true
-        }
-        
         if let url = URL(string: baseURL + currentCurrency! + pageNum + String(pageCount)) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
@@ -63,7 +60,7 @@ class DataManager {
                 }
                 if let data = data {
                     let newCoins = self.parseJSON(data)
-                    self.coins.append(contentsOf: newCoins)
+                    self.coins?.append(contentsOf: newCoins)
                     DispatchQueue.main.async {
                         completed()
                     }
@@ -92,6 +89,7 @@ class DataManager {
                     DispatchQueue.main.async {
                         completed()
                     }
+                    self.pageCount = 2
                 }
             }
             task.resume()

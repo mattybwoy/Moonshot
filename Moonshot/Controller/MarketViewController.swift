@@ -11,8 +11,6 @@ import DropDown
 class MarketViewController: UIViewController {
     var faveCoins: [String]? = [String]()
     
-    var dataManager: DataManager? = DataManager()
-    
     var favoriteCoins = [Coins]()
     
     let currencyMenu: DropDown = {
@@ -49,13 +47,9 @@ class MarketViewController: UIViewController {
         addTitle()
         currencyButton()
         view.backgroundColor = .darkGray
-        dataManager?.loadCoins {
+        DataManager.sharedInstance.loadCoins {
             self.tableView.reloadData()
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        //print(dataManager?.favoriteCoins.count)
     }
     
     func addTitle() {
@@ -102,7 +96,7 @@ class MarketViewController: UIViewController {
             print("index \(index) and \(title)")
             self.currencySelector.setTitle(title, for: .normal)
             let newCurrency = title.lowercased()
-            self.dataManager?.loadCoins(currency: newCurrency, completed: {
+            DataManager.sharedInstance.loadCoins(currency: newCurrency, completed: {
                 self.tableView.reloadData()
             })
         }
@@ -114,7 +108,7 @@ extension MarketViewController: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
             if (velocity.y < -0.2)
             {
-                dataManager?.reloadCoins {
+                DataManager.sharedInstance.reloadCoins {
                     self.tableView.reloadData()
                 }
                     self.refreshControl.endRefreshing()
@@ -124,16 +118,16 @@ extension MarketViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
         if position > (tableView.contentSize.height-100-scrollView.frame.size.height) {
-            guard !dataManager!.isPaginating else {
-                return
-            }
+//            guard DataManager.sharedInstance.isPaginating else {
+//                return
+//            }
             self.tableView.tableFooterView = createSpinnerFooter()
-            
-            dataManager?.scrollCoin(pagination: true, completed: {
+            DataManager.sharedInstance.scrollCoin(pagination: true, completed: {
                 DispatchQueue.main.async {
                     self.tableView.tableFooterView = nil
+                    self.tableView.reloadData()
                 }
-                self.tableView.reloadData()
+                
             })
         }
     }
@@ -162,13 +156,13 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let coinCount = dataManager?.coins.count else { return 0 }
+        guard let coinCount = DataManager.sharedInstance.coins?.count else { return 0 }
         return coinCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CoinCell.reuseIdentifier, for: indexPath) as! CoinCell
-        cell.textLabel?.text = "\(dataManager!.coins[indexPath.row].name)     \(dataManager!.coins[indexPath.row].current_price)"
+        cell.textLabel?.text = "\(DataManager.sharedInstance.coins![indexPath.row].name)     \(DataManager.sharedInstance.coins![indexPath.row].current_price)"
         cell.backgroundColor = .darkGray
         cell.textLabel?.textColor = .systemYellow
         cell.layer.borderColor = UIColor.systemYellow.cgColor
@@ -182,7 +176,7 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let favoriteAction = UITableViewRowAction(style: .normal, title: "Favourite") { _, indexPath in
-            self.faveCoins?.append(self.dataManager!.coins[indexPath.row].name)
+            self.faveCoins?.append((DataManager.sharedInstance.coins?[indexPath.row].name)!)
         }
         
         favoriteAction.backgroundColor = .systemYellow

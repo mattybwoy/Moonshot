@@ -8,8 +8,6 @@
 import UIKit
 
 class TrendingViewController: UIViewController {
-
-    var dataManager: DataManager? = DataManager()
     
     private var tableView: UITableView = UITableView()
     private let refreshControl = UIRefreshControl()
@@ -20,7 +18,7 @@ class TrendingViewController: UIViewController {
         title = "Trending"
         addTitle()
         setupTableView()
-        dataManager?.trendingCoins {
+        DataManager.sharedInstance.trendingCoins {
             self.tableView.reloadData()
         }
     }
@@ -59,13 +57,13 @@ extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let trendCoinCount = dataManager?.trendCoins.count else { return 0 }
+        guard let trendCoinCount = DataManager.sharedInstance.trendCoins?.count else { return 0 }
         return trendCoinCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TrendingCoinCell.reuseIdentifier, for: indexPath) as! TrendingCoinCell
-        cell.textLabel?.text = "\(dataManager!.trendCoins[indexPath.row].item.name)"
+        cell.textLabel?.text = "\(DataManager.sharedInstance.trendCoins?[indexPath.row].item.name)"
         cell.backgroundColor = .darkGray
         cell.textLabel?.textColor = .systemYellow
         cell.layer.borderColor = UIColor.systemYellow.cgColor
