@@ -20,15 +20,12 @@ class DataManager {
     var coins: [Coins]?
     var trendCoins: [TrendCoins.coins]?
     
-    //var favoriteCoins = [Coins]()
+    var favoriteCoins: [String] = [String]()
     
-    func loadCoins(pagination: Bool = false, currency: String = "usd", completed: @escaping () -> ()) {
-        
-        if pagination {
-            isPaginating = true
-        }
-        currentCurrency = currency
+    func loadCoins(currency: String = "usd", completed: @escaping () -> ()) {
 
+        currentCurrency = currency
+        
         if let url = URL(string: baseURL + currentCurrency!) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
@@ -40,9 +37,6 @@ class DataManager {
                     DispatchQueue.main.async {
                         completed()
                     }
-                    if pagination {
-                        self.isPaginating = false
-                    }
                     self.pageCount = 2
                 }
             }
@@ -51,7 +45,9 @@ class DataManager {
     }
     
     func scrollCoin(pagination: Bool, completed: @escaping () -> ()) {
-            isPaginating = true
+        
+        isPaginating = true
+        
         if let url = URL(string: baseURL + currentCurrency! + pageNum + String(pageCount)) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
@@ -75,9 +71,8 @@ class DataManager {
     }
     
     func reloadCoins(pagination: Bool = false, completed: @escaping () -> ()) {
-        let newCurrency: String = baseURL + currentCurrency!
         
-        if let url = URL(string: newCurrency) {
+        if let url = URL(string: baseURL + currentCurrency!) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
                 if error != nil {
@@ -85,7 +80,6 @@ class DataManager {
                 }
                 if let data = data {
                     self.coins = self.parseJSON(data)
-                    print(self.coins)
                     DispatchQueue.main.async {
                         completed()
                     }

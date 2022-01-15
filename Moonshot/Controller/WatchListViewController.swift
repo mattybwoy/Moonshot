@@ -17,19 +17,8 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         view.backgroundColor = .darkGray
         title = "Watchlist"
-        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveFavouriteCoins(_:)), name: Notification.Name("Favourite"), object: nil)
         addTitle()
         createTableView()
-        
-    }
-    
-    @objc func didReceiveFavouriteCoins(_ notification: Notification) {
-        let faveCoins = notification.object as! [String]
-        myCoins = faveCoins
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-        print(myCoins!)
     }
 
     func addTitle() {

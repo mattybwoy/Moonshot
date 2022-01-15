@@ -9,9 +9,6 @@ import UIKit
 import DropDown
 
 class MarketViewController: UIViewController {
-    var faveCoins: [String]? = [String]()
-    
-    var favoriteCoins = [Coins]()
     
     let currencyMenu: DropDown = {
         let currencyMenu = DropDown()
@@ -118,9 +115,6 @@ extension MarketViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
         if position > (tableView.contentSize.height-100-scrollView.frame.size.height) {
-//            guard DataManager.sharedInstance.isPaginating else {
-//                return
-//            }
             self.tableView.tableFooterView = createSpinnerFooter()
             DataManager.sharedInstance.scrollCoin(pagination: true, completed: {
                 DispatchQueue.main.async {
@@ -176,13 +170,14 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let favoriteAction = UITableViewRowAction(style: .normal, title: "Favourite") { _, indexPath in
-            self.faveCoins?.append((DataManager.sharedInstance.coins?[indexPath.row].name)!)
+            DataManager.sharedInstance.favoriteCoins.append((DataManager.sharedInstance.coins![indexPath.row].name))
+            print(DataManager.sharedInstance.favoriteCoins)
         }
-        
         favoriteAction.backgroundColor = .systemYellow
-        NotificationCenter.default.post(name: Notification.Name("Favourite"), object: self.faveCoins)
         return [favoriteAction]
     }
+    
+    
 }
 
 

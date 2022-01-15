@@ -63,7 +63,7 @@ extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: TrendingCoinCell.reuseIdentifier, for: indexPath) as! TrendingCoinCell
-        cell.textLabel?.text = "\(DataManager.sharedInstance.trendCoins?[indexPath.row].item.name)"
+        cell.textLabel?.text = "\(DataManager.sharedInstance.trendCoins![indexPath.row].item.name)"
         cell.backgroundColor = .darkGray
         cell.textLabel?.textColor = .systemYellow
         cell.layer.borderColor = UIColor.systemYellow.cgColor
