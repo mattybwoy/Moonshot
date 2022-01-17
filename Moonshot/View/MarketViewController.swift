@@ -98,6 +98,14 @@ class MarketViewController: UIViewController {
             })
         }
     }
+    
+    func sendAlert() {
+        let alert = UIAlertController(title: "Alert", message: "Coin already in Watchlist", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
 }
 
 
@@ -176,7 +184,13 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
             guard let loadedCoins = DataManager.sharedInstance.coins else {
                 return
             }
-            DataManager.sharedInstance.favoriteCoins.append((loadedCoins[indexPath.row].name))
+            let faveCoins = DataManager.sharedInstance.favoriteCoins
+            
+            if faveCoins.contains(loadedCoins[indexPath.row].name) {
+                self.sendAlert()
+            } else {
+                DataManager.sharedInstance.favoriteCoins.append((loadedCoins[indexPath.row].name))
+            }
             print(DataManager.sharedInstance.favoriteCoins)
         }
         favoriteAction.backgroundColor = .systemYellow
