@@ -16,7 +16,6 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - Added Icon Pack
 
 ## Improvements
-- Passing Favourite Coins Data between Tabs
 - Search functionality
 - Full Market data
 - Flesh out Coin cells
