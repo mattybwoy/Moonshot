@@ -178,23 +178,24 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let favoriteAction = UITableViewRowAction(style: .normal, title: "Favourite") { _, indexPath in
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let favouriteAction = UIContextualAction(style: .normal, title: "Favourite") { [weak self] (action, view, completionHandler) in
+            
             guard let loadedCoins = DataManager.sharedInstance.coins else {
                 return
             }
-            let faveCoins = DataManager.sharedInstance.favoriteCoins
-            
-            if faveCoins.contains(loadedCoins[indexPath.row].name) {
-                self.sendAlert()
+            if DataManager.sharedInstance.favoriteCoins.contains(loadedCoins[indexPath.row].name) {
+                self?.sendAlert()
             } else {
                 DataManager.sharedInstance.favoriteCoins.append((loadedCoins[indexPath.row].name))
             }
             print(DataManager.sharedInstance.favoriteCoins)
+            completionHandler(true)
         }
-        favoriteAction.backgroundColor = .systemYellow
-        return [favoriteAction]
+        favouriteAction.backgroundColor = .systemYellow
+        let swipeActions = UISwipeActionsConfiguration(actions: [favouriteAction])
+        return swipeActions
     }
     
     
