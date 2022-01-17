@@ -36,7 +36,7 @@
 		341578C32739685900179049 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		341578C9273982A800179049 /* MarketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewController.swift; sourceTree = "<group>"; };
 		34526E0527399E6000ECD673 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
-		34526E07273B00E600ECD673 /* Astrolab.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Astrolab.ttf; path = Moonshot/Astrolab.ttf; sourceTree = SOURCE_ROOT; };
+		34526E07273B00E600ECD673 /* Astrolab.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Astrolab.ttf; path = Moonshot/View/Astrolab.ttf; sourceTree = SOURCE_ROOT; };
 		34526E09273BD85200ECD673 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		34526E0B273BD96800ECD673 /* Coins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coins.swift; sourceTree = "<group>"; };
 		34E0C8AB277621CF00CEDA95 /* TrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
@@ -83,7 +83,7 @@
 				341578AF2739679000179049 /* AppDelegate.swift */,
 				341578B12739679000179049 /* SceneDelegate.swift */,
 				341578C727397FF300179049 /* Model */,
-				341578C627397D1B00179049 /* Controller */,
+				341578C627397D1B00179049 /* Presenter */,
 				341578C527397D0900179049 /* View */,
 				341578B82739679200179049 /* Assets.xcassets */,
 				341578BA2739679200179049 /* LaunchScreen.storyboard */,
@@ -95,27 +95,27 @@
 		341578C527397D0900179049 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				341578B52739679000179049 /* Main.storyboard */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		341578C627397D1B00179049 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
 				341578C9273982A800179049 /* MarketViewController.swift */,
 				341578B32739679000179049 /* WatchListViewController.swift */,
 				34526E0527399E6000ECD673 /* TabViewController.swift */,
 				34E0C8AB277621CF00CEDA95 /* TrendingViewController.swift */,
 				34526E07273B00E600ECD673 /* Astrolab.ttf */,
+				341578B52739679000179049 /* Main.storyboard */,
 			);
-			path = Controller;
+			path = View;
+			sourceTree = "<group>";
+		};
+		341578C627397D1B00179049 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				34526E09273BD85200ECD673 /* DataManager.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		341578C727397FF300179049 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				34526E09273BD85200ECD673 /* DataManager.swift */,
 				34526E0B273BD96800ECD673 /* Coins.swift */,
 				34E0C8AD277628A700CEDA95 /* TrendCoins.swift */,
 			);

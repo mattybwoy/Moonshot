@@ -156,7 +156,10 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CoinCell.reuseIdentifier, for: indexPath) as! CoinCell
-        cell.textLabel?.text = "\(DataManager.sharedInstance.coins![indexPath.row].name)     \(DataManager.sharedInstance.coins![indexPath.row].current_price)"
+        guard let loadedCoins = DataManager.sharedInstance.coins else {
+            return cell
+        }
+        cell.textLabel?.text = "\(loadedCoins[indexPath.row].name)     \(loadedCoins[indexPath.row].current_price)"
         cell.backgroundColor = .darkGray
         cell.textLabel?.textColor = .systemYellow
         cell.layer.borderColor = UIColor.systemYellow.cgColor
@@ -170,7 +173,10 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let favoriteAction = UITableViewRowAction(style: .normal, title: "Favourite") { _, indexPath in
-            DataManager.sharedInstance.favoriteCoins.append((DataManager.sharedInstance.coins![indexPath.row].name))
+            guard let loadedCoins = DataManager.sharedInstance.coins else {
+                return
+            }
+            DataManager.sharedInstance.favoriteCoins.append((loadedCoins[indexPath.row].name))
             print(DataManager.sharedInstance.favoriteCoins)
         }
         favoriteAction.backgroundColor = .systemYellow
