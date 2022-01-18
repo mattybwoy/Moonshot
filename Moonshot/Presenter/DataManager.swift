@@ -16,6 +16,7 @@ class DataManager {
     var isPaginating = false
     let baseURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency="
     let trendingURL = "https://api.coingecko.com/api/v3/search/trending"
+    let totalURL = "https://api.coingecko.com/api/v3/global"
     let pageNum = "&page="
     var coins: [Coins]?
     var trendCoins: [TrendCoins.coins]?
@@ -108,6 +109,24 @@ class DataManager {
         }
     }
     
+    func loadMarketData(completed: @escaping () -> ()) {
+        if let url = URL(string: totalURL) {
+            let session = URLSession(configuration: .default)
+            let task = session.dataTask(with: url) { (data, response, error) in
+                if error != nil {
+                    return
+                }
+                if let data = data {
+                    print(self.parseMarketJSON(data))
+                    DispatchQueue.main.async {
+                        completed()
+                    }
+                }
+            }
+            task.resume()
+        }
+    }
+    
     func parseJSON(_ data: Data) -> [Coins] {
         let decoder = JSONDecoder()
         do {
@@ -128,6 +147,17 @@ class DataManager {
         } catch {
             print(error)
             return []
+        }
+    }
+    
+    func parseMarketJSON(_ data: Data) -> MarketData? {
+        let decoder = JSONDecoder()
+        do {
+            let coins = try decoder.decode(MarketData.self, from: data)
+            return coins
+        } catch {
+            print(error)
+            return nil
         }
     }
 }

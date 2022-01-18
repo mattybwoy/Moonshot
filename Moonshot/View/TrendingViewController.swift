@@ -32,6 +32,8 @@ class TrendingViewController: UIViewController {
         label.text = "Trending"
         self.view.addSubview(label)
     }
+    
+    
 }
 
 extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
