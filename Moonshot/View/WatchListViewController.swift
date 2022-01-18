@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WatchListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class WatchListViewController: UIViewController {
 
     var myCoins: [String]? = [String]()
     
@@ -35,6 +35,11 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         self.view.addSubview(label)
     }
     
+    
+}
+
+extension WatchListViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -50,7 +55,6 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.register(FavouriteCoinCell.self, forCellReuseIdentifier: FavouriteCoinCell.reuseIdentifier)
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return DataManager.sharedInstance.favoriteCoins.count
     }
@@ -64,6 +68,22 @@ class WatchListViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.layer.borderWidth = 1.0
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { [weak self] (action, view, completionHandler) in
+            DataManager.sharedInstance.favoriteCoins.remove(at: indexPath.row)
+            self?.tableView.reloadData()
+            completionHandler(true)
+        }
+        deleteAction.backgroundColor = .systemRed
+        let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction])
+        return swipeActions
+    }
+    
     
 }
 
