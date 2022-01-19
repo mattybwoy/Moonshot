@@ -43,9 +43,10 @@ class MarketViewController: UIViewController {
         setupTableView()
         addTitle()
         currencyButton()
-        addMarketTotal()
+
         view.backgroundColor = .darkGray
         DataManager.sharedInstance.loadMarketData {
+            self.addMarketTotal(total: DataManager.sharedInstance.totalMarketCap!)
         }
         DataManager.sharedInstance.loadCoins {
             self.tableView.reloadData()
@@ -62,13 +63,14 @@ class MarketViewController: UIViewController {
         self.view.addSubview(label)
     }
     
-    func addMarketTotal() {
-        let marketTotal = UILabel(frame: CGRect(x: 0, y: 70, width: 250, height: 10))
-        marketTotal.center = CGPoint(x: 250, y: 115)
+    func addMarketTotal(total: Double) {
+        let marketTotal = UILabel(frame: CGRect(x: 0, y: 70, width: 250, height: 30))
+        marketTotal.center = CGPoint(x: 250, y: 125)
         marketTotal.textAlignment = .center
         marketTotal.font = UIFont(name: "Astrolab", size: 10)
         marketTotal.textColor = .systemYellow
-        marketTotal.text = "Total Market Cap"
+        marketTotal.numberOfLines = 0
+        marketTotal.text = "Total Market Cap \(total)"
         self.view.addSubview(marketTotal)
     }
     
@@ -84,7 +86,7 @@ class MarketViewController: UIViewController {
     }
     
     func currencyButton() {
-        currencySelector.center = CGPoint(x: 65, y: 125)
+        currencySelector.center = CGPoint(x: 75, y: 125)
         currencySelector.setTitle("USD", for: .normal)
         currencySelector.titleLabel?.font = UIFont(name: "Astrolab", size: 10)!
         currencySelector.titleLabel?.textColor = .systemYellow

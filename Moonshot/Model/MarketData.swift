@@ -13,4 +13,9 @@ struct MarketData: Decodable {
 
 struct Market: Decodable {
     let markets: Int
+    let total_market_cap: Totals
+}
+
+struct Totals: Decodable {
+    let usd: Double
 }

@@ -16,9 +16,3 @@ struct TrendCoins: Decodable {
     }
     let coins: [coins]
 }
-
-
-
-//struct item: Decodable {
-//    let name: String
-//}

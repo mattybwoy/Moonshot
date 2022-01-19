@@ -20,6 +20,7 @@ class DataManager {
     let pageNum = "&page="
     var coins: [Coins]?
     var trendCoins: [TrendCoins.coins]?
+    var totalMarketCap: Double?
     
     var favoriteCoins: [String] = [String]()
     
@@ -117,7 +118,8 @@ class DataManager {
                     return
                 }
                 if let data = data {
-                    print(self.parseMarketJSON(data))
+                    let marketData = self.parseMarketJSON(data)
+                    self.totalMarketCap = marketData!.data.total_market_cap.usd
                     DispatchQueue.main.async {
                         completed()
                     }
