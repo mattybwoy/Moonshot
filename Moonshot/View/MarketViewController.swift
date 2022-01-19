@@ -41,9 +41,9 @@ class MarketViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Market"
         setupTableView()
-        addTitle()
         currencyButton()
-
+        view.addSubview(header)
+        view.addSubview(marketTotal)
         view.backgroundColor = .darkGray
         DataManager.sharedInstance.loadMarketData {
             self.addMarketTotal(total: DataManager.sharedInstance.totalMarketCap!)
@@ -53,25 +53,28 @@ class MarketViewController: UIViewController {
         }
     }
     
-    func addTitle() {
-        let label = UILabel(frame: CGRect(x: 0, y: 70, width: 300, height: 30))
+    let header: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 300, height: 30))
         label.center = CGPoint(x: 210, y: 80)
         label.textAlignment = .center
         label.font = UIFont(name: "Astrolab", size: 30)
         label.textColor = .systemYellow
         label.text = "Moonshot"
-        self.view.addSubview(label)
-    }
+        return label
+    }()
+    
+    let marketTotal: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 250, height: 30))
+        label.center = CGPoint(x: 250, y: 125)
+        label.textAlignment = .center
+        label.font = UIFont(name: "Astrolab", size: 10)
+        label.textColor = .systemYellow
+        label.numberOfLines = 0
+        return label
+    }()
     
     func addMarketTotal(total: Double) {
-        let marketTotal = UILabel(frame: CGRect(x: 0, y: 70, width: 250, height: 30))
-        marketTotal.center = CGPoint(x: 250, y: 125)
-        marketTotal.textAlignment = .center
-        marketTotal.font = UIFont(name: "Astrolab", size: 10)
-        marketTotal.textColor = .systemYellow
-        marketTotal.numberOfLines = 0
         marketTotal.text = "Total Market Cap \(total)"
-        self.view.addSubview(marketTotal)
     }
     
     func createSpinnerFooter() -> UIView {
@@ -111,6 +114,9 @@ class MarketViewController: UIViewController {
             DataManager.sharedInstance.loadCoins(currency: newCurrency, completed: {
                 self.tableView.reloadData()
             })
+            DataManager.sharedInstance.loadMarketData {
+                self.addMarketTotal(total: DataManager.sharedInstance.totalMarketCap!)
+            }
         }
     }
     

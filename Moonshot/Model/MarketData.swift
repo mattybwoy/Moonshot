@@ -18,4 +18,15 @@ struct Market: Decodable {
 
 struct Totals: Decodable {
     let usd: Double
+    let gbp: Double
+    let eur: Double
+    let aud: Double
+    let cad: Double
+    let cny: Double
+    let hkd: Double
+    let inr: Double
+    let jpy: Double
+    let sgd: Double
+    let twd: Double
+    let vnd: Double
 }

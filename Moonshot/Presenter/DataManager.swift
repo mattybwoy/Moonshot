@@ -119,7 +119,32 @@ class DataManager {
                 }
                 if let data = data {
                     let marketData = self.parseMarketJSON(data)
-                    self.totalMarketCap = marketData!.data.total_market_cap.usd
+                    switch self.currentCurrency {
+                    case "gbp":
+                        self.totalMarketCap = marketData!.data.total_market_cap.gbp
+                    case "eur":
+                        self.totalMarketCap = marketData!.data.total_market_cap.eur
+                    case "aud":
+                        self.totalMarketCap = marketData!.data.total_market_cap.aud
+                    case "cad":
+                        self.totalMarketCap = marketData!.data.total_market_cap.cad
+                    case "cny":
+                        self.totalMarketCap = marketData!.data.total_market_cap.cny
+                    case "hkd":
+                        self.totalMarketCap = marketData!.data.total_market_cap.hkd
+                    case "inr":
+                        self.totalMarketCap = marketData!.data.total_market_cap.inr
+                    case "jpy":
+                        self.totalMarketCap = marketData!.data.total_market_cap.jpy
+                    case "sgd":
+                        self.totalMarketCap = marketData!.data.total_market_cap.sgd
+                    case "twd":
+                        self.totalMarketCap = marketData!.data.total_market_cap.twd
+                    case "vnd":
+                        self.totalMarketCap = marketData!.data.total_market_cap.vnd
+                    default:
+                        self.totalMarketCap = marketData!.data.total_market_cap.usd
+                    }
                     DispatchQueue.main.async {
                         completed()
                     }
