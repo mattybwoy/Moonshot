@@ -16,23 +16,28 @@ class TrendingViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
         title = "Trending"
-        addTitle()
+        view.addSubview(header)
         setupTableView()
         DataManager.sharedInstance.trendingCoins {
             self.tableView.reloadData()
         }
     }
     
-    func addTitle() {
-        let label = UILabel(frame: CGRect(x: 0, y: 80, width: 300, height: 30))
+    let header: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 80, width: 300, height: 30))
         label.center = CGPoint(x: 210, y: 100)
         label.textAlignment = .center
         label.font = UIFont(name: "Astrolab", size: 30)
         label.textColor = .systemYellow
         label.text = "Trending"
-        self.view.addSubview(label)
-    }
+        return label
+    }()
     
+    func sendAlert() {
+        let alert = UIAlertController(title: "Alert", message: "Coin already in Watchlist", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
 }
 
@@ -77,6 +82,30 @@ extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
         cell.layer.borderWidth = 1.0
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let favouriteAction = UIContextualAction(style: .normal, title: "Favourite") { [weak self] (action, view, completionHandler) in
+            
+            guard let trendingCoins = DataManager.sharedInstance.trendCoins else {
+                return
+            }
+            if DataManager.sharedInstance.favoriteCoins.contains(trendingCoins[indexPath.row].item.name) {
+                self?.sendAlert()
+            } else {
+                DataManager.sharedInstance.favoriteCoins.append((trendingCoins[indexPath.row].item.name))
+            }
+            print(DataManager.sharedInstance.favoriteCoins)
+            completionHandler(true)
+        }
+        favouriteAction.backgroundColor = .systemYellow
+        let swipeActions = UISwipeActionsConfiguration(actions: [favouriteAction])
+        return swipeActions
+    }
+    
     
 }
 

@@ -20,10 +20,21 @@
 		34526E0A273BD85200ECD673 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34526E09273BD85200ECD673 /* DataManager.swift */; };
 		34526E0C273BD96800ECD673 /* Coins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34526E0B273BD96800ECD673 /* Coins.swift */; };
 		345B1A0D2797366E000D488F /* MarketData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345B1A0C2797366E000D488F /* MarketData.swift */; };
+		347E9EC92799D38300993426 /* MoonshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347E9EC82799D38300993426 /* MoonshotTests.swift */; };
 		34E0C8AC277621CF00CEDA95 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E0C8AB277621CF00CEDA95 /* TrendingViewController.swift */; };
 		34E0C8AE277628A700CEDA95 /* TrendCoins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E0C8AD277628A700CEDA95 /* TrendCoins.swift */; };
 		FCECC74E14E9E1AE4C2E4500 /* Pods_Moonshot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87CFF8B7A389BECBA735E44 /* Pods_Moonshot.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		347E9ECA2799D38300993426 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 341578A42739679000179049 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 341578AB2739679000179049;
+			remoteInfo = Moonshot;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		341578AC2739679000179049 /* Moonshot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moonshot.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,6 +52,8 @@
 		34526E09273BD85200ECD673 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		34526E0B273BD96800ECD673 /* Coins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coins.swift; sourceTree = "<group>"; };
 		345B1A0C2797366E000D488F /* MarketData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketData.swift; sourceTree = "<group>"; };
+		347E9EC62799D38300993426 /* MoonshotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoonshotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		347E9EC82799D38300993426 /* MoonshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonshotTests.swift; sourceTree = "<group>"; };
 		34E0C8AB277621CF00CEDA95 /* TrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
 		34E0C8AD277628A700CEDA95 /* TrendCoins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendCoins.swift; sourceTree = "<group>"; };
 		8238BC482CA5012A620DEE41 /* Pods-Moonshot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moonshot.release.xcconfig"; path = "Target Support Files/Pods-Moonshot/Pods-Moonshot.release.xcconfig"; sourceTree = "<group>"; };
@@ -57,6 +70,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		347E9EC32799D38300993426 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -65,6 +85,7 @@
 			children = (
 				341578C32739685900179049 /* README.md */,
 				341578AE2739679000179049 /* Moonshot */,
+				347E9EC72799D38300993426 /* MoonshotTests */,
 				341578AD2739679000179049 /* Products */,
 				D868E8B04733D363B548EEAE /* Pods */,
 				CAC9224DF5C45FE1AE8EBE57 /* Frameworks */,
@@ -75,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				341578AC2739679000179049 /* Moonshot.app */,
+				347E9EC62799D38300993426 /* MoonshotTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -125,6 +147,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		347E9EC72799D38300993426 /* MoonshotTests */ = {
+			isa = PBXGroup;
+			children = (
+				347E9EC82799D38300993426 /* MoonshotTests.swift */,
+			);
+			path = MoonshotTests;
+			sourceTree = "<group>";
+		};
 		CAC9224DF5C45FE1AE8EBE57 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +194,24 @@
 			productReference = 341578AC2739679000179049 /* Moonshot.app */;
 			productType = "com.apple.product-type.application";
 		};
+		347E9EC52799D38300993426 /* MoonshotTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 347E9ECE2799D38300993426 /* Build configuration list for PBXNativeTarget "MoonshotTests" */;
+			buildPhases = (
+				347E9EC22799D38300993426 /* Sources */,
+				347E9EC32799D38300993426 /* Frameworks */,
+				347E9EC42799D38300993426 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				347E9ECB2799D38300993426 /* PBXTargetDependency */,
+			);
+			name = MoonshotTests;
+			productName = MoonshotTests;
+			productReference = 347E9EC62799D38300993426 /* MoonshotTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -171,11 +219,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1300;
+				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1300;
 				TargetAttributes = {
 					341578AB2739679000179049 = {
 						CreatedOnToolsVersion = 13.0;
+					};
+					347E9EC52799D38300993426 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 341578AB2739679000179049;
 					};
 				};
 			};
@@ -193,6 +245,7 @@
 			projectRoot = "";
 			targets = (
 				341578AB2739679000179049 /* Moonshot */,
+				347E9EC52799D38300993426 /* MoonshotTests */,
 			);
 		};
 /* End PBXProject section */
@@ -207,6 +260,13 @@
 				341578C42739685900179049 /* README.md in Resources */,
 				341578B72739679000179049 /* Main.storyboard in Resources */,
 				34526E08273B00E600ECD673 /* Astrolab.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		347E9EC42799D38300993426 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,7 +332,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		347E9EC22799D38300993426 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				347E9EC92799D38300993426 /* MoonshotTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		347E9ECB2799D38300993426 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 341578AB2739679000179049 /* Moonshot */;
+			targetProxy = 347E9ECA2799D38300993426 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		341578B52739679000179049 /* Main.storyboard */ = {
@@ -468,6 +544,44 @@
 			};
 			name = Release;
 		};
+		347E9ECC2799D38300993426 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6478Y3WC5Q;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.matthewlock.MoonshotTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Moonshot.app/Moonshot";
+			};
+			name = Debug;
+		};
+		347E9ECD2799D38300993426 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6478Y3WC5Q;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.matthewlock.MoonshotTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Moonshot.app/Moonshot";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -485,6 +599,15 @@
 			buildConfigurations = (
 				341578C12739679200179049 /* Debug */,
 				341578C22739679200179049 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		347E9ECE2799D38300993426 /* Build configuration list for PBXNativeTarget "MoonshotTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				347E9ECC2799D38300993426 /* Debug */,
+				347E9ECD2799D38300993426 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

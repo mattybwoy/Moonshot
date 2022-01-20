@@ -14,11 +14,14 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - Coin results now paginating
 - Trending Coin Tab now displaying results
 - Added Icon Pack
+- Watchlist now displaying favourited coins
 
 ## Improvements
 - Search functionality
-- Full Market data
 - Flesh out Coin cells
+- Flesh out Trending Coin cells
+- Testing
+- Save features
 
 ## Installation
 
