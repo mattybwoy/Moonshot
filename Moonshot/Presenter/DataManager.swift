@@ -134,54 +134,50 @@ class DataManager {
         if let url = URL(string: totalURL) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
-                if error != nil {
+                guard let data = data, error == nil else {
                     return
                 }
-                if let data = data {
-                    let marketData = self.parseMarketJSON(data)
+                do {
+                    let response = try
+                    JSONDecoder().decode(MarketData.self, from: data)
+                    let marketData = response
                     switch self.currentCurrency {
                     case "gbp":
-                        self.totalMarketCap = marketData!.data.total_market_cap.gbp
+                        self.totalMarketCap = marketData.data.total_market_cap.gbp
                     case "eur":
-                        self.totalMarketCap = marketData!.data.total_market_cap.eur
+                        self.totalMarketCap = marketData.data.total_market_cap.eur
                     case "aud":
-                        self.totalMarketCap = marketData!.data.total_market_cap.aud
+                        self.totalMarketCap = marketData.data.total_market_cap.aud
                     case "cad":
-                        self.totalMarketCap = marketData!.data.total_market_cap.cad
+                        self.totalMarketCap = marketData.data.total_market_cap.cad
                     case "cny":
-                        self.totalMarketCap = marketData!.data.total_market_cap.cny
+                        self.totalMarketCap = marketData.data.total_market_cap.cny
                     case "hkd":
-                        self.totalMarketCap = marketData!.data.total_market_cap.hkd
+                        self.totalMarketCap = marketData.data.total_market_cap.hkd
                     case "inr":
-                        self.totalMarketCap = marketData!.data.total_market_cap.inr
+                        self.totalMarketCap = marketData.data.total_market_cap.inr
                     case "jpy":
-                        self.totalMarketCap = marketData!.data.total_market_cap.jpy
+                        self.totalMarketCap = marketData.data.total_market_cap.jpy
                     case "sgd":
-                        self.totalMarketCap = marketData!.data.total_market_cap.sgd
+                        self.totalMarketCap = marketData.data.total_market_cap.sgd
                     case "twd":
-                        self.totalMarketCap = marketData!.data.total_market_cap.twd
+                        self.totalMarketCap = marketData.data.total_market_cap.twd
                     case "vnd":
-                        self.totalMarketCap = marketData!.data.total_market_cap.vnd
+                        self.totalMarketCap = marketData.data.total_market_cap.vnd
                     default:
-                        self.totalMarketCap = marketData!.data.total_market_cap.usd
+                        self.totalMarketCap = marketData.data.total_market_cap.usd
                     }
                     DispatchQueue.main.async {
                         completed()
                     }
+                }
+                catch {
+                    return
                 }
             }
             task.resume()
         }
     }
     
-    func parseMarketJSON(_ data: Data) -> MarketData? {
-        let decoder = JSONDecoder()
-        do {
-            let coins = try decoder.decode(MarketData.self, from: data)
-            return coins
-        } catch {
-            print(error)
-            return nil
-        }
-    }
+    
 }
