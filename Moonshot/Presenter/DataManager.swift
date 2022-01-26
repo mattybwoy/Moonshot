@@ -31,15 +31,20 @@ class DataManager {
         if let url = URL(string: baseURL + currentCurrency!) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
-                if error != nil {
+                guard let data = data, error == nil else {
                     return
                 }
-                if let data = data {
-                    self.coins = self.parseJSON(data)
+                do {
+                    let response = try
+                    JSONDecoder().decode([Coins].self, from: data)
+                    self.coins = response
                     DispatchQueue.main.async {
                         completed()
                     }
                     self.pageCount = 2
+                }
+                catch {
+                    return
                 }
             }
             task.resume()
@@ -53,11 +58,13 @@ class DataManager {
         if let url = URL(string: baseURL + currentCurrency! + pageNum + String(pageCount)) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
-                if error != nil {
+                guard let data = data, error == nil else {
                     return
                 }
-                if let data = data {
-                    let newCoins = self.parseJSON(data)
+                do {
+                let response = try
+                    JSONDecoder().decode([Coins].self, from: data)
+                    let newCoins = response
                     self.coins?.append(contentsOf: newCoins)
                     DispatchQueue.main.async {
                         completed()
@@ -65,6 +72,9 @@ class DataManager {
                     if pagination {
                         self.isPaginating = false
                     }
+                }
+                catch {
+                    return
                 }
             }
             task.resume()
@@ -77,15 +87,20 @@ class DataManager {
         if let url = URL(string: baseURL + currentCurrency!) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
-                if error != nil {
+                guard let data = data, error == nil else {
                     return
                 }
-                if let data = data {
-                    self.coins = self.parseJSON(data)
+                do {
+                    let response = try
+                    JSONDecoder().decode([Coins].self, from: data)
+                    self.coins = response
                     DispatchQueue.main.async {
                         completed()
                     }
                     self.pageCount = 2
+                }
+                catch {
+                    return
                 }
             }
             task.resume()
@@ -151,18 +166,6 @@ class DataManager {
                 }
             }
             task.resume()
-        }
-    }
-    
-    func parseJSON(_ data: Data) -> [Coins] {
-        let decoder = JSONDecoder()
-        do {
-            let coins = try decoder.decode([Coins].self, from: data)
-            print(coins)
-            return coins
-        } catch {
-            print(error)
-            return []
         }
     }
     
