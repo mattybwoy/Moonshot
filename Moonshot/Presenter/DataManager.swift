@@ -111,14 +111,19 @@ class DataManager {
         if let url = URL(string: trendingURL) {
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) { (data, response, error) in
-                if error != nil {
+                guard let data = data, error == nil else {
                     return
                 }
-                if let data = data {
-                    self.trendCoins = self.parseTrendingJSON(data)
+                do {
+                    let response = try
+                    JSONDecoder().decode(TrendCoins.self, from: data)
+                    self.trendCoins = response.coins
                     DispatchQueue.main.async {
                         completed()
                     }
+                }
+                catch {
+                    return
                 }
             }
             task.resume()
@@ -166,17 +171,6 @@ class DataManager {
                 }
             }
             task.resume()
-        }
-    }
-    
-    func parseTrendingJSON(_ data: Data) -> [TrendCoins.coins] {
-        let decoder = JSONDecoder()
-        do {
-            let coins = try decoder.decode(TrendCoins.self, from: data)
-            return coins.coins
-        } catch {
-            print(error)
-            return []
         }
     }
     
