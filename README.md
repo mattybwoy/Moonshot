@@ -15,13 +15,17 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - Trending Coin Tab now displaying results
 - Added Icon Pack
 - Watchlist now displaying favourited coins
+- Search Tab created
 
 ## Improvements
 - Search functionality
 - Flesh out Coin cells
 - Flesh out Trending Coin cells
-- Testing
+- Unit and UI Testing
 - Save features
+
+## Testing
+1/1 Test passing
 
 ## Installation
 

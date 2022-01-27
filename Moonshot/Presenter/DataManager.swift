@@ -140,32 +140,31 @@ class DataManager {
                 do {
                     let response = try
                     JSONDecoder().decode(MarketData.self, from: data)
-                    let marketData = response
                     switch self.currentCurrency {
                     case "gbp":
-                        self.totalMarketCap = marketData.data.total_market_cap.gbp
+                        self.totalMarketCap = response.data.total_market_cap.gbp
                     case "eur":
-                        self.totalMarketCap = marketData.data.total_market_cap.eur
+                        self.totalMarketCap = response.data.total_market_cap.eur
                     case "aud":
-                        self.totalMarketCap = marketData.data.total_market_cap.aud
+                        self.totalMarketCap = response.data.total_market_cap.aud
                     case "cad":
-                        self.totalMarketCap = marketData.data.total_market_cap.cad
+                        self.totalMarketCap = response.data.total_market_cap.cad
                     case "cny":
-                        self.totalMarketCap = marketData.data.total_market_cap.cny
+                        self.totalMarketCap = response.data.total_market_cap.cny
                     case "hkd":
-                        self.totalMarketCap = marketData.data.total_market_cap.hkd
+                        self.totalMarketCap = response.data.total_market_cap.hkd
                     case "inr":
-                        self.totalMarketCap = marketData.data.total_market_cap.inr
+                        self.totalMarketCap = response.data.total_market_cap.inr
                     case "jpy":
-                        self.totalMarketCap = marketData.data.total_market_cap.jpy
+                        self.totalMarketCap = response.data.total_market_cap.jpy
                     case "sgd":
-                        self.totalMarketCap = marketData.data.total_market_cap.sgd
+                        self.totalMarketCap = response.data.total_market_cap.sgd
                     case "twd":
-                        self.totalMarketCap = marketData.data.total_market_cap.twd
+                        self.totalMarketCap = response.data.total_market_cap.twd
                     case "vnd":
-                        self.totalMarketCap = marketData.data.total_market_cap.vnd
+                        self.totalMarketCap = response.data.total_market_cap.vnd
                     default:
-                        self.totalMarketCap = marketData.data.total_market_cap.usd
+                        self.totalMarketCap = response.data.total_market_cap.usd
                     }
                     DispatchQueue.main.async {
                         completed()

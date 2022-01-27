@@ -10,22 +10,23 @@ import XCTest
 
 class MoonshotTests: XCTestCase {
 
+    var sut: DataManager!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = DataManager()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
     }
 
-    func test_loadCoins_WhenSucessfulResponse_ReturnsSucess() throws {
+    func test_loadCoins_WhenSucessfulResponse_ReturnsSuccess() throws {
         //Arrange
         let expectation = self.expectation(description: "Loading Initial Cryptocurrency in USD")
-        let sut = DataManager()
         
         //Act
         sut.loadCoins {
-            XCTAssertNotNil(sut.coins)
+            XCTAssertNotNil(self.sut.coins)
             expectation.fulfill()
         }
         //Assert
