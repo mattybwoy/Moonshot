@@ -23,14 +23,18 @@ class DataManager {
     var totalMarketCap: Double?
     
     var favoriteCoins: [String] = [String]()
+    private var urlSession: URLSession
+    
+    init(urlSession: URLSession = .shared) {
+        self.urlSession = urlSession
+    }
     
     func loadCoins(currency: String = "usd", completed: @escaping () -> ()) {
 
         currentCurrency = currency
         
         if let url = URL(string: baseURL + currentCurrency!) {
-            let session = URLSession(configuration: .default)
-            let task = session.dataTask(with: url) { (data, response, error) in
+            let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
                     return
                 }
@@ -56,8 +60,7 @@ class DataManager {
         isPaginating = true
         
         if let url = URL(string: baseURL + currentCurrency! + pageNum + String(pageCount)) {
-            let session = URLSession(configuration: .default)
-            let task = session.dataTask(with: url) { (data, response, error) in
+            let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
                     return
                 }
@@ -85,8 +88,7 @@ class DataManager {
     func reloadCoins(pagination: Bool = false, completed: @escaping () -> ()) {
         
         if let url = URL(string: baseURL + currentCurrency!) {
-            let session = URLSession(configuration: .default)
-            let task = session.dataTask(with: url) { (data, response, error) in
+            let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
                     return
                 }
@@ -109,8 +111,7 @@ class DataManager {
     
     func trendingCoins(pagination: Bool = false, completed: @escaping () -> ()) {
         if let url = URL(string: trendingURL) {
-            let session = URLSession(configuration: .default)
-            let task = session.dataTask(with: url) { (data, response, error) in
+            let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
                     return
                 }
@@ -132,8 +133,7 @@ class DataManager {
     
     func loadMarketData(completed: @escaping () -> ()) {
         if let url = URL(string: totalURL) {
-            let session = URLSession(configuration: .default)
-            let task = session.dataTask(with: url) { (data, response, error) in
+            let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
                     return
                 }

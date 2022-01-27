@@ -20,15 +20,16 @@ class MoonshotTests: XCTestCase {
 
     func test_loadCoins_WhenSucessfulResponse_ReturnsSucess() throws {
         //Arrange
+        let expectation = self.expectation(description: "Loading Initial Cryptocurrency in USD")
         let sut = DataManager()
-        let baseURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency="
         
         //Act
-//        sut.loadCoins { [Coins].self, error
-//            <#code#>
-//        }
+        sut.loadCoins {
+            XCTAssertNotNil(sut.coins)
+            expectation.fulfill()
+        }
         //Assert
-        
+        self.wait(for: [expectation], timeout: 5)
     }
 
 }

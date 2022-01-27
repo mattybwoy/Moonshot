@@ -39,6 +39,7 @@ class TrendingViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    
 }
 
 extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
@@ -136,5 +137,6 @@ class TrendingCoinCell: UITableViewCell {
             title.topAnchor.constraint(equalTo: topAnchor),
             title.bottomAnchor.constraint(equalTo: bottomAnchor)])
     }
+    
     
 }
