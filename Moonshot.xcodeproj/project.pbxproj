@@ -22,6 +22,8 @@
 		34526E0C273BD96800ECD673 /* Coins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34526E0B273BD96800ECD673 /* Coins.swift */; };
 		345B1A0D2797366E000D488F /* MarketData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345B1A0C2797366E000D488F /* MarketData.swift */; };
 		347E9EC92799D38300993426 /* MoonshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347E9EC82799D38300993426 /* MoonshotTests.swift */; };
+		34962E7F27A835D5002FFF94 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34962E7E27A835D5002FFF94 /* MockURLProtocol.swift */; };
+		34962E8227A8466E002FFF94 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34962E8127A8466E002FFF94 /* Status.swift */; };
 		34E0C8AC277621CF00CEDA95 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E0C8AB277621CF00CEDA95 /* TrendingViewController.swift */; };
 		34E0C8AE277628A700CEDA95 /* TrendCoins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E0C8AD277628A700CEDA95 /* TrendCoins.swift */; };
 		FCECC74E14E9E1AE4C2E4500 /* Pods_Moonshot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87CFF8B7A389BECBA735E44 /* Pods_Moonshot.framework */; };
@@ -56,6 +58,8 @@
 		345B1A0C2797366E000D488F /* MarketData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketData.swift; sourceTree = "<group>"; };
 		347E9EC62799D38300993426 /* MoonshotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoonshotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		347E9EC82799D38300993426 /* MoonshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoonshotTests.swift; sourceTree = "<group>"; };
+		34962E7E27A835D5002FFF94 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		34962E8127A8466E002FFF94 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		34E0C8AB277621CF00CEDA95 /* TrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
 		34E0C8AD277628A700CEDA95 /* TrendCoins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendCoins.swift; sourceTree = "<group>"; };
 		8238BC482CA5012A620DEE41 /* Pods-Moonshot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moonshot.release.xcconfig"; path = "Target Support Files/Pods-Moonshot/Pods-Moonshot.release.xcconfig"; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 				34526E0B273BD96800ECD673 /* Coins.swift */,
 				34E0C8AD277628A700CEDA95 /* TrendCoins.swift */,
 				345B1A0C2797366E000D488F /* MarketData.swift */,
+				34962E8127A8466E002FFF94 /* Status.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -154,8 +159,17 @@
 			isa = PBXGroup;
 			children = (
 				347E9EC82799D38300993426 /* MoonshotTests.swift */,
+				34962E8027A835DB002FFF94 /* Models */,
 			);
 			path = MoonshotTests;
+			sourceTree = "<group>";
+		};
+		34962E8027A835DB002FFF94 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				34962E7E27A835D5002FFF94 /* MockURLProtocol.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		CAC9224DF5C45FE1AE8EBE57 /* Frameworks */ = {
@@ -333,6 +347,7 @@
 				341578B22739679000179049 /* SceneDelegate.swift in Sources */,
 				34E0C8AC277621CF00CEDA95 /* TrendingViewController.swift in Sources */,
 				345B1A0D2797366E000D488F /* MarketData.swift in Sources */,
+				34962E8227A8466E002FFF94 /* Status.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				347E9EC92799D38300993426 /* MoonshotTests.swift in Sources */,
+				34962E7F27A835D5002FFF94 /* MockURLProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

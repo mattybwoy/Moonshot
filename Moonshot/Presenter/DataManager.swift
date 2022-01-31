@@ -29,6 +29,26 @@ class DataManager {
         self.urlSession = urlSession
     }
     
+    func testAPIStatus(completionHandler: @escaping (Status?) -> Void) {
+        let statusURL = "https://api.coingecko.com/api/v3/ping"
+        if let url = URL(string: statusURL) {
+            let task = urlSession.dataTask(with: url) { (data, response, error) in
+                guard let data = data, error == nil else {
+                    return
+                }
+                do {
+                    let status = try
+                    JSONDecoder().decode(Status.self, from: data)
+                    completionHandler(status)
+                }
+                catch {
+                    return
+                }
+            }
+            task.resume()
+        }
+    }
+    
     func loadCoins(currency: String = "usd", completed: @escaping () -> ()) {
 
         currentCurrency = currency
