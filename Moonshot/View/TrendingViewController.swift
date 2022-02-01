@@ -18,7 +18,7 @@ class TrendingViewController: UIViewController {
         title = "Trending"
         view.addSubview(header)
         setupTableView()
-        DataManager.sharedInstance.trendingCoins {
+        DataManager.sharedInstance.trendingCoins {_ in 
             self.tableView.reloadData()
         }
     }

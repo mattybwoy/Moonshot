@@ -129,7 +129,8 @@ class DataManager {
         }
     }
     
-    func trendingCoins(pagination: Bool = false, completed: @escaping () -> ()) {
+    func trendingCoins(pagination: Bool = false, completed: @escaping (TrendCoins?) -> ()) {
+        
         if let url = URL(string: trendingURL) {
             let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
@@ -140,7 +141,7 @@ class DataManager {
                     JSONDecoder().decode(TrendCoins.self, from: data)
                     self.trendCoins = response.coins
                     DispatchQueue.main.async {
-                        completed()
+                        completed(response)
                     }
                 }
                 catch {

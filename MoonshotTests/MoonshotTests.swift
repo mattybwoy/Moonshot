@@ -104,5 +104,20 @@ class MoonshotTests: XCTestCase {
         self.wait(for: [expectation], timeout: 3)
     }
     
+    func test_trendingCoins_WhenSuccessfulResponse_ReturnsLatestTrendingRates() {
+        
+        let expectation = self.expectation(description: "Loads latest trending rates")
+        let jsonString = "{\"coins\": [{\"item\": {\"name\": \"cellframe\"}}]}"
+        MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
+        
+        sut.trendingCoins { (_: TrendCoins?) in
+            XCTAssertNotNil(self.sut.trendCoins)
+            XCTAssertEqual(self.sut.trendCoins?.count, 1)
+            XCTAssertEqual(self.sut.trendCoins![0].item.name, "cellframe")
+            expectation.fulfill()
+        }
+        self.wait(for: [expectation], timeout: 3)
+    }
+    
     
 }
