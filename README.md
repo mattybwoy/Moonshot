@@ -26,7 +26,7 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - Save features
 
 ## Testing
-3/3 Tests passing
+4/4 Tests passing
 
 ## Installation
 

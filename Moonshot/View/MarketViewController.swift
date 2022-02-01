@@ -134,7 +134,7 @@ extension MarketViewController: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
             if (velocity.y < -0.2)
             {
-                DataManager.sharedInstance.reloadCoins {
+                DataManager.sharedInstance.reloadCoins {_ in 
                     self.tableView.reloadData()
                 }
                     self.refreshControl.endRefreshing()

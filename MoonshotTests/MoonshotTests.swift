@@ -86,4 +86,23 @@ class MoonshotTests: XCTestCase {
         XCTAssertEqual(sut.pageCount, 3)
         self.wait(for: [expectation], timeout: 3)
     }
+    
+    func test_reloadCoins_WhenSuccessfulResponse_ReturnsUpdatedRates() {
+        
+        let expectation = self.expectation(description: "Reloads results of page in current currency")
+        let current_price = 28794
+        let jsonString = "[{\"name\": \"Bitcoin\", \"id\": \"bitcoin\", \"current_price\": \(current_price)}]"
+        MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
+        sut.currentCurrency = "gbp"
+        
+        sut.reloadCoins { (_: [Coins]?) in
+            XCTAssertEqual(self.sut.coins![0].name, "Bitcoin")
+            XCTAssertEqual(self.sut.coins![0].id, "bitcoin")
+            XCTAssertEqual(self.sut.coins![0].current_price, 28794)
+            expectation.fulfill()
+        }
+        self.wait(for: [expectation], timeout: 3)
+    }
+    
+    
 }

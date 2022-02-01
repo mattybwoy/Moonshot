@@ -105,7 +105,7 @@ class DataManager {
         pageCount += 1
     }
     
-    func reloadCoins(pagination: Bool = false, completed: @escaping () -> ()) {
+    func reloadCoins(pagination: Bool = false, completed: @escaping ([Coins]?) -> Void) {
         
         if let url = URL(string: baseURL + currentCurrency!) {
             let task = urlSession.dataTask(with: url) { (data, response, error) in
@@ -117,7 +117,7 @@ class DataManager {
                     JSONDecoder().decode([Coins].self, from: data)
                     self.coins = response
                     DispatchQueue.main.async {
-                        completed()
+                        completed(response)
                     }
                     self.pageCount = 2
                 }
