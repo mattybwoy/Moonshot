@@ -48,7 +48,7 @@ class MarketViewController: UIViewController {
         DataManager.sharedInstance.loadMarketData {
             self.addMarketTotal(total: DataManager.sharedInstance.totalMarketCap!)
         }
-        DataManager.sharedInstance.loadCoins {
+        DataManager.sharedInstance.loadCoins {_ in 
             self.tableView.reloadData()
         }
     }
@@ -111,7 +111,7 @@ class MarketViewController: UIViewController {
             print("index \(index) and \(title)")
             self.currencySelector.setTitle(title, for: .normal)
             let newCurrency = title.lowercased()
-            DataManager.sharedInstance.loadCoins(currency: newCurrency, completed: {
+            DataManager.sharedInstance.loadCoins(currency: newCurrency, completed: {_ in 
                 self.tableView.reloadData()
             })
             DataManager.sharedInstance.loadMarketData {

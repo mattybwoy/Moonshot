@@ -49,7 +49,7 @@ class DataManager {
         }
     }
     
-    func loadCoins(currency: String = "usd", completed: @escaping () -> ()) {
+    func loadCoins(currency: String = "usd", completed: @escaping ([Coins]?) -> Void) {
 
         currentCurrency = currency
         
@@ -63,7 +63,7 @@ class DataManager {
                     JSONDecoder().decode([Coins].self, from: data)
                     self.coins = response
                     DispatchQueue.main.async {
-                        completed()
+                        completed(response)
                     }
                     self.pageCount = 2
                 }

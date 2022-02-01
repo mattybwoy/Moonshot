@@ -24,15 +24,23 @@ class MoonshotTests: XCTestCase {
 
         //Arrange
         let expectation = self.expectation(description: "Loading Initial Cryptocurrency in USD")
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [MockURLProtocol.self]
+        let urlSession = URLSession(configuration: config)
+        let current_price = 38346
+        let jsonString = "[{\"name\": \"Bitcoin\", \"id\": \"bitcoin\", \"current_price\": \(current_price)}]"
+        MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
 
         //Act
-        sut = DataManager()
-        sut.loadCoins {
-            XCTAssertNotNil(self.sut.coins)
+        sut = DataManager(urlSession: urlSession)
+        sut.loadCoins { (_: [Coins]?) in
+            XCTAssertEqual(self.sut.coins![0].name, "Bitcoin")
+            XCTAssertEqual(self.sut.coins![0].id, "bitcoin")
+            XCTAssertEqual(self.sut.coins![0].current_price, 38346)
             expectation.fulfill()
         }
         //Assert
-        self.wait(for: [expectation], timeout: 5)
+        self.wait(for: [expectation], timeout: 3)
     }
     
     func test_APIStatus_WhenSuccessfulResponse_ReturnsSuccess() {
@@ -53,21 +61,24 @@ class MoonshotTests: XCTestCase {
         }
         
         //Assert
-        self.wait(for: [expectation], timeout: 5)
+        self.wait(for: [expectation], timeout: 3)
     }
     
     func test_loadCoins_WhenSuccessfulResponse_ReturnsRatesInGBP() {
+        
         //Arrange
         let expectation = self.expectation(description: "Loads Cryptocurrency in GBP")
+        
         //Act
         sut = DataManager()
-        sut.loadCoins(currency: "gbp") {
-            //XCTAssertNotNil(self.sut.coins)
+        sut.loadCoins(currency: "gbp") {_ in
+            XCTAssertNotNil(self.sut.coins)
             XCTAssertEqual(self.sut.currentCurrency, "gbp")
             expectation.fulfill()
         }
+        
         //Assert
-        self.wait(for: [expectation], timeout: 5)
+        self.wait(for: [expectation], timeout: 3)
     }
 
 }
