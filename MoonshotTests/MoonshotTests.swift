@@ -13,26 +13,25 @@ class MoonshotTests: XCTestCase {
     var sut: DataManager!
     
     override func setUpWithError() throws {
-        //sut = DataManager()
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [MockURLProtocol.self]
+        let urlSession = URLSession(configuration: config)
+        sut = DataManager(urlSession: urlSession)
     }
 
     override func tearDownWithError() throws {
         sut = nil
     }
 
-    func test_loadCoins_WhenSuccessfulResponse_ReturnsSuccess() throws {
+    func test_loadCoins_WhenSuccessfulResponse_ReturnsSuccessInUSD() throws {
 
         //Arrange
         let expectation = self.expectation(description: "Loading Initial Cryptocurrency in USD")
-        let config = URLSessionConfiguration.ephemeral
-        config.protocolClasses = [MockURLProtocol.self]
-        let urlSession = URLSession(configuration: config)
         let current_price = 38346
         let jsonString = "[{\"name\": \"Bitcoin\", \"id\": \"bitcoin\", \"current_price\": \(current_price)}]"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
 
         //Act
-        sut = DataManager(urlSession: urlSession)
         sut.loadCoins { (_: [Coins]?) in
             XCTAssertEqual(self.sut.coins![0].name, "Bitcoin")
             XCTAssertEqual(self.sut.coins![0].id, "bitcoin")
@@ -46,15 +45,11 @@ class MoonshotTests: XCTestCase {
     func test_APIStatus_WhenSuccessfulResponse_ReturnsSuccess() {
         
         //Arrange
-        let config = URLSessionConfiguration.ephemeral
-        config.protocolClasses = [MockURLProtocol.self]
-        let urlSession = URLSession(configuration: config)
         let jsonString = "{\"gecko_says\":\"(V3) To the Moon!\"}"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         let expectation = self.expectation(description: "Testing API Status")
         
         //Act
-        sut = DataManager(urlSession: urlSession)
         sut.testAPIStatus { (Status) in
             XCTAssertEqual(Status?.gecko_says, "(V3) To the Moon!")
             expectation.fulfill()
@@ -68,12 +63,16 @@ class MoonshotTests: XCTestCase {
         
         //Arrange
         let expectation = self.expectation(description: "Loads Cryptocurrency in GBP")
+        let current_price = 28794
+        let jsonString = "[{\"name\": \"Bitcoin\", \"id\": \"bitcoin\", \"current_price\": \(current_price)}]"
+        MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         
         //Act
-        sut = DataManager()
-        sut.loadCoins(currency: "gbp") {_ in
-            XCTAssertNotNil(self.sut.coins)
+        sut.loadCoins(currency: "gbp") { (_: [Coins]?) in
             XCTAssertEqual(self.sut.currentCurrency, "gbp")
+            XCTAssertEqual(self.sut.coins![0].name, "Bitcoin")
+            XCTAssertEqual(self.sut.coins![0].id, "bitcoin")
+            XCTAssertEqual(self.sut.coins![0].current_price, 28794)
             expectation.fulfill()
         }
         

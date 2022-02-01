@@ -16,7 +16,7 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - Added Icon Pack
 - Watchlist now displaying favourited coins
 - Search Tab created
-- Mock created for API Status
+- Mocks created for functions testAPIStatus, loadCoins 
 
 ## Improvements
 - Search functionality
