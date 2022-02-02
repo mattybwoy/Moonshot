@@ -152,7 +152,8 @@ class DataManager {
         }
     }
     
-    func loadMarketData(completed: @escaping () -> ()) {
+    func loadMarketData(completed: @escaping (MarketData?) -> Void) {
+        
         if let url = URL(string: totalURL) {
             let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
@@ -182,13 +183,12 @@ class DataManager {
                         self.totalMarketCap = response.data.total_market_cap.sgd
                     case "twd":
                         self.totalMarketCap = response.data.total_market_cap.twd
-                    case "vnd":
-                        self.totalMarketCap = response.data.total_market_cap.vnd
                     default:
                         self.totalMarketCap = response.data.total_market_cap.usd
                     }
                     DispatchQueue.main.async {
-                        completed()
+                        print(response)
+                        completed(response)
                     }
                 }
                 catch {

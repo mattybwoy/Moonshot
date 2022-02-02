@@ -119,5 +119,32 @@ class MoonshotTests: XCTestCase {
         self.wait(for: [expectation], timeout: 3)
     }
     
+    func test_loadMarketData_WhenSuccessfulResponse_ReturnsTotalMarketCap() {
+        
+        let expectation = self.expectation(description: "Loads total market cap rates in current currency")
+        let totalUSDMarket = 1862718374088.0632
+        let totalGBPMarket = 1378260716636.8645
+        let totalEURMarket = 1656172709895.6853
+        let totalAUDMarket = 2618439982920.9585
+        let totalCADMarket = 2363675990896.933
+        let totalCNYMarket = 11848751577574.184
+        let totalHKDMarket = 14518054948417.967
+        let totalINRMarket = 139303160766379.22
+        let totalJPYMarket = 213648209352778.78
+        let totalSGDMarket = 2513319334197.6733
+        let totalTWDMarket = 51789155229333.49
+        let jsonString = "{\"data\": {\"total_market_cap\": {\"usd\": \(totalUSDMarket), \"gbp\": \(totalGBPMarket), \"eur\": \(totalEURMarket), \"aud\": \(totalAUDMarket), \"cad\": \(totalCADMarket), \"cny\": \(totalCNYMarket), \"hkd\": \(totalHKDMarket), \"inr\": \(totalINRMarket), \"jpy\": \(totalJPYMarket), \"sgd\": \(totalSGDMarket), \"twd\": \(totalTWDMarket)}}}"
+        //let jsonString = "{\"data\": {\"total_market_cap\": {\"usd\": \(totalUSDMarket)}}}"
+        MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
+        //sut.currentCurrency = "usd"
+        
+        sut.loadMarketData { (_: MarketData?) in
+            XCTAssertNotNil(self.sut.totalMarketCap)
+            XCTAssertEqual(self.sut.totalMarketCap, 1862718374088.0632)
+            expectation.fulfill()
+        }
+        self.wait(for: [expectation], timeout: 3)
+    }
+    
     
 }

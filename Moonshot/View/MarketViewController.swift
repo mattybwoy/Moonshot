@@ -23,8 +23,7 @@ class MarketViewController: UIViewController {
         "INR",
         "JPY",
         "SGD",
-        "TWD",
-        "VND"
+        "TWD"
         ]
         currencyMenu.backgroundColor = .darkGray
         currencyMenu.textColor = .systemYellow
@@ -45,7 +44,7 @@ class MarketViewController: UIViewController {
         view.addSubview(header)
         view.addSubview(marketTotal)
         view.backgroundColor = .darkGray
-        DataManager.sharedInstance.loadMarketData {
+        DataManager.sharedInstance.loadMarketData {_ in 
             self.addMarketTotal(total: DataManager.sharedInstance.totalMarketCap!)
         }
         DataManager.sharedInstance.loadCoins {_ in 
@@ -114,7 +113,7 @@ class MarketViewController: UIViewController {
             DataManager.sharedInstance.loadCoins(currency: newCurrency, completed: {_ in 
                 self.tableView.reloadData()
             })
-            DataManager.sharedInstance.loadMarketData {
+            DataManager.sharedInstance.loadMarketData {_ in 
                 self.addMarketTotal(total: DataManager.sharedInstance.totalMarketCap!)
             }
         }
