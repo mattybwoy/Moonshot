@@ -16,17 +16,17 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - Added Icon Pack
 - Watchlist now displaying favourited coins
 - Search Tab created
-- Mocks created for functions testAPIStatus, loadCoins 
+- Mocks created for all functions currently in DataManager
 
 ## Improvements
 - Search functionality
 - Flesh out Coin cells
 - Flesh out Trending Coin cells
-- Unit and UI Testing
+- UI Testing
 - Save features
 
 ## Testing
-6/6 Tests passing
+8/8 Tests passing
 
 ## Installation
 
