@@ -14,6 +14,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         title = "Search"
         addTitle()
         addSearchBar()
+        addSearchButton()
         view.backgroundColor = .darkGray
     }
     
@@ -41,5 +42,30 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         self.view.addSubview(searchBar)
     }
     
+    func addSearchButton() {
+        let searchButton = UIButton(frame: CGRect(x: 0, y: 50, width: 100, height: 30))
+        searchButton.setTitle("Search", for: .normal)
+        searchButton.center = CGPoint(x: 210, y: 230)
+        searchButton.titleLabel!.font = UIFont(name: "Astrolab", size: 12)
+        searchButton.titleLabel?.textColor = .systemYellow
+        searchButton.setTitleColor(.systemYellow, for: .normal)
+        searchButton.layer.borderWidth = 2
+        searchButton.layer.borderColor = UIColor.systemYellow.cgColor
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(searchTapped))
+        gesture.numberOfTapsRequired = 1
+        gesture.numberOfTouchesRequired = 1
+        searchButton.addGestureRecognizer(gesture)
+        self.view.addSubview(searchButton)
+        
+    }
+    
+    @objc func searchTapped() {
+        print("click!")
+    }
 
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print(searchText)
+    }
+    
+    
 }
