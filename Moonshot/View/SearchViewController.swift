@@ -13,8 +13,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         super.viewDidLoad()
         title = "Search"
         addTitle()
-        addSearchBar()
-        addSearchButton()
+        searchBar.delegate = self
+        view.addSubview(searchBar)
+        setupSearchButton()
         view.backgroundColor = .darkGray
     }
     
@@ -28,39 +29,46 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         self.view.addSubview(label)
     }
     
-    func addSearchBar() {
-        let searchBar = UISearchBar(frame: CGRect(x: 0, y: 150, width: 350, height: 40))
-        searchBar.center = CGPoint(x: 210, y: 170)
-        searchBar.placeholder = "Search"
-        searchBar.backgroundColor = .darkGray
-        searchBar.searchTextField.font = UIFont(name: "Astrolab", size: 12)
-        searchBar.layer.borderWidth = 2
-        searchBar.barTintColor = .darkGray
-        searchBar.layer.borderColor = UIColor.systemYellow.cgColor
-        searchBar.searchTextField.textColor = .systemYellow
-        searchBar.delegate = self
-        self.view.addSubview(searchBar)
-    }
+    let searchBar: UISearchBar = {
+        var bar = UISearchBar(frame: CGRect(x: 0, y: 150, width: 350, height: 40))
+        bar.center = CGPoint(x: 210, y: 170)
+        bar.placeholder = "Search"
+        bar.backgroundColor = .darkGray
+        bar.searchTextField.font = UIFont(name: "Astrolab", size: 12)
+        bar.layer.borderWidth = 2
+        bar.barTintColor = .darkGray
+        bar.layer.borderColor = UIColor.systemYellow.cgColor
+        bar.searchTextField.textColor = .systemYellow
+        return bar
+    }()
     
-    func addSearchButton() {
-        let searchButton = UIButton(frame: CGRect(x: 0, y: 50, width: 100, height: 30))
-        searchButton.setTitle("Search", for: .normal)
-        searchButton.center = CGPoint(x: 210, y: 230)
-        searchButton.titleLabel!.font = UIFont(name: "Astrolab", size: 12)
-        searchButton.titleLabel?.textColor = .systemYellow
-        searchButton.setTitleColor(.systemYellow, for: .normal)
-        searchButton.layer.borderWidth = 2
-        searchButton.layer.borderColor = UIColor.systemYellow.cgColor
+    func setupSearchButton() {
+        let button = UIButton(frame: CGRect(x: 0, y: 50, width: 100, height: 30))
+        button.setTitle("Search", for: .normal)
+        button.center = CGPoint(x: 210, y: 230)
+        button.titleLabel!.font = UIFont(name: "Astrolab", size: 12)
+        button.titleLabel?.textColor = .systemYellow
+        button.setTitleColor(.systemYellow, for: .normal)
+        button.layer.borderWidth = 2
+        button.layer.borderColor = UIColor.systemYellow.cgColor
         let gesture = UITapGestureRecognizer(target: self, action: #selector(searchTapped))
         gesture.numberOfTapsRequired = 1
         gesture.numberOfTouchesRequired = 1
-        searchButton.addGestureRecognizer(gesture)
-        self.view.addSubview(searchButton)
-        
+        button.addGestureRecognizer(gesture)
+        self.view.addSubview(button)
     }
     
     @objc func searchTapped() {
-        print("click!")
+        guard let text = searchBar.text, !text.isEmpty else {
+            let alert = UIAlertController(title: "Alert", message: "Invalid search term, please try again", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        let searchString = text.replacingOccurrences(of: " ", with: "%20")
+        DataManager.sharedInstance.searchCoin(userSearch: searchString) {
+            print("Matrix reloaded")
+        }
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

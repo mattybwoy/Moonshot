@@ -17,10 +17,12 @@ class DataManager {
     let baseURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency="
     let trendingURL = "https://api.coingecko.com/api/v3/search/trending"
     let totalURL = "https://api.coingecko.com/api/v3/global"
+    let searchURL = "https://api.coingecko.com/api/v3/search?query="
     let pageNum = "&page="
     var coins: [Coins]?
     var trendCoins: [TrendCoins.coins]?
     var totalMarketCap: Double?
+    var searchResults: [SearchCoin]?
     
     var favoriteCoins: [String] = [String]()
     private var urlSession: URLSession
@@ -199,5 +201,27 @@ class DataManager {
         }
     }
     
+    func searchCoin(userSearch: String, completed: @escaping () -> ()) {
+        
+        if let url = URL(string: searchURL + userSearch) {
+            let task = urlSession.dataTask(with: url) { data, response, error in
+                guard let data = data, error == nil else {
+                    return
+                }
+                do {
+                    let response = try
+                    JSONDecoder().decode(SearchCoin.self, from: data)
+                    print(response)
+                    DispatchQueue.main.async {
+                        completed()
+                    }
+                }
+                catch {
+                    return
+                }
+            }
+            task.resume()
+        }
+    }
     
 }
