@@ -9,6 +9,8 @@ import UIKit
 
 class SearchViewController: UIViewController, UISearchBarDelegate {
 
+    private var tableView: UITableView = UITableView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Search"
@@ -16,6 +18,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchBar.delegate = self
         view.addSubview(searchBar)
         setupSearchButton()
+        setupTable()
         view.backgroundColor = .darkGray
     }
     
@@ -58,6 +61,21 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         self.view.addSubview(button)
     }
     
+    func setupTable() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .darkGray
+        view.addSubview(tableView)
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 270),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -85),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        tableView.register(SearchCoinCell.self, forCellReuseIdentifier: SearchCoinCell.reuseIdentifier)
+    }
+    
     @objc func searchTapped() {
         guard let text = searchBar.text, !text.isEmpty else {
             let alert = UIAlertController(title: "Alert", message: "Invalid search term, please try again", preferredStyle: UIAlertController.Style.alert)
@@ -67,7 +85,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         }
         let searchString = text.replacingOccurrences(of: " ", with: "%20")
         DataManager.sharedInstance.searchCoin(userSearch: searchString) {
-            print("Matrix reloaded")
+            self.tableView.reloadData()
         }
     }
 
@@ -75,5 +93,61 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         print(searchText)
     }
     
+    
+}
+
+extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let searchResultTotal = DataManager.sharedInstance.searchResults?.count else {
+            return 0
+        }
+        return searchResultTotal
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchCoinCell.reuseIdentifier, for: indexPath) as! SearchCoinCell
+        guard let searchedCoins = DataManager.sharedInstance.searchResults else {
+            return cell
+        }
+        cell.textLabel?.text = "\(searchedCoins[indexPath.row].name)"
+        cell.backgroundColor = .darkGray
+        cell.textLabel?.textColor = .systemYellow
+        cell.layer.borderColor = UIColor.systemYellow.cgColor
+        cell.layer.borderWidth = 1.0
+        return cell
+    }
+
+
+}
+
+
+
+class SearchCoinCell: UITableViewCell {
+    static let reuseIdentifier = "coincell"
+    
+    lazy var title: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        return label
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+    
+    private func setup() {
+        addSubview(title)
+        NSLayoutConstraint.activate([
+            title.leadingAnchor.constraint(equalTo: leadingAnchor),
+            title.trailingAnchor.constraint(equalTo: trailingAnchor),
+            title.topAnchor.constraint(equalTo: topAnchor),
+            title.bottomAnchor.constraint(equalTo: bottomAnchor)])
+    }
     
 }

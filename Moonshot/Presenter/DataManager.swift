@@ -22,7 +22,7 @@ class DataManager {
     var coins: [Coins]?
     var trendCoins: [TrendCoins.coins]?
     var totalMarketCap: Double?
-    var searchResults: [SearchCoin]?
+    var searchResults: [Coin]?
     
     var favoriteCoins: [String] = [String]()
     private var urlSession: URLSession
@@ -211,7 +211,7 @@ class DataManager {
                 do {
                     let response = try
                     JSONDecoder().decode(SearchCoin.self, from: data)
-                    print(response)
+                    self.searchResults = response.coins
                     DispatchQueue.main.async {
                         completed()
                     }
@@ -223,5 +223,6 @@ class DataManager {
             task.resume()
         }
     }
+    
     
 }
