@@ -84,7 +84,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             return
         }
         let searchString = text.replacingOccurrences(of: " ", with: "%20")
-        DataManager.sharedInstance.searchCoin(userSearch: searchString) {_ in 
+        DataManager.sharedInstance.searchCoin(userSearch: searchString) {_,_  in
             self.tableView.reloadData()
         }
     }
@@ -178,5 +178,6 @@ class SearchCoinCell: UITableViewCell {
             title.topAnchor.constraint(equalTo: topAnchor),
             title.bottomAnchor.constraint(equalTo: bottomAnchor)])
     }
+    
     
 }

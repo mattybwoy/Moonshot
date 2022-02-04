@@ -177,9 +177,23 @@ class MoonshotTests: XCTestCase {
         let jsonString = "{\"coins\": [{\"name\": \"Bitcoin\"}]}"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         
-        sut.searchCoin(userSearch: "Bitcoin") { (_: SearchCoin?) in
+        sut.searchCoin(userSearch: "Bitcoin") { (_: SearchCoin?, NetworkError) in
             XCTAssertNotNil(self.sut.searchResults)
             XCTAssertEqual(self.sut.searchResults![0].name, "Bitcoin")
+            expectation.fulfill()
+        }
+        self.wait(for: [expectation], timeout: 3)
+    }
+    
+    func test_searchCoin_WhenUnsuccessfulRequest_ReturnsZeroResults() {
+        
+        let expectation = self.expectation(description: "Zero results for user")
+        let jsonString = "{\"co1ns\": [54htr]}"
+        MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
+        
+        sut.searchCoin(userSearch: "WrappedBitcoin") { (_: SearchCoin?, error) in
+            XCTAssertNil(self.sut.searchResults)
+            XCTAssertEqual(error, NetworkError.invalidRequestError)
             expectation.fulfill()
         }
         self.wait(for: [expectation], timeout: 3)

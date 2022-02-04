@@ -201,11 +201,12 @@ class DataManager {
         }
     }
     
-    func searchCoin(userSearch: String, completed: @escaping (SearchCoin?) -> Void) {
+    func searchCoin(userSearch: String, completed: @escaping (SearchCoin?, NetworkError?) -> Void) {
         
         if let url = URL(string: searchURL + userSearch) {
             let task = urlSession.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else {
+                    completed(nil, NetworkError.invalidRequestError)
                     return
                 }
                 do {
@@ -213,14 +214,25 @@ class DataManager {
                     JSONDecoder().decode(SearchCoin.self, from: data)
                     self.searchResults = response.coins
                     DispatchQueue.main.async {
-                        completed(response)
+                        completed(response, nil)
                     }
                 }
                 catch {
+                    completed(nil, NetworkError.invalidRequestError)
                     return
                 }
-            }
+//
+//                if let data = data, let response = try? JSONDecoder().decode(SearchCoin.self, from: data) {
+//                    self.searchResults = response.coins
+//                        completed(response, nil)
+//                    } else {
+//                        completed(nil, NetworkError.invalidRequestError)
+//                    }
+                }
             task.resume()
+                    
+            
+            
         }
     }
     
