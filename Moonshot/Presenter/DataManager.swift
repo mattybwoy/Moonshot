@@ -201,7 +201,7 @@ class DataManager {
         }
     }
     
-    func searchCoin(userSearch: String, completed: @escaping () -> ()) {
+    func searchCoin(userSearch: String, completed: @escaping (SearchCoin?) -> Void) {
         
         if let url = URL(string: searchURL + userSearch) {
             let task = urlSession.dataTask(with: url) { data, response, error in
@@ -213,7 +213,7 @@ class DataManager {
                     JSONDecoder().decode(SearchCoin.self, from: data)
                     self.searchResults = response.coins
                     DispatchQueue.main.async {
-                        completed()
+                        completed(response)
                     }
                 }
                 catch {

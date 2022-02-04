@@ -84,13 +84,19 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             return
         }
         let searchString = text.replacingOccurrences(of: " ", with: "%20")
-        DataManager.sharedInstance.searchCoin(userSearch: searchString) {
+        DataManager.sharedInstance.searchCoin(userSearch: searchString) {_ in 
             self.tableView.reloadData()
         }
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
+    }
+    
+    func sendAlert() {
+        let alert = UIAlertController(title: "Alert", message: "Coin already in Watchlist", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -116,6 +122,29 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         cell.layer.borderColor = UIColor.systemYellow.cgColor
         cell.layer.borderWidth = 1.0
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let favouriteAction = UIContextualAction(style: .normal, title: "Favourite") { [weak self] (action, view, completionHandler) in
+            
+            guard let searchedCoins = DataManager.sharedInstance.searchResults else {
+                return
+            }
+            if DataManager.sharedInstance.favoriteCoins.contains(searchedCoins[indexPath.row].name) {
+                self?.sendAlert()
+            } else {
+                DataManager.sharedInstance.favoriteCoins.append((searchedCoins[indexPath.row].name))
+            }
+            print(DataManager.sharedInstance.favoriteCoins)
+            completionHandler(true)
+        }
+        favouriteAction.backgroundColor = .systemYellow
+        let swipeActions = UISwipeActionsConfiguration(actions: [favouriteAction])
+        return swipeActions
     }
 
 

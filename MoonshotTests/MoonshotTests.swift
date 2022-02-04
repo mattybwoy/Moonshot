@@ -170,4 +170,20 @@ class MoonshotTests: XCTestCase {
         self.wait(for: [expectation], timeout: 3)
     }
     
+    func test_searchCoin_WhenSuccessfulResponse_ReturnsSearchResults() {
+        
+        let expectation = self.expectation(description: "Loads search results for user")
+        
+        let jsonString = "{\"coins\": [{\"name\": \"Bitcoin\"}]}"
+        MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
+        
+        sut.searchCoin(userSearch: "Bitcoin") { (_: SearchCoin?) in
+            XCTAssertNotNil(self.sut.searchResults)
+            XCTAssertEqual(self.sut.searchResults![0].name, "Bitcoin")
+            expectation.fulfill()
+        }
+        self.wait(for: [expectation], timeout: 3)
+    }
+    
+    
 }

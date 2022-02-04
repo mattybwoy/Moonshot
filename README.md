@@ -19,14 +19,13 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - Mocks created for all functions currently in DataManager
 
 ## Improvements
-- Search functionality
 - Flesh out Coin cells
 - Flesh out Trending Coin cells
 - UI Testing
 - Save features
 
 ## Testing
-8/8 Tests passing
+9/9 Tests passing
 
 ## Installation
 
