@@ -12,6 +12,7 @@ struct TrendCoins: Decodable {
         var item: Item
         struct Item: Decodable {
             var name: String
+            var thumb: String
         }
     }
     let coins: [coins]

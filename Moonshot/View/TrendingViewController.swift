@@ -61,9 +61,8 @@ extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        tableView.register(TrendingCoinCell.self, forCellReuseIdentifier: TrendingCoinCell.reuseIdentifier)
-//        let nib = UINib(nibName: "TrendingCellTableViewCell", bundle: nil)
-//        tableView.register(nib, forCellReuseIdentifier: "TrendingCell")
+        let nib = UINib(nibName: "TrendingCellTableViewCell", bundle: .main)
+        tableView.register(nib, forCellReuseIdentifier: TrendingCellTableViewCell.reuseidentifier)
         
     }
     
@@ -75,15 +74,16 @@ extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: TrendingCoinCell.reuseIdentifier, for: indexPath) as! TrendingCoinCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: TrendingCellTableViewCell.reuseidentifier, for: indexPath) as! TrendingCellTableViewCell
         guard let trendingCoins = DataManager.sharedInstance.trendCoins else {
             return cell
         }
-        cell.textLabel?.text = "\(trendingCoins[indexPath.row].item.name)"
-        cell.backgroundColor = .darkGray
-        cell.textLabel?.textColor = .systemYellow
+        cell.coinTitle.text = "\(trendingCoins[indexPath.row].item.name)"
+        cell.coinTitle.textColor = .systemYellow
         cell.layer.borderColor = UIColor.systemYellow.cgColor
         cell.layer.borderWidth = 1.0
+        cell.backgroundColor = .darkGray
+        cell.thumbNail.image = UIImage(named: trendingCoins[indexPath.row].item.thumb)
         return cell
     }
     
