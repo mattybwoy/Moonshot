@@ -62,6 +62,9 @@ extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         tableView.register(TrendingCoinCell.self, forCellReuseIdentifier: TrendingCoinCell.reuseIdentifier)
+//        let nib = UINib(nibName: "TrendingCellTableViewCell", bundle: nil)
+//        tableView.register(nib, forCellReuseIdentifier: "TrendingCell")
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -117,8 +120,15 @@ class TrendingCoinCell: UITableViewCell {
     lazy var title: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
+        label.textColor = .systemBlue
+        label.font = UIFont(name: "Astrolab", size: 10)
         return label
+    }()
+    
+    lazy var thumbNail: UIImageView = {
+        let image = UIImageView(frame: CGRect(x: 0, y: 25, width: 15, height: 15))
+        image.center = CGPoint(x: 20, y: 20)
+        return image
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -131,6 +141,7 @@ class TrendingCoinCell: UITableViewCell {
     
     private func setup() {
         addSubview(title)
+        addSubview(thumbNail)
         NSLayoutConstraint.activate([
             title.leadingAnchor.constraint(equalTo: leadingAnchor),
             title.trailingAnchor.constraint(equalTo: trailingAnchor),

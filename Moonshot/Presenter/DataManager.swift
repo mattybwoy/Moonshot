@@ -206,7 +206,7 @@ class DataManager {
         if let url = URL(string: searchURL + userSearch) {
             let task = urlSession.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else {
-                    completed(nil, NetworkError.invalidRequestError)
+                    completed(nil, NetworkError.failedRequest)
                     return
                 }
                 do {
@@ -221,16 +221,8 @@ class DataManager {
                     completed(nil, NetworkError.invalidRequestError)
                     return
                 }
-//
-//                if let data = data, let response = try? JSONDecoder().decode(SearchCoin.self, from: data) {
-//                    self.searchResults = response.coins
-//                        completed(response, nil)
-//                    } else {
-//                        completed(nil, NetworkError.invalidRequestError)
-//                    }
                 }
             task.resume()
-                    
             
             
         }

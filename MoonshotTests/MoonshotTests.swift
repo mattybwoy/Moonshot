@@ -21,6 +21,8 @@ class MoonshotTests: XCTestCase {
 
     override func tearDownWithError() throws {
         sut = nil
+        MockURLProtocol.stubResponseData = nil
+        MockURLProtocol.error = nil
     }
     
     func test_APIStatus_WhenSuccessfulResponse_ReturnsSuccess() {
@@ -177,7 +179,7 @@ class MoonshotTests: XCTestCase {
         let jsonString = "{\"coins\": [{\"name\": \"Bitcoin\"}]}"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         
-        sut.searchCoin(userSearch: "Bitcoin") { (_: SearchCoin?, NetworkError) in
+        sut.searchCoin(userSearch: "Bitcoin") { (_: SearchCoin?, error) in
             XCTAssertNotNil(self.sut.searchResults)
             XCTAssertEqual(self.sut.searchResults![0].name, "Bitcoin")
             expectation.fulfill()
@@ -192,6 +194,7 @@ class MoonshotTests: XCTestCase {
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         
         sut.searchCoin(userSearch: "WrappedBitcoin") { (_: SearchCoin?, error) in
+            XCTAssertTrue(error != nil)
             XCTAssertNil(self.sut.searchResults)
             XCTAssertEqual(error, NetworkError.invalidRequestError)
             expectation.fulfill()
