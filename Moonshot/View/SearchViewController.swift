@@ -49,7 +49,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         let button = UIButton(frame: CGRect(x: 0, y: 50, width: 100, height: 30))
         button.setTitle("Search", for: .normal)
         button.center = CGPoint(x: 210, y: 230)
-        button.titleLabel!.font = UIFont(name: "Astrolab", size: 12)
+        button.titleLabel!.font = UIFont(name: "Nasalization", size: 12)
         button.titleLabel?.textColor = .systemYellow
         button.setTitleColor(.systemYellow, for: .normal)
         button.layer.borderWidth = 2
@@ -117,6 +117,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         }
         cell.textLabel?.text = "\(searchedCoins[indexPath.row].name)"
+        cell.textLabel?.font = UIFont(name: "Nasalization", size: 15)
         cell.backgroundColor = .darkGray
         cell.textLabel?.textColor = .systemYellow
         cell.layer.borderColor = UIColor.systemYellow.cgColor
@@ -147,7 +148,11 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         return swipeActions
     }
 
-
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        self.tableView.setSwipeActionFont(UIFont(name: "Nasalization", size: 15)!)
+    }
+    
+    
 }
 
 

@@ -62,6 +62,7 @@ extension WatchListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FavouriteCoinCell.reuseIdentifier, for: indexPath)
         cell.textLabel?.text = "\(DataManager.sharedInstance.favoriteCoins[indexPath.row])"
+        cell.textLabel?.font = UIFont(name: "Nasalization", size: 15)
         cell.backgroundColor = .darkGray
         cell.textLabel?.textColor = .systemYellow
         cell.layer.borderColor = UIColor.systemYellow.cgColor
@@ -82,6 +83,10 @@ extension WatchListViewController: UITableViewDelegate, UITableViewDataSource {
         deleteAction.backgroundColor = .systemRed
         let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction])
         return swipeActions
+    }
+    
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        self.tableView.setSwipeActionFont(UIFont(name: "Nasalization", size: 15)!)
     }
     
     

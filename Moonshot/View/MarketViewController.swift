@@ -27,6 +27,7 @@ class MarketViewController: UIViewController {
         ]
         currencyMenu.backgroundColor = .darkGray
         currencyMenu.textColor = .systemYellow
+        currencyMenu.textFont = UIFont(name: "Nasalization", size: 15)!
         return currencyMenu
     }()
     
@@ -63,17 +64,18 @@ class MarketViewController: UIViewController {
     }()
     
     let marketTotal: UILabel = {
-        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 250, height: 30))
+        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 255, height: 30))
         label.center = CGPoint(x: 250, y: 125)
         label.textAlignment = .center
-        label.font = UIFont(name: "Astrolab", size: 10)
+        label.font = UIFont(name: "Nasalization", size: 15)
+        label.adjustsFontSizeToFitWidth = true
         label.textColor = .systemYellow
         label.numberOfLines = 0
         return label
     }()
     
     func addMarketTotal(total: Double) {
-        marketTotal.text = "Total Market Cap \(total)"
+        marketTotal.text = "Total Market Cap \n\(total)"
     }
     
     func createSpinnerFooter() -> UIView {
@@ -90,7 +92,7 @@ class MarketViewController: UIViewController {
     func currencyButton() {
         currencySelector.center = CGPoint(x: 75, y: 125)
         currencySelector.setTitle("USD", for: .normal)
-        currencySelector.titleLabel?.font = UIFont(name: "Astrolab", size: 10)!
+        currencySelector.titleLabel?.font = UIFont(name: "Nasalization", size: 15)!
         currencySelector.titleLabel?.textColor = .systemYellow
         currencySelector.setTitleColor(.systemYellow, for: .normal)
         currencySelector.layer.borderWidth = 1
@@ -190,6 +192,7 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
         cell.textLabel?.text = "\(loadedCoins[indexPath.row].name)     \(loadedCoins[indexPath.row].current_price)"
         cell.backgroundColor = .darkGray
         cell.textLabel?.textColor = .systemYellow
+        cell.textLabel?.font = UIFont(name: "Nasalization", size: 15)
         cell.layer.borderColor = UIColor.systemYellow.cgColor
         cell.layer.borderWidth = 1.0
         return cell
@@ -218,8 +221,44 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
         return swipeActions
     }
     
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        self.tableView.setSwipeActionFont(UIFont(name: "Nasalization", size: 15)!)
+    }
+    
+    
     
 }
+
+extension UITableView {
+    public func setSwipeActionFont(_ font: UIFont, withTintColor tintColor: UIColor? = nil, andIgnoreFirst ignoreFirst: Bool = false) {
+        for subview in self.subviews {
+            guard NSStringFromClass(type(of: subview)) == "_UITableViewCellSwipeContainerView" else {
+                continue
+            }
+
+            for swipeContainerSubview in subview.subviews {
+                guard NSStringFromClass(type(of: swipeContainerSubview)) == "UISwipeActionPullView" else {
+                    continue
+                }
+
+                for (index, view) in swipeContainerSubview.subviews.filter({ $0 is UIButton }).enumerated() {
+
+                    guard let button = view as? UIButton else {
+                        continue
+                    }
+                    button.titleLabel?.font = font
+                    
+                    guard index > 0 || !ignoreFirst else {
+                        continue
+                    }
+                    button.setTitleColor(tintColor, for: .normal)
+                    button.imageView?.tintColor = tintColor
+                }
+            }
+        }
+    }
+}
+
 
 
 class CoinCell: UITableViewCell {

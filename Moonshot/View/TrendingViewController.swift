@@ -112,44 +112,8 @@ extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
         return swipeActions
     }
     
-    
-}
-
-
-class TrendingCoinCell: UITableViewCell {
-    static let reuseIdentifier = "coincell"
-    
-    lazy var title: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .systemBlue
-        label.font = UIFont(name: "Astrolab", size: 10)
-        return label
-    }()
-    
-    lazy var thumbNail: UIImageView = {
-        let image = UIImageView(frame: CGRect(x: 0, y: 25, width: 15, height: 15))
-        image.center = CGPoint(x: 20, y: 20)
-        return image
-    }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        self.tableView.setSwipeActionFont(UIFont(name: "Nasalization", size: 15)!)
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError()
-    }
-    
-    private func setup() {
-        addSubview(title)
-        addSubview(thumbNail)
-        NSLayoutConstraint.activate([
-            title.leadingAnchor.constraint(equalTo: leadingAnchor),
-            title.trailingAnchor.constraint(equalTo: trailingAnchor),
-            title.topAnchor.constraint(equalTo: topAnchor),
-            title.bottomAnchor.constraint(equalTo: bottomAnchor)])
-    }
-    
     
 }
