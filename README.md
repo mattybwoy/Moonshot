@@ -17,10 +17,10 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - Watchlist now displaying favourited coins
 - Search Tab created
 - Mocks created for all functions currently in DataManager
+- Added Coin Font
 
 ## Improvements
 - Flesh out Coin cells
-- Flesh out Trending Coin cells
 - UI Testing
 - Save features
 

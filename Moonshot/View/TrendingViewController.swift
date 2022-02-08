@@ -80,11 +80,13 @@ extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
         }
         cell.coinTitle.text = "\(trendingCoins[indexPath.row].item.name)"
         cell.coinTitle.textColor = .systemYellow
+        cell.coinTitle.font = UIFont(name: "Nasalization", size: 15)
         cell.layer.borderColor = UIColor.systemYellow.cgColor
         cell.layer.borderWidth = 1.0
         cell.backgroundColor = .darkGray
-        cell.thumbNail.image = UIImage(named: trendingCoins[indexPath.row].item.thumb)
+        cell.thumbNail.image = UIImage(data: try! Data(contentsOf: URL(string: trendingCoins[indexPath.row].item.thumb)!))
         return cell
+        
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
