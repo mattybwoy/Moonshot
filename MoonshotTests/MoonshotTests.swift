@@ -109,13 +109,14 @@ class MoonshotTests: XCTestCase {
     func test_trendingCoins_WhenSuccessfulResponse_ReturnsLatestTrendingRates() {
         
         let expectation = self.expectation(description: "Loads latest trending rates")
-        let jsonString = "{\"coins\": [{\"item\": {\"name\": \"cellframe\"}}]}"
+        let jsonString = "{\"coins\": [{\"item\": {\"name\": \"cellframe\", \"thumb\": \"https://assets.coingecko.com/coins/images/14465/thumb/cellframe_logo.png\"}}]}"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         
         sut.trendingCoins { (_: TrendCoins?) in
             XCTAssertNotNil(self.sut.trendCoins)
             XCTAssertEqual(self.sut.trendCoins?.count, 1)
             XCTAssertEqual(self.sut.trendCoins![0].item.name, "cellframe")
+            XCTAssertEqual(self.sut.trendCoins![0].item.thumb, "https://assets.coingecko.com/coins/images/14465/thumb/cellframe_logo.png")
             expectation.fulfill()
         }
         self.wait(for: [expectation], timeout: 3)
@@ -176,12 +177,13 @@ class MoonshotTests: XCTestCase {
         
         let expectation = self.expectation(description: "Loads search results for user")
         
-        let jsonString = "{\"coins\": [{\"name\": \"Bitcoin\"}]}"
+        let jsonString = "{\"coins\": [{\"name\": \"Bitcoin\", \"thumb\": \"https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png\"}]}"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         
         sut.searchCoin(userSearch: "Bitcoin") { (_: SearchCoin?, error) in
             XCTAssertNotNil(self.sut.searchResults)
             XCTAssertEqual(self.sut.searchResults![0].name, "Bitcoin")
+            XCTAssertEqual(self.sut.searchResults![0].thumb, "https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png")
             expectation.fulfill()
         }
         self.wait(for: [expectation], timeout: 3)

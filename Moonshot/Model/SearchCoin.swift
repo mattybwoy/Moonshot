@@ -13,4 +13,5 @@ struct SearchCoin: Decodable {
 
 struct Coin: Decodable {
     let name: String
+    let thumb: String
 }
