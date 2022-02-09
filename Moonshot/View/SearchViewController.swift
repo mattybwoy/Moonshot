@@ -73,7 +73,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        tableView.register(SearchCoinCell.self, forCellReuseIdentifier: SearchCoinCell.reuseIdentifier)
+        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.reuseidentifier)
     }
     
     @objc func searchTapped() {
@@ -112,16 +112,17 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SearchCoinCell.reuseIdentifier, for: indexPath) as! SearchCoinCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.reuseidentifier, for: indexPath) as! SearchTableViewCell
         guard let searchedCoins = DataManager.sharedInstance.searchResults else {
             return cell
         }
-        cell.textLabel?.text = "\(searchedCoins[indexPath.row].name)"
-        cell.textLabel?.font = UIFont(name: "Nasalization", size: 15)
+        cell.title.text = "\(searchedCoins[indexPath.row].name)"
+        cell.title.font = UIFont(name: "Nasalization", size: 15)
+        cell.title.textColor = .systemYellow
         cell.backgroundColor = .darkGray
-        cell.textLabel?.textColor = .systemYellow
         cell.layer.borderColor = UIColor.systemYellow.cgColor
         cell.layer.borderWidth = 1.0
+        cell.thumbNail.image = UIImage(data: try! Data(contentsOf: URL(string: searchedCoins[indexPath.row].thumb)!))
         return cell
     }
     
@@ -150,38 +151,6 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
         self.tableView.setSwipeActionFont(UIFont(name: "Nasalization", size: 15)!)
-    }
-    
-    
-}
-
-
-
-class SearchCoinCell: UITableViewCell {
-    static let reuseIdentifier = "coincell"
-    
-    lazy var title: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
-        return label
-    }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError()
-    }
-    
-    private func setup() {
-        addSubview(title)
-        NSLayoutConstraint.activate([
-            title.leadingAnchor.constraint(equalTo: leadingAnchor),
-            title.trailingAnchor.constraint(equalTo: trailingAnchor),
-            title.topAnchor.constraint(equalTo: topAnchor),
-            title.bottomAnchor.constraint(equalTo: bottomAnchor)])
     }
     
     
