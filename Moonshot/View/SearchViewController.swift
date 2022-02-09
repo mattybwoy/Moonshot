@@ -138,13 +138,16 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             guard let searchedCoins = DataManager.sharedInstance.searchResults else {
                 return
             }
-            if DataManager.sharedInstance.favoriteCoins.contains(searchedCoins[indexPath.row].name) {
-                self?.sendAlert()
-            } else {
-                DataManager.sharedInstance.favoriteCoins.append((searchedCoins[indexPath.row].name))
+            for name in DataManager.sharedInstance.favoriteCoins {
+                if name.name == (searchedCoins[indexPath.row].name) {
+                    self?.sendAlert()
+                }
+                DataManager.sharedInstance.favoriteCoins.append(WatchCoins(name: searchedCoins[indexPath.row].name, thumb: searchedCoins[indexPath.row].thumb))
+                
+                print(DataManager.sharedInstance.favoriteCoins)
+                completionHandler(true)
             }
-            print(DataManager.sharedInstance.favoriteCoins)
-            completionHandler(true)
+            
         }
         favouriteAction.backgroundColor = .systemYellow
         let swipeActions = UISwipeActionsConfiguration(actions: [favouriteAction])

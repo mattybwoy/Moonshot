@@ -208,18 +208,21 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
             guard let loadedCoins = DataManager.sharedInstance.coins else {
                 return
             }
-            if DataManager.sharedInstance.favoriteCoins.contains(loadedCoins[indexPath.row].name) {
-                self?.sendAlert()
-            } else {
-                DataManager.sharedInstance.favoriteCoins.append((loadedCoins[indexPath.row].name))
+            for name in DataManager.sharedInstance.favoriteCoins {
+                if name.name == (loadedCoins[indexPath.row].name) {
+                    self?.sendAlert()
+                }
+                DataManager.sharedInstance.favoriteCoins.append(WatchCoins(name: loadedCoins[indexPath.row].name, thumb: loadedCoins[indexPath.row].image))
+                
+                print(DataManager.sharedInstance.favoriteCoins)
+                completionHandler(true)
             }
-            print(DataManager.sharedInstance.favoriteCoins)
-            completionHandler(true)
         }
         favouriteAction.backgroundColor = .systemYellow
         let swipeActions = UISwipeActionsConfiguration(actions: [favouriteAction])
         return swipeActions
     }
+
     
     func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
         self.tableView.setSwipeActionFont(UIFont(name: "Nasalization", size: 15)!)

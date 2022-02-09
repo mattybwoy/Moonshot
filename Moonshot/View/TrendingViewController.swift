@@ -34,11 +34,11 @@ class TrendingViewController: UIViewController {
     }()
     
     func sendAlert() {
+        self.tableView.reloadData()
         let alert = UIAlertController(title: "Alert", message: "Coin already in Watchlist", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-    
     
 }
 
@@ -100,13 +100,24 @@ extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
             guard let trendingCoins = DataManager.sharedInstance.trendCoins else {
                 return
             }
-            if DataManager.sharedInstance.favoriteCoins.contains(trendingCoins[indexPath.row].item.name) {
-                self?.sendAlert()
+            
+            if DataManager.sharedInstance.favoriteCoins.isEmpty {
+                DataManager.sharedInstance.favoriteCoins.append(WatchCoins(name: trendingCoins[indexPath.row].item.name, thumb: trendingCoins[indexPath.row].item.thumb))
+
+                    print(DataManager.sharedInstance.favoriteCoins)
+                    completionHandler(true)
             } else {
-                DataManager.sharedInstance.favoriteCoins.append((trendingCoins[indexPath.row].item.name))
+                for coin in DataManager.sharedInstance.favoriteCoins {
+                    if coin.name == (trendingCoins[indexPath.row].item.name) {
+                        self?.sendAlert()
+                        return
+                    }
+                }
+                DataManager.sharedInstance.favoriteCoins.append(WatchCoins(name: trendingCoins[indexPath.row].item.name, thumb: trendingCoins[indexPath.row].item.thumb))
+                    print(DataManager.sharedInstance.favoriteCoins)
+                    completionHandler(true)
             }
-            print(DataManager.sharedInstance.favoriteCoins)
-            completionHandler(true)
+            
         }
         favouriteAction.backgroundColor = .systemYellow
         let swipeActions = UISwipeActionsConfiguration(actions: [favouriteAction])

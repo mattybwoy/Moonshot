@@ -24,7 +24,8 @@ class DataManager {
     var totalMarketCap: Double?
     var searchResults: [Coin]?
     
-    var favoriteCoins: [String] = [String]()
+    var favoriteCoins: [WatchCoins] = [WatchCoins]()
+    
     private var urlSession: URLSession
     
     init(urlSession: URLSession = .shared) {
