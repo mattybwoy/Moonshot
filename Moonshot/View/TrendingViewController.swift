@@ -81,6 +81,7 @@ extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
         cell.coinTitle.text = "\(trendingCoins[indexPath.row].item.name)"
         cell.coinTitle.textColor = .systemYellow
         cell.coinTitle.font = UIFont(name: "Nasalization", size: 15)
+        cell.coinTitle.adjustsFontSizeToFitWidth = true
         cell.layer.borderColor = UIColor.systemYellow.cgColor
         cell.layer.borderWidth = 1.0
         cell.backgroundColor = .darkGray

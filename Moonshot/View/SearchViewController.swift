@@ -37,7 +37,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         bar.center = CGPoint(x: 210, y: 170)
         bar.placeholder = "Search"
         bar.backgroundColor = .darkGray
-        bar.searchTextField.font = UIFont(name: "Astrolab", size: 12)
+        bar.searchTextField.font = UIFont(name: "Astrolab", size: 16)
         bar.layer.borderWidth = 2
         bar.barTintColor = .darkGray
         bar.layer.borderColor = UIColor.systemYellow.cgColor
@@ -73,7 +73,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.reuseidentifier)
+        let nib = UINib(nibName: "SearchTableViewCell", bundle: .main)
+        tableView.register(nib.self, forCellReuseIdentifier: SearchTableViewCell.reuseidentifier)
     }
     
     @objc func searchTapped() {
@@ -116,9 +117,10 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         guard let searchedCoins = DataManager.sharedInstance.searchResults else {
             return cell
         }
-        cell.title.text = "\(searchedCoins[indexPath.row].name)"
-        cell.title.font = UIFont(name: "Nasalization", size: 15)
-        cell.title.textColor = .systemYellow
+        cell.coinLabel.text = "\(searchedCoins[indexPath.row].name)"
+        cell.coinLabel.font = UIFont(name: "Nasalization", size: 15)
+        cell.coinLabel.textColor = .systemYellow
+        cell.coinLabel.adjustsFontSizeToFitWidth = true
         cell.backgroundColor = .darkGray
         cell.layer.borderColor = UIColor.systemYellow.cgColor
         cell.layer.borderWidth = 1.0

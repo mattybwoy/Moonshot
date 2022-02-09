@@ -8,37 +8,20 @@
 import UIKit
 
 class SearchTableViewCell: UITableViewCell {
+    
+    static let reuseidentifier = "SearchCoinCell"
 
-    static let reuseidentifier = "SearchTableCell"
+    @IBOutlet var coinLabel: UILabel!
+    @IBOutlet var thumbNail: UIImageView!
     
-    lazy var title: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
-        label.adjustsFontSizeToFitWidth = true
-        return label
-    }()
-    
-    lazy var thumbNail: UIImageView = {
-        let image = UIImageView()
-        return image
-    }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .darkGray
-        contentView.addSubview(thumbNail)
-        contentView.addSubview(title)
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError()
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        // Configure the view for the selected state
     }
-    
-    override func layoutSubviews() {
-        thumbNail.frame = CGRect(x: 13, y: 9, width: 25, height: 25)
-        title.frame = CGRect(x: 60, y: 13, width: 300, height: 20)
-    }
-    
     
 }

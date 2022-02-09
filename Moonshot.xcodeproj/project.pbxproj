@@ -25,7 +25,8 @@
 		348872B527B179CA00ECE00D /* TrendingCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 348872B327B179CA00ECE00D /* TrendingCellTableViewCell.xib */; };
 		348872B927B2CFF800ECE00D /* Typodermic-NasalizationRg-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 348872B827B2CFF800ECE00D /* Typodermic-NasalizationRg-Regular.otf */; };
 		348872BC27B2D13D00ECE00D /* Astrolab.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 348872BB27B2D13D00ECE00D /* Astrolab.ttf */; };
-		348872BE27B3C3F300ECE00D /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348872BD27B3C3F300ECE00D /* SearchTableViewCell.swift */; };
+		348872C727B41A2A00ECE00D /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348872C527B41A2A00ECE00D /* SearchTableViewCell.swift */; };
+		348872C827B41A2A00ECE00D /* SearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 348872C627B41A2A00ECE00D /* SearchTableViewCell.xib */; };
 		348B6F3C27AC195B00E0EEBA /* SearchCoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348B6F3B27AC195A00E0EEBA /* SearchCoin.swift */; };
 		348B6F3E27AD6D1600E0EEBA /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348B6F3D27AD6D1600E0EEBA /* NetworkError.swift */; };
 		34962E7F27A835D5002FFF94 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34962E7E27A835D5002FFF94 /* MockURLProtocol.swift */; };
@@ -67,7 +68,8 @@
 		348872B327B179CA00ECE00D /* TrendingCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrendingCellTableViewCell.xib; sourceTree = "<group>"; };
 		348872B827B2CFF800ECE00D /* Typodermic-NasalizationRg-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Typodermic-NasalizationRg-Regular.otf"; sourceTree = "<group>"; };
 		348872BB27B2D13D00ECE00D /* Astrolab.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Astrolab.ttf; sourceTree = "<group>"; };
-		348872BD27B3C3F300ECE00D /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		348872C527B41A2A00ECE00D /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		348872C627B41A2A00ECE00D /* SearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchTableViewCell.xib; sourceTree = "<group>"; };
 		348B6F3B27AC195A00E0EEBA /* SearchCoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoin.swift; sourceTree = "<group>"; };
 		348B6F3D27AD6D1600E0EEBA /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		34962E7E27A835D5002FFF94 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
@@ -146,7 +148,8 @@
 				341578B52739679000179049 /* Main.storyboard */,
 				348872B227B179CA00ECE00D /* TrendingCellTableViewCell.swift */,
 				348872B327B179CA00ECE00D /* TrendingCellTableViewCell.xib */,
-				348872BD27B3C3F300ECE00D /* SearchTableViewCell.swift */,
+				348872C527B41A2A00ECE00D /* SearchTableViewCell.swift */,
+				348872C627B41A2A00ECE00D /* SearchTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				348872BC27B2D13D00ECE00D /* Astrolab.ttf in Resources */,
+				348872C827B41A2A00ECE00D /* SearchTableViewCell.xib in Resources */,
 				341578BC2739679200179049 /* LaunchScreen.storyboard in Resources */,
 				341578B92739679200179049 /* Assets.xcassets in Resources */,
 				348872B527B179CA00ECE00D /* TrendingCellTableViewCell.xib in Resources */,
@@ -377,7 +381,7 @@
 				34526E0627399E6000ECD673 /* TabViewController.swift in Sources */,
 				341578B22739679000179049 /* SceneDelegate.swift in Sources */,
 				34E0C8AC277621CF00CEDA95 /* TrendingViewController.swift in Sources */,
-				348872BE27B3C3F300ECE00D /* SearchTableViewCell.swift in Sources */,
+				348872C727B41A2A00ECE00D /* SearchTableViewCell.swift in Sources */,
 				345B1A0D2797366E000D488F /* MarketData.swift in Sources */,
 				34962E8227A8466E002FFF94 /* Status.swift in Sources */,
 			);
