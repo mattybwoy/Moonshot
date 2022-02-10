@@ -18,9 +18,10 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - Search Tab created
 - Mocks created for all functions currently in DataManager
 - Added Coin Font
+- Standardised Coin cells for Trending, Search and Watchlist Tabs
 
 ## Improvements
-- Flesh out Coin cells
+- Flesh out Market Coin cells
 - UI Testing
 - Save features
 

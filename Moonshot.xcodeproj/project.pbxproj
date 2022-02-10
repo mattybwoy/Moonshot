@@ -30,6 +30,7 @@
 		348872CA27B421AE00ECE00D /* WatchCoins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348872C927B421AE00ECE00D /* WatchCoins.swift */; };
 		348872CD27B525C700ECE00D /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348872CB27B525C700ECE00D /* FavouriteTableViewCell.swift */; };
 		348872CE27B525C700ECE00D /* FavouriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 348872CC27B525C700ECE00D /* FavouriteTableViewCell.xib */; };
+		348872D427B5512C00ECE00D /* CoinGecko.png in Resources */ = {isa = PBXBuildFile; fileRef = 348872D327B5512C00ECE00D /* CoinGecko.png */; };
 		348B6F3C27AC195B00E0EEBA /* SearchCoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348B6F3B27AC195A00E0EEBA /* SearchCoin.swift */; };
 		348B6F3E27AD6D1600E0EEBA /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348B6F3D27AD6D1600E0EEBA /* NetworkError.swift */; };
 		34962E7F27A835D5002FFF94 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34962E7E27A835D5002FFF94 /* MockURLProtocol.swift */; };
@@ -76,6 +77,7 @@
 		348872C927B421AE00ECE00D /* WatchCoins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchCoins.swift; sourceTree = "<group>"; };
 		348872CB27B525C700ECE00D /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
 		348872CC27B525C700ECE00D /* FavouriteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouriteTableViewCell.xib; sourceTree = "<group>"; };
+		348872D327B5512C00ECE00D /* CoinGecko.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoinGecko.png; sourceTree = "<group>"; };
 		348B6F3B27AC195A00E0EEBA /* SearchCoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoin.swift; sourceTree = "<group>"; };
 		348B6F3D27AD6D1600E0EEBA /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		34962E7E27A835D5002FFF94 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 		341578AE2739679000179049 /* Moonshot */ = {
 			isa = PBXGroup;
 			children = (
+				348872D327B5512C00ECE00D /* CoinGecko.png */,
 				341578AF2739679000179049 /* AppDelegate.swift */,
 				341578B12739679000179049 /* SceneDelegate.swift */,
 				341578C727397FF300179049 /* Model */,
@@ -316,6 +319,7 @@
 				341578BC2739679200179049 /* LaunchScreen.storyboard in Resources */,
 				341578B92739679200179049 /* Assets.xcassets in Resources */,
 				348872B527B179CA00ECE00D /* TrendingCellTableViewCell.xib in Resources */,
+				348872D427B5512C00ECE00D /* CoinGecko.png in Resources */,
 				341578C42739685900179049 /* README.md in Resources */,
 				341578B72739679000179049 /* Main.storyboard in Resources */,
 				348872B927B2CFF800ECE00D /* Typodermic-NasalizationRg-Regular.otf in Resources */,
@@ -442,6 +446,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -503,6 +508,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -560,6 +566,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6478Y3WC5Q;
@@ -568,6 +575,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -589,6 +597,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6478Y3WC5Q;
@@ -597,6 +606,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
