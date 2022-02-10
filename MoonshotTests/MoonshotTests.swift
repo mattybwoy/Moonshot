@@ -43,13 +43,15 @@ class MoonshotTests: XCTestCase {
 
         let expectation = self.expectation(description: "Loading Initial Cryptocurrency in USD")
         let current_price = 38346
-        let jsonString = "[{\"name\": \"Bitcoin\", \"id\": \"bitcoin\", \"current_price\": \(current_price)}]"
+        let image = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"
+        let jsonString = "[{\"name\": \"Bitcoin\", \"id\": \"bitcoin\", \"current_price\": \(current_price), \"image\": \"https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579\"}]"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
 
         sut.loadCoins { (_: [Coins]?) in
             XCTAssertEqual(self.sut.coins![0].name, "Bitcoin")
             XCTAssertEqual(self.sut.coins![0].id, "bitcoin")
             XCTAssertEqual(self.sut.coins![0].current_price, 38346)
+            XCTAssertEqual(self.sut.coins![0].image, image)
             expectation.fulfill()
         }
         
@@ -60,7 +62,8 @@ class MoonshotTests: XCTestCase {
         
         let expectation = self.expectation(description: "Loads Cryptocurrency in GBP")
         let current_price = 28794
-        let jsonString = "[{\"name\": \"Bitcoin\", \"id\": \"bitcoin\", \"current_price\": \(current_price)}]"
+        let image = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"
+        let jsonString = "[{\"name\": \"Bitcoin\", \"id\": \"bitcoin\", \"current_price\": \(current_price), \"image\": \"https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579\"}]"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         
         sut.loadCoins(currency: "gbp") { (_: [Coins]?) in
@@ -68,6 +71,7 @@ class MoonshotTests: XCTestCase {
             XCTAssertEqual(self.sut.coins![0].name, "Bitcoin")
             XCTAssertEqual(self.sut.coins![0].id, "bitcoin")
             XCTAssertEqual(self.sut.coins![0].current_price, 28794)
+            XCTAssertEqual(self.sut.coins![0].image, image)
             expectation.fulfill()
         }
         
@@ -78,7 +82,7 @@ class MoonshotTests: XCTestCase {
         
         let expectation = self.expectation(description: "Loads results of next page in current currency")
         let current_price = 38346
-        let jsonString = "[{\"name\": \"Bitcoin\", \"id\": \"bitcoin\", \"current_price\": \(current_price)}]"
+        let jsonString = "[{\"name\": \"Bitcoin\", \"id\": \"bitcoin\", \"current_price\": \(current_price), \"image\": \"https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579\"}]"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         sut.currentCurrency = "usd"
         
@@ -93,7 +97,8 @@ class MoonshotTests: XCTestCase {
         
         let expectation = self.expectation(description: "Reloads results of page in current currency")
         let current_price = 28794
-        let jsonString = "[{\"name\": \"Bitcoin\", \"id\": \"bitcoin\", \"current_price\": \(current_price)}]"
+        let image = "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"
+        let jsonString = "[{\"name\": \"Bitcoin\", \"id\": \"bitcoin\", \"current_price\": \(current_price), \"image\": \"https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579\"}]"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         sut.currentCurrency = "gbp"
         
@@ -101,6 +106,7 @@ class MoonshotTests: XCTestCase {
             XCTAssertEqual(self.sut.coins![0].name, "Bitcoin")
             XCTAssertEqual(self.sut.coins![0].id, "bitcoin")
             XCTAssertEqual(self.sut.coins![0].current_price, 28794)
+            XCTAssertEqual(self.sut.coins![0].image, image)
             expectation.fulfill()
         }
         self.wait(for: [expectation], timeout: 3)

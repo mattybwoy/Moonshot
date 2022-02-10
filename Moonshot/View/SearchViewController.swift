@@ -37,7 +37,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         bar.center = CGPoint(x: 210, y: 170)
         bar.placeholder = "Search"
         bar.backgroundColor = .darkGray
-        bar.searchTextField.font = UIFont(name: "Astrolab", size: 16)
+        bar.searchTextField.font = UIFont(name: "Astrolab", size: 14)
         bar.layer.borderWidth = 2
         bar.barTintColor = .darkGray
         bar.layer.borderColor = UIColor.systemYellow.cgColor
@@ -49,7 +49,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         let button = UIButton(frame: CGRect(x: 0, y: 50, width: 100, height: 30))
         button.setTitle("Search", for: .normal)
         button.center = CGPoint(x: 210, y: 230)
-        button.titleLabel!.font = UIFont(name: "Nasalization", size: 12)
+        button.titleLabel!.font = UIFont(name: "Nasalization", size: 16)
         button.titleLabel?.textColor = .systemYellow
         button.setTitleColor(.systemYellow, for: .normal)
         button.layer.borderWidth = 2
@@ -95,6 +95,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     }
     
     func sendAlert() {
+        self.tableView.reloadData()
         let alert = UIAlertController(title: "Alert", message: "Coin already in Watchlist", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
@@ -138,14 +139,22 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             guard let searchedCoins = DataManager.sharedInstance.searchResults else {
                 return
             }
-            for name in DataManager.sharedInstance.favoriteCoins {
-                if name.name == (searchedCoins[indexPath.row].name) {
-                    self?.sendAlert()
+            
+            if DataManager.sharedInstance.favoriteCoins.isEmpty {
+                DataManager.sharedInstance.favoriteCoins.append(WatchCoins(name: searchedCoins[indexPath.row].name, thumb: searchedCoins[indexPath.row].thumb))
+
+                    print(DataManager.sharedInstance.favoriteCoins)
+                    completionHandler(true)
+            } else {
+                for coin in DataManager.sharedInstance.favoriteCoins {
+                    if coin.name == (searchedCoins[indexPath.row].name) {
+                        self?.sendAlert()
+                        return
+                    }
                 }
                 DataManager.sharedInstance.favoriteCoins.append(WatchCoins(name: searchedCoins[indexPath.row].name, thumb: searchedCoins[indexPath.row].thumb))
-                
-                print(DataManager.sharedInstance.favoriteCoins)
-                completionHandler(true)
+                    print(DataManager.sharedInstance.favoriteCoins)
+                    completionHandler(true)
             }
             
         }
