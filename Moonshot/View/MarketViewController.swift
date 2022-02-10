@@ -208,16 +208,25 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
             guard let loadedCoins = DataManager.sharedInstance.coins else {
                 return
             }
-            for name in DataManager.sharedInstance.favoriteCoins {
-                if name.name == (loadedCoins[indexPath.row].name) {
-                    self?.sendAlert()
+            
+            if DataManager.sharedInstance.favoriteCoins.isEmpty {
+                DataManager.sharedInstance.favoriteCoins.append(WatchCoins(name: loadedCoins[indexPath.row].name, thumb: loadedCoins[indexPath.row].image))
+
+                    print(DataManager.sharedInstance.favoriteCoins)
+                    completionHandler(true)
+            } else {
+                for coin in DataManager.sharedInstance.favoriteCoins {
+                    if coin.name == (loadedCoins[indexPath.row].name) {
+                        self?.sendAlert()
+                        return
+                    }
                 }
                 DataManager.sharedInstance.favoriteCoins.append(WatchCoins(name: loadedCoins[indexPath.row].name, thumb: loadedCoins[indexPath.row].image))
-                
-                print(DataManager.sharedInstance.favoriteCoins)
-                completionHandler(true)
+                    print(DataManager.sharedInstance.favoriteCoins)
+                    completionHandler(true)
             }
         }
+        
         favouriteAction.backgroundColor = .systemYellow
         let swipeActions = UISwipeActionsConfiguration(actions: [favouriteAction])
         return swipeActions

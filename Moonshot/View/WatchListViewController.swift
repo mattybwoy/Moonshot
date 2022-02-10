@@ -52,7 +52,8 @@ extension WatchListViewController: UITableViewDelegate, UITableViewDataSource {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        tableView.register(FavouriteCoinCell.self, forCellReuseIdentifier: FavouriteCoinCell.reuseIdentifier)
+        let nib = UINib(nibName: "FavouriteTableViewCell", bundle: .main)
+        tableView.register(nib.self, forCellReuseIdentifier: FavouriteTableViewCell.reuseidentifier)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,13 +61,15 @@ extension WatchListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: FavouriteCoinCell.reuseIdentifier, for: indexPath)
-        cell.textLabel?.text = "\(DataManager.sharedInstance.favoriteCoins[indexPath.row])"
-        cell.textLabel?.font = UIFont(name: "Nasalization", size: 15)
+        let cell = tableView.dequeueReusableCell(withIdentifier: FavouriteTableViewCell.reuseidentifier, for: indexPath) as! FavouriteTableViewCell
+        
+        cell.coinLabel.text = "\(DataManager.sharedInstance.favoriteCoins[indexPath.row].name)"
+        cell.coinLabel.font = UIFont(name: "Nasalization", size: 15)
+        cell.coinLabel.textColor = .systemYellow
         cell.backgroundColor = .darkGray
-        cell.textLabel?.textColor = .systemYellow
         cell.layer.borderColor = UIColor.systemYellow.cgColor
         cell.layer.borderWidth = 1.0
+        cell.thumbNail.image = UIImage(data: try! Data(contentsOf: URL(string: DataManager.sharedInstance.favoriteCoins[indexPath.row].thumb)!))
         return cell
     }
     
