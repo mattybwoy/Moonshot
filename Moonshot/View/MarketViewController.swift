@@ -176,7 +176,8 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        tableView.register(CoinCell.self, forCellReuseIdentifier: CoinCell.reuseIdentifier)
+        let nib = UINib(nibName: "MarketTableViewCell", bundle: .main)
+        tableView.register(nib, forCellReuseIdentifier: MarketTableViewCell.reuseidentifier)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -185,14 +186,30 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CoinCell.reuseIdentifier, for: indexPath) as! CoinCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: MarketTableViewCell.reuseidentifier, for: indexPath) as! MarketTableViewCell
         guard let loadedCoins = DataManager.sharedInstance.coins else {
             return cell
         }
-        cell.textLabel?.text = "\(loadedCoins[indexPath.row].name)     \(loadedCoins[indexPath.row].current_price)"
+        
+        if loadedCoins[indexPath.row].price_change_24h > 0 {
+            let imageIcon = UIImage(systemName: "arrow.up.right")?.withTintColor(.systemGreen, renderingMode: .alwaysOriginal)
+            cell.arrowIndicator.image = imageIcon
+        } else if loadedCoins[indexPath.row].price_change_24h < 0 {
+            let imageIcon = UIImage(systemName: "arrow.down.right")?.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
+            cell.arrowIndicator.image = imageIcon
+        } else {
+            let imageIcon = UIImage(systemName: "minus")?.withTintColor(.systemBlue, renderingMode: .alwaysOriginal)
+            cell.arrowIndicator.image = imageIcon
+        }
+        cell.coinLabel.text = "\(loadedCoins[indexPath.row].name)"
+        cell.coinLabel.textColor = .systemYellow
+        cell.coinLabel.font = UIFont(name: "Nasalization", size: 15)
+        cell.coinLabel.adjustsFontSizeToFitWidth = true
+        cell.coinValue.text = "\(loadedCoins[indexPath.row].current_price)"
+        cell.coinValue.textColor = .systemYellow
+        cell.coinValue.font = UIFont(name: "Nasalization", size: 15)
+        cell.thumbNail.image = UIImage(data: try! Data(contentsOf: URL(string: loadedCoins[indexPath.row].image)!))
         cell.backgroundColor = .darkGray
-        cell.textLabel?.textColor = .systemYellow
-        cell.textLabel?.font = UIFont(name: "Nasalization", size: 15)
         cell.layer.borderColor = UIColor.systemYellow.cgColor
         cell.layer.borderWidth = 1.0
         return cell

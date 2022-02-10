@@ -21,7 +21,6 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - Standardised Coin cells for Trending, Search and Watchlist Tabs
 
 ## Improvements
-- Flesh out Market Coin cells
 - UI Testing
 - Save features
 

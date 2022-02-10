@@ -31,6 +31,8 @@
 		348872CD27B525C700ECE00D /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348872CB27B525C700ECE00D /* FavouriteTableViewCell.swift */; };
 		348872CE27B525C700ECE00D /* FavouriteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 348872CC27B525C700ECE00D /* FavouriteTableViewCell.xib */; };
 		348872D427B5512C00ECE00D /* CoinGecko.png in Resources */ = {isa = PBXBuildFile; fileRef = 348872D327B5512C00ECE00D /* CoinGecko.png */; };
+		348872D727B57F1100ECE00D /* MarketTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348872D527B57F1100ECE00D /* MarketTableViewCell.swift */; };
+		348872D827B57F1100ECE00D /* MarketTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 348872D627B57F1100ECE00D /* MarketTableViewCell.xib */; };
 		348B6F3C27AC195B00E0EEBA /* SearchCoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348B6F3B27AC195A00E0EEBA /* SearchCoin.swift */; };
 		348B6F3E27AD6D1600E0EEBA /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348B6F3D27AD6D1600E0EEBA /* NetworkError.swift */; };
 		34962E7F27A835D5002FFF94 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34962E7E27A835D5002FFF94 /* MockURLProtocol.swift */; };
@@ -78,6 +80,8 @@
 		348872CB27B525C700ECE00D /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
 		348872CC27B525C700ECE00D /* FavouriteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavouriteTableViewCell.xib; sourceTree = "<group>"; };
 		348872D327B5512C00ECE00D /* CoinGecko.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoinGecko.png; sourceTree = "<group>"; };
+		348872D527B57F1100ECE00D /* MarketTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTableViewCell.swift; sourceTree = "<group>"; };
+		348872D627B57F1100ECE00D /* MarketTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarketTableViewCell.xib; sourceTree = "<group>"; };
 		348B6F3B27AC195A00E0EEBA /* SearchCoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoin.swift; sourceTree = "<group>"; };
 		348B6F3D27AD6D1600E0EEBA /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		34962E7E27A835D5002FFF94 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
@@ -161,6 +165,8 @@
 				348872C627B41A2A00ECE00D /* SearchTableViewCell.xib */,
 				348872CB27B525C700ECE00D /* FavouriteTableViewCell.swift */,
 				348872CC27B525C700ECE00D /* FavouriteTableViewCell.xib */,
+				348872D527B57F1100ECE00D /* MarketTableViewCell.swift */,
+				348872D627B57F1100ECE00D /* MarketTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -319,6 +325,7 @@
 				341578BC2739679200179049 /* LaunchScreen.storyboard in Resources */,
 				341578B92739679200179049 /* Assets.xcassets in Resources */,
 				348872B527B179CA00ECE00D /* TrendingCellTableViewCell.xib in Resources */,
+				348872D827B57F1100ECE00D /* MarketTableViewCell.xib in Resources */,
 				348872D427B5512C00ECE00D /* CoinGecko.png in Resources */,
 				341578C42739685900179049 /* README.md in Resources */,
 				341578B72739679000179049 /* Main.storyboard in Resources */,
@@ -389,6 +396,7 @@
 				34526E0A273BD85200ECD673 /* DataManager.swift in Sources */,
 				348872CA27B421AE00ECE00D /* WatchCoins.swift in Sources */,
 				34E0C8AE277628A700CEDA95 /* TrendCoins.swift in Sources */,
+				348872D727B57F1100ECE00D /* MarketTableViewCell.swift in Sources */,
 				341578B02739679000179049 /* AppDelegate.swift in Sources */,
 				348B6F3C27AC195B00E0EEBA /* SearchCoin.swift in Sources */,
 				34526E0C273BD96800ECD673 /* Coins.swift in Sources */,
