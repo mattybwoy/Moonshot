@@ -28,6 +28,10 @@ class MarketViewController: UIViewController {
         currencyMenu.backgroundColor = .darkGray
         currencyMenu.textColor = .systemYellow
         currencyMenu.textFont = UIFont(name: "Nasalization", size: 15)!
+        currencyMenu.selectedTextColor = .systemYellow
+        currencyMenu.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
+            cell.optionLabel.textAlignment = .center
+        }
         return currencyMenu
     }()
     
@@ -92,7 +96,7 @@ class MarketViewController: UIViewController {
     func currencyButton() {
         currencySelector.center = CGPoint(x: 75, y: 125)
         currencySelector.setTitle("USD", for: .normal)
-        currencySelector.titleLabel?.font = UIFont(name: "Nasalization", size: 15)!
+        currencySelector.titleLabel?.font = UIFont(name: "Nasalization", size: 16)!
         currencySelector.titleLabel?.textColor = .systemYellow
         currencySelector.setTitleColor(.systemYellow, for: .normal)
         currencySelector.layer.borderWidth = 1
@@ -191,10 +195,10 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         }
         
-        if loadedCoins[indexPath.row].price_change_24h > 0 {
+        if loadedCoins[indexPath.row].price_change_24h > 0.005 {
             let imageIcon = UIImage(systemName: "arrow.up.right")?.withTintColor(.systemGreen, renderingMode: .alwaysOriginal)
             cell.arrowIndicator.image = imageIcon
-        } else if loadedCoins[indexPath.row].price_change_24h < 0 {
+        } else if loadedCoins[indexPath.row].price_change_24h < -0.005 {
             let imageIcon = UIImage(systemName: "arrow.down.right")?.withTintColor(.systemRed, renderingMode: .alwaysOriginal)
             cell.arrowIndicator.image = imageIcon
         } else {

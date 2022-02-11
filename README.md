@@ -19,6 +19,7 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - Mocks created for all functions currently in DataManager
 - Added Coin Font
 - Standardised Coin cells for Trending, Search and Watchlist Tabs
+- Market Cells now showing trends along with current rates
 
 ## Improvements
 - UI Testing
