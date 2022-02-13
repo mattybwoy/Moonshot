@@ -33,6 +33,7 @@
 		348872D427B5512C00ECE00D /* CoinGecko.png in Resources */ = {isa = PBXBuildFile; fileRef = 348872D327B5512C00ECE00D /* CoinGecko.png */; };
 		348872D727B57F1100ECE00D /* MarketTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348872D527B57F1100ECE00D /* MarketTableViewCell.swift */; };
 		348872D827B57F1100ECE00D /* MarketTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 348872D627B57F1100ECE00D /* MarketTableViewCell.xib */; };
+		348872DB27B95F3800ECE00D /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 348872DA27B95F3800ECE00D /* Nuke */; };
 		348B6F3C27AC195B00E0EEBA /* SearchCoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348B6F3B27AC195A00E0EEBA /* SearchCoin.swift */; };
 		348B6F3E27AD6D1600E0EEBA /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348B6F3D27AD6D1600E0EEBA /* NetworkError.swift */; };
 		34962E7F27A835D5002FFF94 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34962E7E27A835D5002FFF94 /* MockURLProtocol.swift */; };
@@ -99,6 +100,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCECC74E14E9E1AE4C2E4500 /* Pods_Moonshot.framework in Frameworks */,
+				348872DB27B95F3800ECE00D /* Nuke in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +256,9 @@
 			dependencies = (
 			);
 			name = Moonshot;
+			packageProductDependencies = (
+				348872DA27B95F3800ECE00D /* Nuke */,
+			);
 			productName = Moonshot;
 			productReference = 341578AC2739679000179049 /* Moonshot.app */;
 			productType = "com.apple.product-type.application";
@@ -304,6 +309,9 @@
 				Base,
 			);
 			mainGroup = 341578A32739679000179049;
+			packageReferences = (
+				348872D927B95F3800ECE00D /* XCRemoteSwiftPackageReference "Nuke" */,
+			);
 			productRefGroup = 341578AD2739679000179049 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -699,6 +707,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		348872D927B95F3800ECE00D /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		348872DA27B95F3800ECE00D /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 348872D927B95F3800ECE00D /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 341578A42739679000179049 /* Project object */;
 }

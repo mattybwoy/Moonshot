@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Nuke
 
 class SearchViewController: UIViewController, UISearchBarDelegate {
 
@@ -125,7 +126,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         cell.backgroundColor = .darkGray
         cell.layer.borderColor = UIColor.systemYellow.cgColor
         cell.layer.borderWidth = 1.0
-        cell.thumbNail.image = UIImage(data: try! Data(contentsOf: URL(string: searchedCoins[indexPath.row].thumb)!))
+        Nuke.loadImage(with: URL(string: searchedCoins[indexPath.row].thumb)!, into: cell.thumbNail)
         return cell
     }
     

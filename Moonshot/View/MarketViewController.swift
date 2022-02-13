@@ -7,6 +7,7 @@
 
 import UIKit
 import DropDown
+import Nuke
 
 class MarketViewController: UIViewController {
     
@@ -212,7 +213,7 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
         cell.coinValue.text = "\(loadedCoins[indexPath.row].current_price)"
         cell.coinValue.textColor = .systemYellow
         cell.coinValue.font = UIFont(name: "Nasalization", size: 15)
-        cell.thumbNail.image = UIImage(data: try! Data(contentsOf: URL(string: loadedCoins[indexPath.row].image)!))
+        Nuke.loadImage(with: URL(string: loadedCoins[indexPath.row].image)!, into: cell.thumbNail)
         cell.backgroundColor = .darkGray
         cell.layer.borderColor = UIColor.systemYellow.cgColor
         cell.layer.borderWidth = 1.0
