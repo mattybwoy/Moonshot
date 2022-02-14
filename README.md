@@ -20,8 +20,10 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - Added Coin Font
 - Standardised Coin cells for Trending, Search and Watchlist Tabs
 - Market Cells now showing trends along with current rates
+- Using Nuke dependency for loading thumbnails
 
 ## Improvements
+- Coin Information screen
 - UI Testing
 - Save features
 

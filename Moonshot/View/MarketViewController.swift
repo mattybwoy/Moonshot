@@ -49,6 +49,11 @@ class MarketViewController: UIViewController {
         currencyButton()
         view.addSubview(header)
         view.addSubview(marketTotal)
+        view.addSubview(coinLabel)
+        view.addSubview(priceLabel)
+        view.addSubview(trendLabel)
+        view.addSubview(topLineView)
+        view.addSubview(bottomLineView)
         view.backgroundColor = .darkGray
         DataManager.sharedInstance.loadMarketData {_ in 
             self.addMarketTotal(total: DataManager.sharedInstance.totalMarketCap!)
@@ -69,14 +74,62 @@ class MarketViewController: UIViewController {
     }()
     
     let marketTotal: UILabel = {
-        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 255, height: 30))
-        label.center = CGPoint(x: 250, y: 125)
+        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 265, height: 40))
+        label.center = CGPoint(x: 280, y: 130)
         label.textAlignment = .center
-        label.font = UIFont(name: "Nasalization", size: 15)
+        label.font = UIFont(name: "Nasalization", size: 17)
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .systemYellow
         label.numberOfLines = 0
         return label
+    }()
+    
+    let coinLabel: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 50, width: 80, height: 20))
+        label.center = CGPoint(x: 80, y: 175)
+        label.textAlignment = .center
+        label.font = UIFont(name: "Nasalization", size: 20)
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = .systemYellow
+        label.text = "Coin"
+        return label
+    }()
+    
+    let priceLabel: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 50, width: 80, height: 20))
+        label.center = CGPoint(x: 280, y: 175)
+        label.textAlignment = .center
+        label.font = UIFont(name: "Nasalization", size: 20)
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = .systemYellow
+        label.text = "Price"
+        
+        return label
+    }()
+    
+    let trendLabel: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 50, width: 80, height: 20))
+        label.center = CGPoint(x: 370, y: 175)
+        label.textAlignment = .center
+        label.font = UIFont(name: "Nasalization", size: 20)
+        label.adjustsFontSizeToFitWidth = true
+        label.textColor = .systemYellow
+        label.text = "Trend 24H"
+        return label
+    }()
+    
+    let topLineView: UIView = {
+        var line = UIView(frame: CGRect(x: 0, y: 160, width: 420, height: 1))
+        line.layer.borderWidth = 1.0
+        line.layer.borderColor = UIColor.systemYellow.cgColor
+        return line
+    }()
+    
+    let bottomLineView: UIView = {
+        var line = UIView(frame: CGRect(x: 0, y: 185, width: 420, height: 1))
+        line.layer.borderWidth = 1.0
+        line.layer.borderColor = UIColor.systemYellow.cgColor
+        return line
     }()
     
     func addMarketTotal(total: Double) {
@@ -95,9 +148,9 @@ class MarketViewController: UIViewController {
     }
     
     func currencyButton() {
-        currencySelector.center = CGPoint(x: 75, y: 125)
+        currencySelector.center = CGPoint(x: 85, y: 130)
         currencySelector.setTitle("USD", for: .normal)
-        currencySelector.titleLabel?.font = UIFont(name: "Nasalization", size: 16)!
+        currencySelector.titleLabel?.font = UIFont(name: "Nasalization", size: 18)!
         currencySelector.titleLabel?.textColor = .systemYellow
         currencySelector.setTitleColor(.systemYellow, for: .normal)
         currencySelector.layer.borderWidth = 1
@@ -176,7 +229,7 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
 
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 192),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -85),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -291,35 +344,4 @@ extension UITableView {
             }
         }
     }
-}
-
-
-
-class CoinCell: UITableViewCell {
-    static let reuseIdentifier = "coincell"
-    
-    lazy var title: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
-        return label
-    }()
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError()
-    }
-    
-    private func setup() {
-        addSubview(title)
-        NSLayoutConstraint.activate([
-            title.leadingAnchor.constraint(equalTo: leadingAnchor),
-            title.trailingAnchor.constraint(equalTo: trailingAnchor),
-            title.topAnchor.constraint(equalTo: topAnchor),
-            title.bottomAnchor.constraint(equalTo: bottomAnchor)])
-    }
-    
 }
