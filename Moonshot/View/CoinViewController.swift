@@ -6,20 +6,21 @@
 //
 
 import UIKit
+import Nuke
 
 class CoinViewController: UIViewController {
     
-    let coinId: String
+    let coin: Coins
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
         view.addSubview(coinHeader)
-        setupLabels()
+        setupScreen()
     }
     
-    init(coinId: String) {
-        self.coinId = coinId
+    init(coin: Coins) {
+        self.coin = coin
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -28,16 +29,27 @@ class CoinViewController: UIViewController {
     }
     
     let coinHeader: UILabel = {
-        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 200, height: 30))
-        label.center = CGPoint(x: 210, y: 50)
+        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 250, height: 30))
+        label.center = CGPoint(x: 210, y: 40)
         label.textAlignment = .center
         label.font = UIFont(name: "Astrolab", size: 22)
         label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
-    func setupLabels() {
-        coinHeader.text = "\(self.coinId)"
+    func setupScreen() {
+        coinHeader.text = "\(self.coin.name)"
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 50, width: 16, height: 16))
+        Nuke.loadImage(with: URL(string: self.coin.image)!, into: imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(imageView)
+        NSLayoutConstraint.activate([
+            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 57),
+            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -725),
+            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 180),
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -180),
+        ])
     }
     
     
