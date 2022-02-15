@@ -119,7 +119,7 @@ class MarketViewController: UIViewController {
     }()
     
     let topLineView: UIView = {
-        var line = UIView(frame: CGRect(x: 0, y: 160, width: 420, height: 1))
+        var line = UIView(frame: CGRect(x: 0, y: 162, width: 420, height: 1))
         line.layer.borderWidth = 1.0
         line.layer.borderColor = UIColor.systemYellow.cgColor
         return line
@@ -307,11 +307,19 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
         return swipeActions
     }
 
-    
     func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
         self.tableView.setSwipeActionFont(UIFont(name: "Nasalization", size: 15)!)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let loadedCoins = DataManager.sharedInstance.coins else {
+            return
+        }
+        let coinSelected = loadedCoins[indexPath.row].id
+        let coinController = CoinViewController(coinId: coinSelected)
+        show(coinController, sender: self)
+    }
     
     
 }

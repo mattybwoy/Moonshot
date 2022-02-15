@@ -34,6 +34,7 @@
 		348872D727B57F1100ECE00D /* MarketTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348872D527B57F1100ECE00D /* MarketTableViewCell.swift */; };
 		348872D827B57F1100ECE00D /* MarketTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 348872D627B57F1100ECE00D /* MarketTableViewCell.xib */; };
 		348872DB27B95F3800ECE00D /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 348872DA27B95F3800ECE00D /* Nuke */; };
+		348872DD27BBF79D00ECE00D /* CoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348872DC27BBF79D00ECE00D /* CoinViewController.swift */; };
 		348B6F3C27AC195B00E0EEBA /* SearchCoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348B6F3B27AC195A00E0EEBA /* SearchCoin.swift */; };
 		348B6F3E27AD6D1600E0EEBA /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348B6F3D27AD6D1600E0EEBA /* NetworkError.swift */; };
 		34962E7F27A835D5002FFF94 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34962E7E27A835D5002FFF94 /* MockURLProtocol.swift */; };
@@ -83,6 +84,7 @@
 		348872D327B5512C00ECE00D /* CoinGecko.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CoinGecko.png; sourceTree = "<group>"; };
 		348872D527B57F1100ECE00D /* MarketTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketTableViewCell.swift; sourceTree = "<group>"; };
 		348872D627B57F1100ECE00D /* MarketTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarketTableViewCell.xib; sourceTree = "<group>"; };
+		348872DC27BBF79D00ECE00D /* CoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinViewController.swift; sourceTree = "<group>"; };
 		348B6F3B27AC195A00E0EEBA /* SearchCoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoin.swift; sourceTree = "<group>"; };
 		348B6F3D27AD6D1600E0EEBA /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		34962E7E27A835D5002FFF94 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				348872CC27B525C700ECE00D /* FavouriteTableViewCell.xib */,
 				348872D527B57F1100ECE00D /* MarketTableViewCell.swift */,
 				348872D627B57F1100ECE00D /* MarketTableViewCell.xib */,
+				348872DC27BBF79D00ECE00D /* CoinViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				348872C727B41A2A00ECE00D /* SearchTableViewCell.swift in Sources */,
 				345B1A0D2797366E000D488F /* MarketData.swift in Sources */,
 				34962E8227A8466E002FFF94 /* Status.swift in Sources */,
+				348872DD27BBF79D00ECE00D /* CoinViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
