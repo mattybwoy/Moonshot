@@ -16,6 +16,7 @@ class CoinViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .darkGray
         view.addSubview(coinHeader)
+        view.addSubview(coinSymbol)
         setupScreen()
     }
     
@@ -38,8 +39,19 @@ class CoinViewController: UIViewController {
         return label
     }()
     
+    let coinSymbol: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 50, height: 25))
+        label.center = CGPoint(x: 208, y: 127)
+        label.textAlignment = .center
+        label.font = UIFont(name: "Astrolab", size: 14)
+        label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
     func setupScreen() {
         coinHeader.text = "\(self.coin.name)"
+        coinSymbol.text = "btc"
         let imageView = UIImageView(frame: CGRect(x: 0, y: 50, width: 16, height: 16))
         Nuke.loadImage(with: URL(string: self.coin.image)!, into: imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false

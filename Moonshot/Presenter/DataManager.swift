@@ -18,11 +18,16 @@ class DataManager {
     let trendingURL = "https://api.coingecko.com/api/v3/search/trending"
     let totalURL = "https://api.coingecko.com/api/v3/global"
     let searchURL = "https://api.coingecko.com/api/v3/search?query="
+    let coinHistory = "https://api.coingecko.com/api/v3/coins/"
+    let coinHistoryCurrency = "/market_chart?vs_currency="
+    let coinHistoryInterval = "&days=7&interval=daily"
+    let coinInformationParams = "?localization=false&tickers=false&community_data=false&developer_data=false"
     let pageNum = "&page="
     var coins: [Coins]?
     var trendCoins: [TrendCoins.coins]?
     var totalMarketCap: Double?
     var searchResults: [Coin]?
+    var coinDetail: CoinDetail?
     
     var favoriteCoins: [WatchCoins] = [WatchCoins]()
     
@@ -224,8 +229,26 @@ class DataManager {
                 }
                 }
             task.resume()
-            
-            
+        }
+    }
+    
+    func loadCoinInformation(userSearch: String) {
+        
+        if let url = URL(string: coinHistory + userSearch + coinInformationParams) {
+            let task = urlSession.dataTask(with: url) { data, response, error in
+                guard let data = data, error == nil else {
+                    return
+                }
+                do {
+                    let response = try
+                    JSONDecoder().decode(CoinDetail.self, from: data)
+                    print(response.market_data.total_supply)
+                }
+                catch {
+                    return
+                }
+            }
+            task.resume()
         }
     }
     
