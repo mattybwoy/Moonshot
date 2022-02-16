@@ -242,7 +242,8 @@ class DataManager {
                 do {
                     let response = try
                     JSONDecoder().decode(CoinDetail.self, from: data)
-                    print(response.market_data.total_supply)
+                    self.coinDetail = response
+                    print(self.coinDetail)
                 }
                 catch {
                     return

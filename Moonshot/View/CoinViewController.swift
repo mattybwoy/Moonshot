@@ -17,6 +17,9 @@ class CoinViewController: UIViewController {
         view.backgroundColor = .darkGray
         view.addSubview(coinHeader)
         view.addSubview(coinSymbol)
+        view.addSubview(coinRank)
+        view.addSubview(totalSupply)
+        view.addSubview(circulatingSupply)
         setupScreen()
     }
     
@@ -49,8 +52,42 @@ class CoinViewController: UIViewController {
         return label
     }()
     
+    let coinRank: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 70, height: 20))
+        label.center = CGPoint(x: 355, y: 150)
+        label.textAlignment = .center
+        label.font = UIFont(name: "Astrolab", size: 14)
+        label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    let totalSupply: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 250, height: 20))
+        label.center = CGPoint(x: 88, y: 730)
+        label.textAlignment = .center
+        label.font = UIFont(name: "Astrolab", size: 12)
+        label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    let circulatingSupply: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 250, height: 20))
+        label.center = CGPoint(x: 120, y: 755)
+        label.textAlignment = .center
+        label.font = UIFont(name: "Astrolab", size: 12)
+        label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    
     func setupScreen() {
         coinHeader.text = "\(self.coin.name)"
+        coinRank.text = "Rank: \(DataManager.sharedInstance.coinDetail?.market_cap_rank ?? 0)"
+        totalSupply.text = "Total Supply: "
+        circulatingSupply.text = "Circulating Supply: "
         coinSymbol.text = "btc"
         let imageView = UIImageView(frame: CGRect(x: 0, y: 50, width: 16, height: 16))
         Nuke.loadImage(with: URL(string: self.coin.image)!, into: imageView)
