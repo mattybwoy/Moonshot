@@ -195,7 +195,6 @@ class DataManager {
                         self.totalMarketCap = response.data.total_market_cap.usd
                     }
                     DispatchQueue.main.async {
-                        print(response)
                         completed(response)
                     }
                 }
@@ -232,9 +231,10 @@ class DataManager {
         }
     }
     
-    func loadCoinInformation(userSearch: String) {
-        
+    func loadCoinInformation(userSearch: String, completed: @escaping () -> ()) {
+        print(userSearch)
         if let url = URL(string: coinHistory + userSearch + coinInformationParams) {
+            print(url)
             let task = urlSession.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else {
                     return
@@ -243,7 +243,9 @@ class DataManager {
                     let response = try
                     JSONDecoder().decode(CoinDetail.self, from: data)
                     self.coinDetail = response
-                    print(self.coinDetail)
+                    DispatchQueue.main.async {
+                        completed()
+                    }
                 }
                 catch {
                     return

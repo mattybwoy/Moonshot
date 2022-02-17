@@ -20,7 +20,9 @@ class CoinViewController: UIViewController {
         view.addSubview(coinRank)
         view.addSubview(totalSupply)
         view.addSubview(circulatingSupply)
-        setupScreen()
+        DataManager.sharedInstance.loadCoinInformation(userSearch: self.coin.id) {
+            self.setupScreen()
+        }
     }
     
     init(coin: Coins) {
@@ -64,8 +66,7 @@ class CoinViewController: UIViewController {
     
     let totalSupply: UILabel = {
         var label = UILabel(frame: CGRect(x: 0, y: 70, width: 250, height: 20))
-        label.center = CGPoint(x: 88, y: 730)
-        label.textAlignment = .center
+        label.center = CGPoint(x: 140, y: 730)
         label.font = UIFont(name: "Astrolab", size: 12)
         label.textColor = .systemYellow
         label.adjustsFontSizeToFitWidth = true
@@ -74,8 +75,7 @@ class CoinViewController: UIViewController {
     
     let circulatingSupply: UILabel = {
         var label = UILabel(frame: CGRect(x: 0, y: 70, width: 250, height: 20))
-        label.center = CGPoint(x: 120, y: 755)
-        label.textAlignment = .center
+        label.center = CGPoint(x: 140, y: 755)
         label.font = UIFont(name: "Astrolab", size: 12)
         label.textColor = .systemYellow
         label.adjustsFontSizeToFitWidth = true
@@ -84,11 +84,14 @@ class CoinViewController: UIViewController {
     
     
     func setupScreen() {
+        guard let coinInfo = DataManager.sharedInstance.coinDetail else {
+            return
+        }
         coinHeader.text = "\(self.coin.name)"
-        coinRank.text = "Rank: \(DataManager.sharedInstance.coinDetail?.market_cap_rank ?? 0)"
-        totalSupply.text = "Total Supply: "
-        circulatingSupply.text = "Circulating Supply: "
-        coinSymbol.text = "btc"
+        coinRank.text = "Rank: \(coinInfo.market_cap_rank)"
+        totalSupply.text = "Total Supply: \(coinInfo.market_data.total_supply ?? 0)"
+        circulatingSupply.text = "Circulating Supply: \(coinInfo.market_data.circulating_supply ?? 0)"
+        coinSymbol.text = "\(coinInfo.symbol)"
         let imageView = UIImageView(frame: CGRect(x: 0, y: 50, width: 16, height: 16))
         Nuke.loadImage(with: URL(string: self.coin.image)!, into: imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false

@@ -9,16 +9,11 @@ import Foundation
 
 struct CoinDetail: Decodable {
     let symbol: String
-    let description: Description
     let market_cap_rank: Int
     let market_data: CoinMarketData
 }
 
-struct Description: Decodable {
-    let en: String
-}
-
 struct CoinMarketData: Decodable {
-    let total_supply: Double
-    let circulating_supply: Double
+    var total_supply: Double? = nil
+    var circulating_supply: Double? = nil
 }

@@ -317,8 +317,8 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
             return
         }
         let coinSelected = loadedCoins[indexPath.row]
+        print(coinSelected)
         let coinController = CoinViewController(coin: coinSelected)
-        DataManager.sharedInstance.loadCoinInformation(userSearch: loadedCoins[indexPath.row].id)
         show(coinController, sender: self)
     }
     
