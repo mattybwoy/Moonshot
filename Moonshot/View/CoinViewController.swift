@@ -11,6 +11,7 @@ import Nuke
 class CoinViewController: UIViewController {
     
     let coin: Coins
+    var currency = DataManager.sharedInstance.currentCurrency
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,11 +19,13 @@ class CoinViewController: UIViewController {
         view.addSubview(coinHeader)
         view.addSubview(coinSymbol)
         view.addSubview(coinRank)
+        view.addSubview(marketCapLabel)
         view.addSubview(totalSupply)
         view.addSubview(circulatingSupply)
         DataManager.sharedInstance.loadCoinInformation(userSearch: self.coin.id) {
             self.setupScreen()
         }
+        setupCoinImage()
     }
     
     init(coin: Coins) {
@@ -64,6 +67,15 @@ class CoinViewController: UIViewController {
         return label
     }()
     
+    let marketCapLabel: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 250, height: 20))
+        label.center = CGPoint(x: 140, y: 705)
+        label.font = UIFont(name: "Astrolab", size: 12)
+        label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
     let totalSupply: UILabel = {
         var label = UILabel(frame: CGRect(x: 0, y: 70, width: 250, height: 20))
         label.center = CGPoint(x: 140, y: 730)
@@ -92,6 +104,34 @@ class CoinViewController: UIViewController {
         totalSupply.text = "Total Supply: \(coinInfo.market_data.total_supply ?? 0)"
         circulatingSupply.text = "Circulating Supply: \(coinInfo.market_data.circulating_supply ?? 0)"
         coinSymbol.text = "\(coinInfo.symbol)"
+        
+        switch currency {
+        case "gbp":
+            marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.gbp)"
+        case "eur":
+            marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.eur)"
+        case "aud":
+            marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.aud)"
+        case "cad":
+            marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.cad)"
+        case "cny":
+            marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.cny)"
+        case "hkd":
+            marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.hkd)"
+        case "inr":
+            marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.inr)"
+        case "jpy":
+            marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.jpy)"
+        case "sgd":
+            marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.sgd)"
+        case "twd":
+            marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.twd)"
+        default:
+            marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.usd)"
+        }
+    }
+    
+    func setupCoinImage() {
         let imageView = UIImageView(frame: CGRect(x: 0, y: 50, width: 16, height: 16))
         Nuke.loadImage(with: URL(string: self.coin.image)!, into: imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -103,6 +143,5 @@ class CoinViewController: UIViewController {
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -180),
         ])
     }
-    
     
 }
