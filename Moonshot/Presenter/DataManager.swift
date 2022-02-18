@@ -243,6 +243,7 @@ class DataManager {
                     let response = try
                     JSONDecoder().decode(CoinDetail.self, from: data)
                     self.coinDetail = response
+                    print(response.market_data.high_24h.usd)
                     DispatchQueue.main.async {
                         completed()
                     }
