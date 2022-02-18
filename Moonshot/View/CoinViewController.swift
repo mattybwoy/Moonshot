@@ -25,6 +25,8 @@ class CoinViewController: UIViewController {
         view.addSubview(circulatingSupply)
         view.addSubview(high24Price)
         view.addSubview(low24Price)
+        view.addSubview(highAllTimePrice)
+        view.addSubview(lowAllTimePrice)
         DataManager.sharedInstance.loadCoinInformation(userSearch: self.coin.id) {
             self.setupScreen()
         }
@@ -71,8 +73,8 @@ class CoinViewController: UIViewController {
     }()
     
     let currentPrice: UILabel = {
-        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 220, height: 25))
-        label.center = CGPoint(x: 208, y: 450)
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 240, height: 25))
+        label.center = CGPoint(x: 208, y: 560)
         label.textAlignment = .center
         label.font = UIFont(name: "Astrolab", size: 14)
         label.textColor = .systemYellow
@@ -81,8 +83,8 @@ class CoinViewController: UIViewController {
     }()
     
     let high24Price: UILabel = {
-        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 30))
-        label.center = CGPoint(x: 110, y: 500)
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 170, height: 30))
+        label.center = CGPoint(x: 110, y: 610)
         label.font = UIFont(name: "Astrolab", size: 12)
         label.textColor = .systemYellow
         label.adjustsFontSizeToFitWidth = true
@@ -91,8 +93,28 @@ class CoinViewController: UIViewController {
     }()
     
     let low24Price: UILabel = {
-        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 30))
-        label.center = CGPoint(x: 310, y: 500)
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 170, height: 30))
+        label.center = CGPoint(x: 310, y: 610)
+        label.font = UIFont(name: "Astrolab", size: 12)
+        label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    let highAllTimePrice: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 170, height: 30))
+        label.center = CGPoint(x: 110, y: 660)
+        label.font = UIFont(name: "Astrolab", size: 12)
+        label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    let lowAllTimePrice: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 170, height: 30))
+        label.center = CGPoint(x: 310, y: 660)
         label.font = UIFont(name: "Astrolab", size: 12)
         label.textColor = .systemYellow
         label.adjustsFontSizeToFitWidth = true
@@ -101,8 +123,8 @@ class CoinViewController: UIViewController {
     }()
     
     let marketCapLabel: UILabel = {
-        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 250, height: 20))
-        label.center = CGPoint(x: 208, y: 705)
+        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 270, height: 25))
+        label.center = CGPoint(x: 208, y: 180)
         label.font = UIFont(name: "Astrolab", size: 12)
         label.textColor = .systemYellow
         label.adjustsFontSizeToFitWidth = true
@@ -110,7 +132,7 @@ class CoinViewController: UIViewController {
     }()
     
     let totalSupply: UILabel = {
-        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 250, height: 20))
+        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 270, height: 25))
         label.center = CGPoint(x: 208, y: 730)
         label.font = UIFont(name: "Astrolab", size: 12)
         label.textColor = .systemYellow
@@ -119,7 +141,7 @@ class CoinViewController: UIViewController {
     }()
     
     let circulatingSupply: UILabel = {
-        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 250, height: 20))
+        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 270, height: 25))
         label.center = CGPoint(x: 208, y: 755)
         label.font = UIFont(name: "Astrolab", size: 12)
         label.textColor = .systemYellow
@@ -142,58 +164,80 @@ class CoinViewController: UIViewController {
         case "gbp":
             marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.gbp)"
             currentPrice.text = "Current Price: \(coinInfo.market_data.current_price.gbp)"
-            high24Price.text = "Max price 24Hours \n\(coinInfo.market_data.high_24h.gbp)"
-            low24Price.text = "Min price 24Hours \n\(coinInfo.market_data.low_24h.gbp)"
+            high24Price.text = "Max price 24 Hours \n\(coinInfo.market_data.high_24h.gbp)"
+            low24Price.text = "Min price 24 Hours \n\(coinInfo.market_data.low_24h.gbp)"
+            highAllTimePrice.text = "Max alltime price \n\(coinInfo.market_data.ath.gbp)"
+            lowAllTimePrice.text = "Min alltime price \n\(coinInfo.market_data.atl.gbp)"
         case "eur":
             marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.eur)"
             currentPrice.text = "Current Price: \(coinInfo.market_data.current_price.eur)"
-            high24Price.text = "Max price 24Hours \n\(coinInfo.market_data.high_24h.eur)"
-            low24Price.text = "Min price 24Hours \n\(coinInfo.market_data.low_24h.eur)"
+            high24Price.text = "Max price 24 Hours \n\(coinInfo.market_data.high_24h.eur)"
+            low24Price.text = "Min price 24 Hours \n\(coinInfo.market_data.low_24h.eur)"
+            highAllTimePrice.text = "Max alltime price \n\(coinInfo.market_data.ath.eur)"
+            lowAllTimePrice.text = "Min alltime price \n\(coinInfo.market_data.atl.eur)"
         case "aud":
             marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.aud)"
             currentPrice.text = "Current Price: \(coinInfo.market_data.current_price.aud)"
-            high24Price.text = "Max price 24Hours \n\(coinInfo.market_data.high_24h.aud)"
-            low24Price.text = "Min price 24Hours \n\(coinInfo.market_data.low_24h.aud)"
+            high24Price.text = "Max price 24 Hours \n\(coinInfo.market_data.high_24h.aud)"
+            low24Price.text = "Min price 24 Hours \n\(coinInfo.market_data.low_24h.aud)"
+            highAllTimePrice.text = "Max alltime price \n\(coinInfo.market_data.ath.aud)"
+            lowAllTimePrice.text = "Min alltime price \n\(coinInfo.market_data.atl.aud)"
         case "cad":
             marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.cad)"
             currentPrice.text = "Current Price: \(coinInfo.market_data.current_price.cad)"
-            high24Price.text = "Max price 24Hours \n\(coinInfo.market_data.high_24h.cad)"
-            low24Price.text = "Min price 24Hours \n\(coinInfo.market_data.low_24h.cad)"
+            high24Price.text = "Max price 24 Hours \n\(coinInfo.market_data.high_24h.cad)"
+            low24Price.text = "Min price 24 Hours \n\(coinInfo.market_data.low_24h.cad)"
+            highAllTimePrice.text = "Max alltime price \n\(coinInfo.market_data.ath.cad)"
+            lowAllTimePrice.text = "Min alltime price \n\(coinInfo.market_data.atl.cad)"
         case "cny":
             marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.cny)"
             currentPrice.text = "Current Price: \(coinInfo.market_data.current_price.cny)"
-            high24Price.text = "Max price 24Hours \n\(coinInfo.market_data.high_24h.cny)"
-            low24Price.text = "Min price 24Hours \n\(coinInfo.market_data.low_24h.cny)"
+            high24Price.text = "Max price 24 Hours \n\(coinInfo.market_data.high_24h.cny)"
+            low24Price.text = "Min price 24 Hours \n\(coinInfo.market_data.low_24h.cny)"
+            highAllTimePrice.text = "Max alltime price \n\(coinInfo.market_data.ath.cny)"
+            lowAllTimePrice.text = "Min alltime price \n\(coinInfo.market_data.atl.cny)"
         case "hkd":
             marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.hkd)"
             currentPrice.text = "Current Price: \(coinInfo.market_data.current_price.hkd)"
-            high24Price.text = "Max price 24Hours \n\(coinInfo.market_data.high_24h.hkd)"
-            low24Price.text = "Min price 24Hours \n\(coinInfo.market_data.low_24h.hkd)"
+            high24Price.text = "Max price 24 Hours \n\(coinInfo.market_data.high_24h.hkd)"
+            low24Price.text = "Min price 24 Hours \n\(coinInfo.market_data.low_24h.hkd)"
+            highAllTimePrice.text = "Max alltime price \n\(coinInfo.market_data.ath.hkd)"
+            lowAllTimePrice.text = "Min alltime price \n\(coinInfo.market_data.atl.hkd)"
         case "inr":
             marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.inr)"
             currentPrice.text = "Current Price: \(coinInfo.market_data.current_price.inr)"
-            high24Price.text = "Max price 24Hours \n\(coinInfo.market_data.high_24h.inr)"
-            low24Price.text = "Min price 24Hours \n\(coinInfo.market_data.low_24h.inr)"
+            high24Price.text = "Max price 24 Hours \n\(coinInfo.market_data.high_24h.inr)"
+            low24Price.text = "Min price 24 Hours \n\(coinInfo.market_data.low_24h.inr)"
+            highAllTimePrice.text = "Max alltime price \n\(coinInfo.market_data.ath.inr)"
+            lowAllTimePrice.text = "Min alltime price \n\(coinInfo.market_data.atl.inr)"
         case "jpy":
             marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.jpy)"
             currentPrice.text = "Current Price: \(coinInfo.market_data.current_price.jpy)"
-            high24Price.text = "Max price 24Hours \n\(coinInfo.market_data.high_24h.jpy)"
-            low24Price.text = "Min price 24Hours \n\(coinInfo.market_data.low_24h.jpy)"
+            high24Price.text = "Max price 24 Hours \n\(coinInfo.market_data.high_24h.jpy)"
+            low24Price.text = "Min price 24 Hours \n\(coinInfo.market_data.low_24h.jpy)"
+            highAllTimePrice.text = "Max alltime price \n\(coinInfo.market_data.ath.jpy)"
+            lowAllTimePrice.text = "Min alltime price \n\(coinInfo.market_data.atl.jpy)"
         case "sgd":
             marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.sgd)"
             currentPrice.text = "Current Price: \(coinInfo.market_data.current_price.sgd)"
-            high24Price.text = "Max price 24Hours \n\(coinInfo.market_data.high_24h.sgd)"
-            low24Price.text = "Min price 24Hours \n\(coinInfo.market_data.low_24h.sgd)"
+            high24Price.text = "Max price 24 Hours \n\(coinInfo.market_data.high_24h.sgd)"
+            low24Price.text = "Min price 24 Hours \n\(coinInfo.market_data.low_24h.sgd)"
+            highAllTimePrice.text = "Max all time price \n\(coinInfo.market_data.ath.sgd)"
+            lowAllTimePrice.text = "Min all time price \n\(coinInfo.market_data.atl.sgd)"
         case "twd":
             marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.twd)"
             currentPrice.text = "Current Price: \(coinInfo.market_data.current_price.twd)"
-            high24Price.text = "Max price 24Hours \n\(coinInfo.market_data.high_24h.twd)"
-            low24Price.text = "Min price 24Hours \n\(coinInfo.market_data.low_24h.twd)"
+            high24Price.text = "Max price 24 Hours \n\(coinInfo.market_data.high_24h.twd)"
+            low24Price.text = "Min price 24 Hours \n\(coinInfo.market_data.low_24h.twd)"
+            highAllTimePrice.text = "Max alltime price \n\(coinInfo.market_data.ath.twd)"
+            lowAllTimePrice.text = "Min alltime price \n\(coinInfo.market_data.atl.twd)"
         default:
             marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.usd)"
             currentPrice.text = "Current Price: \(coinInfo.market_data.current_price.usd)"
-            high24Price.text = "Max price 24Hours \n\(coinInfo.market_data.high_24h.usd)"
-            low24Price.text = "Min price 24Hours \n\(coinInfo.market_data.low_24h.usd)"
+            high24Price.text = "Max price 24 Hours \n\(coinInfo.market_data.high_24h.usd)"
+            low24Price.text = "Min price 24 Hours \n\(coinInfo.market_data.low_24h.usd)"
+            highAllTimePrice.text = "Max alltime price \n\(coinInfo.market_data.ath.usd)"
+            lowAllTimePrice.text = "Min alltime price \n\(coinInfo.market_data.atl.usd)"
         }
     }
     
