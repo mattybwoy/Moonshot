@@ -44,6 +44,7 @@
 		34E0C8AC277621CF00CEDA95 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E0C8AB277621CF00CEDA95 /* TrendingViewController.swift */; };
 		34E0C8AE277628A700CEDA95 /* TrendCoins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E0C8AD277628A700CEDA95 /* TrendCoins.swift */; };
 		34E3149B27C142AD00B49F3C /* CoinHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E3149A27C142AD00B49F3C /* CoinHistory.swift */; };
+		34E3149D27C1595200B49F3C /* BitcoinExchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E3149C27C1595200B49F3C /* BitcoinExchange.swift */; };
 		FCECC74E14E9E1AE4C2E4500 /* Pods_Moonshot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87CFF8B7A389BECBA735E44 /* Pods_Moonshot.framework */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,7 @@
 		34E0C8AB277621CF00CEDA95 /* TrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
 		34E0C8AD277628A700CEDA95 /* TrendCoins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendCoins.swift; sourceTree = "<group>"; };
 		34E3149A27C142AD00B49F3C /* CoinHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinHistory.swift; sourceTree = "<group>"; };
+		34E3149C27C1595200B49F3C /* BitcoinExchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinExchange.swift; sourceTree = "<group>"; };
 		8238BC482CA5012A620DEE41 /* Pods-Moonshot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moonshot.release.xcconfig"; path = "Target Support Files/Pods-Moonshot/Pods-Moonshot.release.xcconfig"; sourceTree = "<group>"; };
 		AEA2FB348DAD6459F6F0FA74 /* Pods-Moonshot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moonshot.debug.xcconfig"; path = "Target Support Files/Pods-Moonshot/Pods-Moonshot.debug.xcconfig"; sourceTree = "<group>"; };
 		D87CFF8B7A389BECBA735E44 /* Pods_Moonshot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Moonshot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,6 +205,7 @@
 				348872C927B421AE00ECE00D /* WatchCoins.swift */,
 				348872DE27BD0F2300ECE00D /* CoinDetail.swift */,
 				34E3149A27C142AD00B49F3C /* CoinHistory.swift */,
+				34E3149C27C1595200B49F3C /* BitcoinExchange.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				34526E0A273BD85200ECD673 /* DataManager.swift in Sources */,
 				348872CA27B421AE00ECE00D /* WatchCoins.swift in Sources */,
 				34E0C8AE277628A700CEDA95 /* TrendCoins.swift in Sources */,
+				34E3149D27C1595200B49F3C /* BitcoinExchange.swift in Sources */,
 				348872D727B57F1100ECE00D /* MarketTableViewCell.swift in Sources */,
 				341578B02739679000179049 /* AppDelegate.swift in Sources */,
 				348B6F3C27AC195B00E0EEBA /* SearchCoin.swift in Sources */,

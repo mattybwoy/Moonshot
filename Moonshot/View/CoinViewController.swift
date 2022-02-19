@@ -264,15 +264,15 @@ class CoinViewController: UIViewController {
         chartView.backgroundColor = .blue
         chartView.xAxis.labelPosition = .bottom
         chartView.rightAxis.enabled = false
-            chartView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(chartView)
-            NSLayoutConstraint.activate([
-                chartView.topAnchor.constraint(equalTo: view.topAnchor, constant: 220),
-                chartView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -300),
-                chartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-                chartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
-            ])
-        }
+        chartView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(chartView)
+        NSLayoutConstraint.activate([
+            chartView.topAnchor.constraint(equalTo: view.topAnchor, constant: 220),
+            chartView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -300),
+            chartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            chartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
+        ])
+    }
     
     func setupCoinImage() {
         let imageView = UIImageView(frame: CGRect(x: 0, y: 50, width: 16, height: 16))

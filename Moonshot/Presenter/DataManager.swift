@@ -22,6 +22,7 @@ class DataManager {
     let coinHistoryCurrency = "/market_chart?vs_currency="
     let coinHistoryInterval = "&days=7&interval=daily"
     let coinInformationParams = "?localization=false&tickers=false&community_data=false&developer_data=false"
+    let btcToFiat = "https://api.coingecko.com/api/v3/exchange_rates"
     let pageNum = "&page="
     var coins: [Coins]?
     var trendCoins: [TrendCoins.coins]?
@@ -226,7 +227,30 @@ class DataManager {
                     completed(nil, NetworkError.invalidRequestError)
                     return
                 }
+            }
+            task.resume()
+        }
+    }
+    
+    func btcComparision(completed: @escaping () -> ()) {
+        
+        if let url = URL(string: btcToFiat) {
+            let task = urlSession.dataTask(with: url) { data, response, error in
+                guard let data = data, error == nil else {
+                    return
                 }
+                do {
+                    let response = try
+                    JSONDecoder().decode(BitcoinExchange.self, from: data)
+                    print(response)
+                    DispatchQueue.main.async {
+                        completed()
+                    }
+                }
+                catch {
+                    return
+                }
+            }
             task.resume()
         }
     }

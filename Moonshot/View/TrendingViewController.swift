@@ -17,9 +17,13 @@ class TrendingViewController: UIViewController {
         view.backgroundColor = .darkGray
         title = "Trending"
         view.addSubview(header)
+        view.addSubview(btcLabel)
         setupTableView()
         DataManager.sharedInstance.trendingCoins {_ in 
             self.tableView.reloadData()
+        }
+        DataManager.sharedInstance.btcComparision {
+            print("Matrix reloaded")
         }
     }
     
@@ -33,12 +37,28 @@ class TrendingViewController: UIViewController {
         return label
     }()
     
+    let btcLabel: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 240, height: 40))
+        label.center = CGPoint(x: 208, y: 520)
+        label.textAlignment = .center
+        label.font = UIFont(name: "Nasalization", size: 24)
+        label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "1 BTC ="
+        return label
+    }()
+    
     func sendAlert() {
         self.tableView.reloadData()
         let alert = UIAlertController(title: "Alert", message: "Coin already in Watchlist", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func loadCurrencies() {
+        
+    }
+    
     
 }
 
@@ -57,7 +77,7 @@ extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -85),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -420),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
