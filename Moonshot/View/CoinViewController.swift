@@ -34,6 +34,9 @@ class CoinViewController: UIViewController {
         DataManager.sharedInstance.loadCoinInformation(userSearch: self.coin.id) {
             self.setupScreen()
         }
+        DataManager.sharedInstance.loadCoinPriceHistory(userSearch: self.coin.id) {
+            print("Completed")
+        }
         setupCoinImage()
         setupGraph()
     }
@@ -259,6 +262,8 @@ class CoinViewController: UIViewController {
     
     func setupGraph() {
         chartView.backgroundColor = .blue
+        chartView.xAxis.labelPosition = .bottom
+        chartView.rightAxis.enabled = false
             chartView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(chartView)
             NSLayoutConstraint.activate([
@@ -281,5 +286,6 @@ class CoinViewController: UIViewController {
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -180),
         ])
     }
+    
     
 }

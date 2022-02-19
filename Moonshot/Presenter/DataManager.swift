@@ -232,9 +232,8 @@ class DataManager {
     }
     
     func loadCoinInformation(userSearch: String, completed: @escaping () -> ()) {
-        print(userSearch)
+        
         if let url = URL(string: coinHistory + userSearch + coinInformationParams) {
-            print(url)
             let task = urlSession.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else {
                     return
@@ -243,7 +242,29 @@ class DataManager {
                     let response = try
                     JSONDecoder().decode(CoinDetail.self, from: data)
                     self.coinDetail = response
-                    print(response.market_data.high_24h.usd)
+                    DispatchQueue.main.async {
+                        completed()
+                    }
+                }
+                catch {
+                    return
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    func loadCoinPriceHistory(userSearch: String, completed: @escaping () -> ()) {
+        
+        if let url = URL(string: coinHistory + userSearch + coinHistoryCurrency + currentCurrency! + coinHistoryInterval) {
+            let task = urlSession.dataTask(with: url) { data, response, error in
+                guard let data = data, error == nil else {
+                    return
+                }
+                do {
+                    let response = try
+                    JSONDecoder().decode(CoinHistory.self, from: data)
+                    print(response)
                     DispatchQueue.main.async {
                         completed()
                     }
