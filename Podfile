@@ -6,5 +6,6 @@ target 'Moonshot' do
   use_frameworks!
 
 pod 'DropDown'
+pod 'Charts'
 
 end

@@ -7,11 +7,14 @@
 
 import UIKit
 import Nuke
+import Charts
 
 class CoinViewController: UIViewController {
     
     let coin: Coins
     var currency = DataManager.sharedInstance.currentCurrency
+    
+    let chartView: LineChartView = LineChartView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +30,12 @@ class CoinViewController: UIViewController {
         view.addSubview(low24Price)
         view.addSubview(highAllTimePrice)
         view.addSubview(lowAllTimePrice)
+        view.addSubview(coinHistoryLabel)
         DataManager.sharedInstance.loadCoinInformation(userSearch: self.coin.id) {
             self.setupScreen()
         }
         setupCoinImage()
+        setupGraph()
     }
     
     init(coin: Coins) {
@@ -53,10 +58,10 @@ class CoinViewController: UIViewController {
     }()
     
     let coinSymbol: UILabel = {
-        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 50, height: 25))
-        label.center = CGPoint(x: 208, y: 127)
+        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 100, height: 30))
+        label.center = CGPoint(x: 206, y: 127)
         label.textAlignment = .center
-        label.font = UIFont(name: "Nasalization", size: 14)
+        label.font = UIFont(name: "Nasalization", size: 16)
         label.textColor = .systemYellow
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -78,6 +83,17 @@ class CoinViewController: UIViewController {
         label.font = UIFont(name: "Nasalization", size: 18)
         label.textColor = .systemYellow
         label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    let coinHistoryLabel: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 70, width: 240, height: 25))
+        label.center = CGPoint(x: 208, y: 210)
+        label.font = UIFont(name: "Nasalization", size: 14)
+        label.textColor = .systemYellow
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        label.text = "Coin history last 7 days"
         return label
     }()
     
@@ -240,6 +256,18 @@ class CoinViewController: UIViewController {
             lowAllTimePrice.text = "Min all-time price \n\(coinInfo.market_data.atl.usd)"
         }
     }
+    
+    func setupGraph() {
+        chartView.backgroundColor = .blue
+            chartView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(chartView)
+            NSLayoutConstraint.activate([
+                chartView.topAnchor.constraint(equalTo: view.topAnchor, constant: 220),
+                chartView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -300),
+                chartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+                chartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
+            ])
+        }
     
     func setupCoinImage() {
         let imageView = UIImageView(frame: CGRect(x: 0, y: 50, width: 16, height: 16))
