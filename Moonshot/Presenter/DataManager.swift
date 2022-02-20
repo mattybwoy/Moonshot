@@ -29,6 +29,7 @@ class DataManager {
     var totalMarketCap: Double?
     var searchResults: [Coin]?
     var coinDetail: CoinDetail?
+    var btcRates: Tokens?
     
     var favoriteCoins: [WatchCoins] = [WatchCoins]()
     
@@ -188,8 +189,6 @@ class DataManager {
                         self.totalMarketCap = response.data.total_market_cap.inr
                     case "jpy":
                         self.totalMarketCap = response.data.total_market_cap.jpy
-                    case "sgd":
-                        self.totalMarketCap = response.data.total_market_cap.sgd
                     case "twd":
                         self.totalMarketCap = response.data.total_market_cap.twd
                     default:
@@ -242,8 +241,8 @@ class DataManager {
                 do {
                     let response = try
                     JSONDecoder().decode(BitcoinExchange.self, from: data)
-                    print(response)
                     DispatchQueue.main.async {
+                        self.btcRates = response.rates
                         completed()
                     }
                 }

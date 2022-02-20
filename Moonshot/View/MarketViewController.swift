@@ -23,7 +23,6 @@ class MarketViewController: UIViewController {
         "HKD",
         "INR",
         "JPY",
-        "SGD",
         "TWD"
         ]
         currencyMenu.backgroundColor = .darkGray

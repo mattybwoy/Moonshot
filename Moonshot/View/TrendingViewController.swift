@@ -18,13 +18,24 @@ class TrendingViewController: UIViewController {
         title = "Trending"
         view.addSubview(header)
         view.addSubview(btcLabel)
+        view.addSubview(usdPrice)
+        view.addSubview(gbpPrice)
+        view.addSubview(eurPrice)
+        view.addSubview(cadPrice)
+        view.addSubview(audPrice)
+        view.addSubview(hkdPrice)
+        view.addSubview(cnyPrice)
+        view.addSubview(twdPrice)
+        view.addSubview(jpyPrice)
+        view.addSubview(inrPrice)
         setupTableView()
         DataManager.sharedInstance.trendingCoins {_ in 
             self.tableView.reloadData()
         }
         DataManager.sharedInstance.btcComparision {
-            print("Matrix reloaded")
+            self.loadCurrencies()
         }
+        
     }
     
     let header: UILabel = {
@@ -38,13 +49,103 @@ class TrendingViewController: UIViewController {
     }()
     
     let btcLabel: UILabel = {
-        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 240, height: 40))
-        label.center = CGPoint(x: 208, y: 520)
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 140, height: 40))
+        label.center = CGPoint(x: 200, y: 520)
         label.textAlignment = .center
         label.font = UIFont(name: "Nasalization", size: 24)
         label.textColor = .systemYellow
         label.adjustsFontSizeToFitWidth = true
         label.text = "1 BTC ="
+        return label
+    }()
+    
+    let usdPrice: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
+        label.center = CGPoint(x: 110, y: 560)
+        label.font = UIFont(name: "Nasalization", size: 16)
+        label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    let gbpPrice: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
+        label.center = CGPoint(x: 110, y: 600)
+        label.font = UIFont(name: "Nasalization", size: 16)
+        label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    let eurPrice: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
+        label.center = CGPoint(x: 110, y: 640)
+        label.font = UIFont(name: "Nasalization", size: 16)
+        label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    let cadPrice: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
+        label.center = CGPoint(x: 110, y: 680)
+        label.font = UIFont(name: "Nasalization", size: 16)
+        label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    let audPrice: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
+        label.center = CGPoint(x: 110, y: 720)
+        label.font = UIFont(name: "Nasalization", size: 16)
+        label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    let hkdPrice: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
+        label.center = CGPoint(x: 310, y: 560)
+        label.font = UIFont(name: "Nasalization", size: 16)
+        label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    let cnyPrice: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
+        label.center = CGPoint(x: 300, y: 600)
+        label.font = UIFont(name: "Nasalization", size: 16)
+        label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    let twdPrice: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
+        label.center = CGPoint(x: 300, y: 640)
+        label.font = UIFont(name: "Nasalization", size: 16)
+        label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    let jpyPrice: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
+        label.center = CGPoint(x: 300, y: 680)
+        label.font = UIFont(name: "Nasalization", size: 16)
+        label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    let inrPrice: UILabel = {
+        var label = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
+        label.center = CGPoint(x: 300, y: 720)
+        label.font = UIFont(name: "Nasalization", size: 16)
+        label.textColor = .systemYellow
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -56,7 +157,19 @@ class TrendingViewController: UIViewController {
     }
     
     func loadCurrencies() {
-        
+        guard let fiatRates = DataManager.sharedInstance.btcRates else {
+            return
+        }
+        usdPrice.text = "USD: \(fiatRates.usd.value)"
+        gbpPrice.text = "GBP: \(fiatRates.gbp.value)"
+        eurPrice.text = "EUR: \(fiatRates.eur.value)"
+        cadPrice.text = "CAD: \(fiatRates.cad.value)"
+        audPrice.text = "AUD: \(fiatRates.aud.value)"
+        hkdPrice.text = "HKD: \(fiatRates.hkd.value)"
+        cnyPrice.text = "CNY: \(fiatRates.cny.value)"
+        twdPrice.text = "TWD: \(fiatRates.twd.value)"
+        jpyPrice.text = "JPY: \(fiatRates.jpy.value)"
+        inrPrice.text = "INR: \(fiatRates.inr.value)"
     }
     
     

@@ -71,7 +71,6 @@ extension WatchListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.layer.borderColor = UIColor.systemYellow.cgColor
         cell.layer.borderWidth = 1.0
         Nuke.loadImage(with: URL(string: DataManager.sharedInstance.favoriteCoins[indexPath.row].thumb)!, into: cell.thumbNail)
-//        cell.thumbNail.image = UIImage(data: try! Data(contentsOf: URL(string: DataManager.sharedInstance.favoriteCoins[indexPath.row].thumb)!))
         return cell
     }
     

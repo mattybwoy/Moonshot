@@ -236,13 +236,6 @@ class CoinViewController: UIViewController {
             low24Price.text = "Min price 24 Hours \n\(coinInfo.market_data.low_24h.jpy)"
             highAllTimePrice.text = "Max all-time price \n\(coinInfo.market_data.ath.jpy)"
             lowAllTimePrice.text = "Min all-time price \n\(coinInfo.market_data.atl.jpy)"
-        case "sgd":
-            marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.sgd)"
-            currentPrice.text = "Current Price: \(coinInfo.market_data.current_price.sgd)"
-            high24Price.text = "Max price 24 Hours \n\(coinInfo.market_data.high_24h.sgd)"
-            low24Price.text = "Min price 24 Hours \n\(coinInfo.market_data.low_24h.sgd)"
-            highAllTimePrice.text = "Max all-time price \n\(coinInfo.market_data.ath.sgd)"
-            lowAllTimePrice.text = "Min all-time price \n\(coinInfo.market_data.atl.sgd)"
         case "twd":
             marketCapLabel.text = "Market Cap: \(coinInfo.market_data.market_cap.twd)"
             currentPrice.text = "Current Price: \(coinInfo.market_data.current_price.twd)"

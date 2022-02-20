@@ -25,6 +25,5 @@ struct Totals: Decodable {
     let hkd: Double
     let inr: Double
     let jpy: Double
-    let sgd: Double
     let twd: Double
 }

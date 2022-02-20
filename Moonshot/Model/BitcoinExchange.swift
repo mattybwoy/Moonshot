@@ -21,7 +21,6 @@ struct Tokens: Decodable {
     let hkd: Token
     let inr: Token
     let jpy: Token
-    let sgd: Token
     let twd: Token
 }
 

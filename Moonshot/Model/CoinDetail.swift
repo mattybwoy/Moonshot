@@ -34,7 +34,6 @@ struct Current: Decodable {
     let hkd: Double
     let inr: Double
     let jpy: Double
-    let sgd: Double
     let twd: Double
 }
 
@@ -48,7 +47,6 @@ struct High: Decodable {
     let hkd: Double
     let inr: Double
     let jpy: Double
-    let sgd: Double
     let twd: Double
 }
 
@@ -62,7 +60,6 @@ struct Low: Decodable {
     let hkd: Double
     let inr: Double
     let jpy: Double
-    let sgd: Double
     let twd: Double
 }
 
@@ -76,7 +73,6 @@ struct Cap: Decodable {
     let hkd: Double
     let inr: Double
     let jpy: Double
-    let sgd: Double
     let twd: Double
 }
 
@@ -90,7 +86,6 @@ struct High24: Decodable {
     let hkd: Double
     let inr: Double
     let jpy: Double
-    let sgd: Double
     let twd: Double
 }
 
@@ -104,6 +99,5 @@ struct Low24: Decodable {
     let hkd: Double
     let inr: Double
     let jpy: Double
-    let sgd: Double
     let twd: Double
 }
