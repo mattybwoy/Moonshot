@@ -30,6 +30,7 @@ class DataManager {
     var searchResults: [Coin]?
     var coinDetail: CoinDetail?
     var btcRates: Tokens?
+    var historicalRates: [[Double]]?
     
     var favoriteCoins: [WatchCoins] = [WatchCoins]()
     
@@ -287,13 +288,8 @@ class DataManager {
                 do {
                     let response = try
                     JSONDecoder().decode(CoinHistory.self, from: data)
-                    print(response.prices[0][0])
-                    let date = NSDate(timeIntervalSince1970: response.prices[0][0]/1000)
-                    let dayTimePeriodFormatter = DateFormatter()
-                    dayTimePeriodFormatter.timeZone = .current
-                    dayTimePeriodFormatter.dateStyle = .medium
-                    let dateString = dayTimePeriodFormatter.string(from: date as Date)
-                    print(dateString)
+                    print(response.prices)
+                    self.historicalRates = response.prices
                     DispatchQueue.main.async {
                         completed()
                     }

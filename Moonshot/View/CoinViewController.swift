@@ -34,13 +34,12 @@ class CoinViewController: UIViewController, ChartViewDelegate {
         DataManager.sharedInstance.loadCoinInformation(userSearch: self.coin.id) {
             self.setupScreen()
         }
-        DataManager.sharedInstance.loadCoinPriceHistory(userSearch: self.coin.id) {
+        DataManager.sharedInstance.loadCoinPriceHistory(userSearch: self.coin.id) { [self] in
+            self.setData()
             print("Completed")
         }
         setupCoinImage()
         setupGraph()
-        unixTimeConverter()
-        setData()
     }
     
     init(coin: Coins) {
@@ -264,18 +263,19 @@ class CoinViewController: UIViewController, ChartViewDelegate {
         yAxis.labelTextColor = .systemYellow
         yAxis.axisLineColor = .systemYellow
         
-        chartView.xAxis.labelFont = UIFont(name: "Nasalization", size: 10)!
+        chartView.xAxis.labelFont = UIFont(name: "Nasalization", size: 7)!
         chartView.xAxis.labelTextColor = .systemYellow
         chartView.xAxis.axisLineColor = .systemYellow
         
-        //chartView.animate(xAxisDuration: 1.5)
+        
+        chartView.animate(xAxisDuration: 1.0)
         chartView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(chartView)
         NSLayoutConstraint.activate([
             chartView.topAnchor.constraint(equalTo: view.topAnchor, constant: 220),
             chartView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -300),
-            chartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            chartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
+            chartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            chartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
     }
     
@@ -283,16 +283,40 @@ class CoinViewController: UIViewController, ChartViewDelegate {
         print(entry)
     }
     
-    let yValues: [ChartDataEntry] = [
-        ChartDataEntry(x: 0.0, y: 10.0),
-        ChartDataEntry(x: 1.0, y: 5.0),
-        ChartDataEntry(x: 2.0, y: 7.0)
-    ]
+
     
     func setData() {
+
+        
+        let yValues: [ChartDataEntry] = [
+            ChartDataEntry(x: 0.0, y: DataManager.sharedInstance.historicalRates![0][1]),
+            ChartDataEntry(x: 1.0, y: DataManager.sharedInstance.historicalRates![1][1]),
+            ChartDataEntry(x: 2.0, y: DataManager.sharedInstance.historicalRates![2][1]),
+            ChartDataEntry(x: 3.0, y: DataManager.sharedInstance.historicalRates![3][1]),
+            ChartDataEntry(x: 4.0, y: DataManager.sharedInstance.historicalRates![4][1]),
+            ChartDataEntry(x: 5.0, y: DataManager.sharedInstance.historicalRates![5][1]),
+            ChartDataEntry(x: 6.0, y: DataManager.sharedInstance.historicalRates![6][1]),
+            ChartDataEntry(x: 7.0, y: DataManager.sharedInstance.historicalRates![7][1])
+        ]
+        
+        guard let previousRates = DataManager.sharedInstance.historicalRates else {
+            return
+        }
+        
+        let dateValue = [unixTimeConverter(unix: previousRates[0][0]),
+                         unixTimeConverter(unix: previousRates[1][0]),
+                         unixTimeConverter(unix: previousRates[2][0]),
+                         unixTimeConverter(unix: previousRates[3][0]),
+                         unixTimeConverter(unix: previousRates[4][0]),
+                         unixTimeConverter(unix: previousRates[5][0]),
+                         unixTimeConverter(unix: previousRates[6][0]),
+                         unixTimeConverter(unix: previousRates[7][0])
+        ]
+        
+        chartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: dateValue)
         let set = LineChartDataSet(entries: yValues, label: "Price")
         set.drawCirclesEnabled = false
-        set.mode = .linear
+        set.mode = .cubicBezier
         set.lineWidth = 2
         set.setColor(.systemYellow)
         let data = LineChartData(dataSet: set)
@@ -313,15 +337,14 @@ class CoinViewController: UIViewController, ChartViewDelegate {
         ])
     }
     
-    func unixTimeConverter() {
-        let time: Double = 16448832000000
-        let formatTime = time/10000
+    func unixTimeConverter(unix: Double) -> String {
+        let formatTime = unix/1000
         let date = NSDate(timeIntervalSince1970: formatTime)
         let dayTimePeriodFormatter = DateFormatter()
         dayTimePeriodFormatter.timeZone = .current
-        dayTimePeriodFormatter.dateStyle = .medium
+        dayTimePeriodFormatter.dateFormat = "dd/MM"
         let dateString = dayTimePeriodFormatter.string(from: date as Date)
-        print("TimeStamp \(dateString)")
+        return dateString
     }
     
     
