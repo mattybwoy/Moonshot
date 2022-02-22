@@ -9,7 +9,7 @@ import UIKit
 import Nuke
 import Charts
 
-class CoinViewController: UIViewController {
+class CoinViewController: UIViewController, ChartViewDelegate {
     
     let coin: Coins
     var currency = DataManager.sharedInstance.currentCurrency
@@ -39,6 +39,8 @@ class CoinViewController: UIViewController {
         }
         setupCoinImage()
         setupGraph()
+        unixTimeConverter()
+        setData()
     }
     
     init(coin: Coins) {
@@ -254,9 +256,19 @@ class CoinViewController: UIViewController {
     }
     
     func setupGraph() {
-        chartView.backgroundColor = .blue
+        chartView.backgroundColor = .darkGray
         chartView.xAxis.labelPosition = .bottom
         chartView.rightAxis.enabled = false
+        let yAxis = chartView.leftAxis
+        yAxis.labelFont = UIFont(name: "Nasalization", size: 10)!
+        yAxis.labelTextColor = .systemYellow
+        yAxis.axisLineColor = .systemYellow
+        
+        chartView.xAxis.labelFont = UIFont(name: "Nasalization", size: 10)!
+        chartView.xAxis.labelTextColor = .systemYellow
+        chartView.xAxis.axisLineColor = .systemYellow
+        
+        //chartView.animate(xAxisDuration: 1.5)
         chartView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(chartView)
         NSLayoutConstraint.activate([
@@ -265,6 +277,27 @@ class CoinViewController: UIViewController {
             chartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             chartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
         ])
+    }
+    
+    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
+        print(entry)
+    }
+    
+    let yValues: [ChartDataEntry] = [
+        ChartDataEntry(x: 0.0, y: 10.0),
+        ChartDataEntry(x: 1.0, y: 5.0),
+        ChartDataEntry(x: 2.0, y: 7.0)
+    ]
+    
+    func setData() {
+        let set = LineChartDataSet(entries: yValues, label: "Price")
+        set.drawCirclesEnabled = false
+        set.mode = .linear
+        set.lineWidth = 2
+        set.setColor(.systemYellow)
+        let data = LineChartData(dataSet: set)
+        data.setDrawValues(false)
+        chartView.data = data
     }
     
     func setupCoinImage() {
@@ -278,6 +311,17 @@ class CoinViewController: UIViewController {
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 180),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -180),
         ])
+    }
+    
+    func unixTimeConverter() {
+        let time: Double = 16448832000000
+        let formatTime = time/10000
+        let date = NSDate(timeIntervalSince1970: formatTime)
+        let dayTimePeriodFormatter = DateFormatter()
+        dayTimePeriodFormatter.timeZone = .current
+        dayTimePeriodFormatter.dateStyle = .medium
+        let dateString = dayTimePeriodFormatter.string(from: date as Date)
+        print("TimeStamp \(dateString)")
     }
     
     
