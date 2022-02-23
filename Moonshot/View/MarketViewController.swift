@@ -316,8 +316,7 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
             return
         }
         let coinSelected = loadedCoins[indexPath.row]
-        print(coinSelected)
-        let coinController = CoinViewController(coin: coinSelected)
+        let coinController = CoinViewController(coin: coinSelected.id)
         show(coinController, sender: self)
     }
     

@@ -261,4 +261,14 @@ extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
         self.tableView.setSwipeActionFont(UIFont(name: "Nasalization", size: 15)!)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let trendingCoins = DataManager.sharedInstance.trendCoins else {
+            return
+        }
+        let coinSelected = trendingCoins[indexPath.row].item.id
+        let coinController = CoinViewController(coin: coinSelected)
+        show(coinController, sender: self)
+    }
+    
 }

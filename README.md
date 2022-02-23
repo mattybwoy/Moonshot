@@ -21,9 +21,10 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - Standardised Coin cells for Trending, Search and Watchlist Tabs
 - Market Cells now showing trends along with current rates
 - Using Nuke dependency for loading thumbnails
+- Using Charts dependency to load historical coin data for past 7 days
+- Individual coin screen now complete
 
 ## Improvements
-- Coin Information screen
 - UI Testing
 - Save features
 

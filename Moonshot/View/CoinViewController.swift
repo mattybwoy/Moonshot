@@ -11,7 +11,7 @@ import Charts
 
 class CoinViewController: UIViewController, ChartViewDelegate {
     
-    let coin: Coins
+    let coin: String
     var currency = DataManager.sharedInstance.currentCurrency
     
     let chartView: LineChartView = LineChartView()
@@ -31,18 +31,17 @@ class CoinViewController: UIViewController, ChartViewDelegate {
         view.addSubview(highAllTimePrice)
         view.addSubview(lowAllTimePrice)
         view.addSubview(coinHistoryLabel)
-        DataManager.sharedInstance.loadCoinInformation(userSearch: self.coin.id) {
+        DataManager.sharedInstance.loadCoinInformation(userSearch: self.coin) {
             self.setupScreen()
+            self.setupCoinImage()
         }
-        DataManager.sharedInstance.loadCoinPriceHistory(userSearch: self.coin.id) { [self] in
+        DataManager.sharedInstance.loadCoinPriceHistory(userSearch: self.coin) { [self] in
             self.setData()
-            print("Completed")
         }
-        setupCoinImage()
         setupGraph()
     }
     
-    init(coin: Coins) {
+    init(coin: String) {
         self.coin = coin
         super.init(nibName: nil, bundle: nil)
     }
@@ -174,7 +173,7 @@ class CoinViewController: UIViewController, ChartViewDelegate {
         guard let coinInfo = DataManager.sharedInstance.coinDetail else {
             return
         }
-        coinHeader.text = "\(self.coin.name)"
+        coinHeader.text = "\(coinInfo.name)"
         coinRank.text = "Rank: \(coinInfo.market_cap_rank)"
         totalSupply.text = "Total Supply: \(coinInfo.market_data.total_supply ?? 0)"
         circulatingSupply.text = "Circulating Supply: \(coinInfo.market_data.circulating_supply ?? 0)"
@@ -262,13 +261,14 @@ class CoinViewController: UIViewController, ChartViewDelegate {
         yAxis.labelFont = UIFont(name: "Nasalization", size: 10)!
         yAxis.labelTextColor = .systemYellow
         yAxis.axisLineColor = .systemYellow
+        yAxis.axisLineWidth = 2
         
         chartView.xAxis.labelFont = UIFont(name: "Nasalization", size: 7)!
         chartView.xAxis.labelTextColor = .systemYellow
         chartView.xAxis.axisLineColor = .systemYellow
+        chartView.xAxis.axisLineWidth = 2
         
-        
-        chartView.animate(xAxisDuration: 1.0)
+        chartView.animate(xAxisDuration: 1.5)
         chartView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(chartView)
         NSLayoutConstraint.activate([
@@ -283,10 +283,7 @@ class CoinViewController: UIViewController, ChartViewDelegate {
         print(entry)
     }
     
-
-    
     func setData() {
-
         
         let yValues: [ChartDataEntry] = [
             ChartDataEntry(x: 0.0, y: DataManager.sharedInstance.historicalRates![0][1]),
@@ -325,8 +322,11 @@ class CoinViewController: UIViewController, ChartViewDelegate {
     }
     
     func setupCoinImage() {
+        guard let coinImage = DataManager.sharedInstance.coinDetail?.image.small else {
+            return
+        }
         let imageView = UIImageView(frame: CGRect(x: 0, y: 50, width: 16, height: 16))
-        Nuke.loadImage(with: URL(string: self.coin.image)!, into: imageView)
+        Nuke.loadImage(with: URL(string: coinImage)!, into: imageView)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
         NSLayoutConstraint.activate([

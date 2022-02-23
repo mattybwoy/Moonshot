@@ -8,9 +8,15 @@
 import Foundation
 
 struct CoinDetail: Decodable {
+    let name: String
     let symbol: String
     let market_cap_rank: Int
     let market_data: CoinMarketData
+    let image: Image
+}
+
+struct Image: Decodable {
+    let small: String
 }
 
 struct CoinMarketData: Decodable {
