@@ -262,7 +262,7 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
         cell.coinLabel.textColor = .systemYellow
         cell.coinLabel.font = UIFont(name: "Nasalization", size: 15)
         cell.coinLabel.adjustsFontSizeToFitWidth = true
-        cell.coinValue.text = "\(loadedCoins[indexPath.row].current_price)"
+        cell.coinValue.text = "\(loadedCoins[indexPath.row].current_price.toString())"
         cell.coinValue.textColor = .systemYellow
         cell.coinValue.font = UIFont(name: "Nasalization", size: 15)
         Nuke.loadImage(with: URL(string: loadedCoins[indexPath.row].image)!, into: cell.thumbNail)
@@ -323,6 +323,7 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
     
 }
 
+
 extension UITableView {
     public func setSwipeActionFont(_ font: UIFont, withTintColor tintColor: UIColor? = nil, andIgnoreFirst ignoreFirst: Bool = false) {
         for subview in self.subviews {
@@ -350,5 +351,20 @@ extension UITableView {
                 }
             }
         }
+    }
+}
+
+//Convert scientific notation to Double
+extension Double {
+
+    func toString(decimal: Int = 9) -> String {
+        let value = decimal < 0 ? 0 : decimal
+        var string = String(format: "%.\(value)f", self)
+
+        while string.last == "0" || string.last == "." {
+            if string.last == "." { string = String(string.dropLast()); break}
+            string = String(string.dropLast())
+        }
+        return string
     }
 }

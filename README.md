@@ -23,6 +23,7 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - Using Nuke dependency for loading thumbnails
 - Using Charts dependency to load historical coin data for past 7 days
 - Individual coin screen now complete
+- All Tabs now connnected to coin screen
 
 ## Improvements
 - UI Testing
