@@ -93,5 +93,11 @@ extension WatchListViewController: UITableViewDelegate, UITableViewDataSource {
         self.tableView.setSwipeActionFont(UIFont(name: "Nasalization", size: 15)!)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let coinSelected = DataManager.sharedInstance.favoriteCoins[indexPath.row].id
+        let coinController = CoinViewController(coin: coinSelected)
+        show(coinController, sender: self)
+    }
     
 }

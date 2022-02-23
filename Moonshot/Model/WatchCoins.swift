@@ -8,6 +8,7 @@
 import Foundation
 
 struct WatchCoins {
+    let id: String
     let name: String
     let thumb: String
 }

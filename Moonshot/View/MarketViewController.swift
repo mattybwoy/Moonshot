@@ -284,7 +284,7 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             if DataManager.sharedInstance.favoriteCoins.isEmpty {
-                DataManager.sharedInstance.favoriteCoins.append(WatchCoins(name: loadedCoins[indexPath.row].name, thumb: loadedCoins[indexPath.row].image))
+                DataManager.sharedInstance.favoriteCoins.append(WatchCoins(id: loadedCoins[indexPath.row].id, name: loadedCoins[indexPath.row].name, thumb: loadedCoins[indexPath.row].image))
 
                     print(DataManager.sharedInstance.favoriteCoins)
                     completionHandler(true)
@@ -295,7 +295,7 @@ extension MarketViewController: UITableViewDataSource, UITableViewDelegate {
                         return
                     }
                 }
-                DataManager.sharedInstance.favoriteCoins.append(WatchCoins(name: loadedCoins[indexPath.row].name, thumb: loadedCoins[indexPath.row].image))
+                DataManager.sharedInstance.favoriteCoins.append(WatchCoins(id: loadedCoins[indexPath.row].id, name: loadedCoins[indexPath.row].name, thumb: loadedCoins[indexPath.row].image))
                     print(DataManager.sharedInstance.favoriteCoins)
                     completionHandler(true)
             }

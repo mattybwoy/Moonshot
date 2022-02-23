@@ -235,7 +235,7 @@ extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             if DataManager.sharedInstance.favoriteCoins.isEmpty {
-                DataManager.sharedInstance.favoriteCoins.append(WatchCoins(name: trendingCoins[indexPath.row].item.name, thumb: trendingCoins[indexPath.row].item.thumb))
+                DataManager.sharedInstance.favoriteCoins.append(WatchCoins(id: trendingCoins[indexPath.row].item.id, name: trendingCoins[indexPath.row].item.name, thumb: trendingCoins[indexPath.row].item.thumb))
 
                     print(DataManager.sharedInstance.favoriteCoins)
                     completionHandler(true)
@@ -246,7 +246,7 @@ extension TrendingViewController: UITableViewDataSource, UITableViewDelegate {
                         return
                     }
                 }
-                DataManager.sharedInstance.favoriteCoins.append(WatchCoins(name: trendingCoins[indexPath.row].item.name, thumb: trendingCoins[indexPath.row].item.thumb))
+                DataManager.sharedInstance.favoriteCoins.append(WatchCoins(id: trendingCoins[indexPath.row].item.id, name: trendingCoins[indexPath.row].item.name, thumb: trendingCoins[indexPath.row].item.thumb))
                     print(DataManager.sharedInstance.favoriteCoins)
                     completionHandler(true)
             }

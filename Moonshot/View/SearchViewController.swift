@@ -142,7 +142,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             if DataManager.sharedInstance.favoriteCoins.isEmpty {
-                DataManager.sharedInstance.favoriteCoins.append(WatchCoins(name: searchedCoins[indexPath.row].name, thumb: searchedCoins[indexPath.row].thumb))
+                DataManager.sharedInstance.favoriteCoins.append(WatchCoins(id: searchedCoins[indexPath.row].id, name: searchedCoins[indexPath.row].name, thumb: searchedCoins[indexPath.row].thumb))
 
                     print(DataManager.sharedInstance.favoriteCoins)
                     completionHandler(true)
@@ -153,7 +153,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
                         return
                     }
                 }
-                DataManager.sharedInstance.favoriteCoins.append(WatchCoins(name: searchedCoins[indexPath.row].name, thumb: searchedCoins[indexPath.row].thumb))
+                DataManager.sharedInstance.favoriteCoins.append(WatchCoins(id: searchedCoins[indexPath.row].id, name: searchedCoins[indexPath.row].name, thumb: searchedCoins[indexPath.row].thumb))
                     completionHandler(true)
             }
             
