@@ -38,7 +38,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         bar.center = CGPoint(x: 210, y: 170)
         bar.placeholder = "Search"
         bar.backgroundColor = .darkGray
-        bar.searchTextField.font = UIFont(name: "Astrolab", size: 14)
+        bar.searchTextField.font = UIFont(name: "Nasalization", size: 16)
         bar.layer.borderWidth = 2
         bar.barTintColor = .darkGray
         bar.layer.borderColor = UIColor.systemYellow.cgColor
@@ -154,7 +154,6 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
                     }
                 }
                 DataManager.sharedInstance.favoriteCoins.append(WatchCoins(name: searchedCoins[indexPath.row].name, thumb: searchedCoins[indexPath.row].thumb))
-                    print(DataManager.sharedInstance.favoriteCoins)
                     completionHandler(true)
             }
             
@@ -166,6 +165,16 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
         self.tableView.setSwipeActionFont(UIFont(name: "Nasalization", size: 15)!)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let searchedCoins = DataManager.sharedInstance.searchResults else {
+            return
+        }
+        let coinSelected = searchedCoins[indexPath.row].id
+        let coinController = CoinViewController(coin: coinSelected)
+        show(coinController, sender: self)
     }
     
     
