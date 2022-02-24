@@ -219,5 +219,30 @@ class MoonshotTests: XCTestCase {
         self.wait(for: [expectation], timeout: 3)
     }
     
+    func test_btcComparision() {
+        
+        let expectation = self.expectation(description: "Loads fiat currency results for 1 BTC")
+        let USDRate = 36030.933
+        let GBPRate = 27010.517
+        let EURRate = 32346.373
+        let AUDRate = 50591.177
+        let CADRate = 46326.88
+        let CNYRate = 228010.951
+        let HKDRate = 281326.824
+        let INRRate = 2728027.988
+        let JPYRate = 4158987.564
+        let TWDRate = 1013382.895
+        let jsonString = "{\"rates\": {\"usd\": {\"name\": \"US Dollar\", \"value\": \(USDRate)}, \"gbp\": {\"name\": \"British Pound Sterling\", \"value\": \(GBPRate)}, \"eur\": {\"name\": \"Euro\", \"value\": \(EURRate)}, \"aud\": {\"name\": \"Australian Dollar\", \"value\": \(AUDRate)}, \"cad\": {\"name\": \"Canadian Dollar\", \"value\": \(CADRate)}, \"cny\": {\"name\": \"Chinese Yuan\", \"value\": \(CNYRate)}, \"hkd\": {\"name\": \"Hong Kong Dollar\", \"value\": \(HKDRate)}, \"inr\": {\"name\": \"Indian Rupee\", \"value\": \(INRRate)}, \"jpy\": {\"name\": \"Japanese Yen\", \"value\": \(JPYRate)}, \"twd\": {\"name\": \"New Taiwan Dollar\", \"value\": \(TWDRate)}}}"
+        
+        MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
+        
+        sut.btcComparision {(_: BitcoinExchange?) in
+            XCTAssertNotNil(self.sut.btcRates)
+            expectation.fulfill()
+        }
+        self.wait(for: [expectation], timeout: 3)
+    }
+    
+
     
 }

@@ -32,7 +32,7 @@ class TrendingViewController: UIViewController {
         DataManager.sharedInstance.trendingCoins {_ in 
             self.tableView.reloadData()
         }
-        DataManager.sharedInstance.btcComparision {
+        DataManager.sharedInstance.btcComparision {_ in
             self.loadCurrencies()
         }
         

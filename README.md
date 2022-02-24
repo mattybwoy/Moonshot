@@ -30,7 +30,7 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - Save features
 
 ## Testing
-10/10 Tests passing
+11/11 Tests passing
 
 ## Installation
 

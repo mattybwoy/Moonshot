@@ -232,7 +232,7 @@ class DataManager {
         }
     }
     
-    func btcComparision(completed: @escaping () -> ()) {
+    func btcComparision(completed: @escaping (BitcoinExchange?) -> Void) {
         
         if let url = URL(string: btcToFiat) {
             let task = urlSession.dataTask(with: url) { data, response, error in
@@ -244,7 +244,7 @@ class DataManager {
                     JSONDecoder().decode(BitcoinExchange.self, from: data)
                     DispatchQueue.main.async {
                         self.btcRates = response.rates
-                        completed()
+                        completed(response)
                     }
                 }
                 catch {
