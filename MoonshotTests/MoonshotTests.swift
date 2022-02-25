@@ -219,7 +219,7 @@ class MoonshotTests: XCTestCase {
         self.wait(for: [expectation], timeout: 3)
     }
     
-    func test_btcComparision() {
+    func test_btcComparision_WhenSuccessfulRequest_ReturnsFiatRates() {
         
         let expectation = self.expectation(description: "Loads fiat currency results for 1 BTC")
         let USDRate = 36030.933
@@ -238,10 +238,60 @@ class MoonshotTests: XCTestCase {
         
         sut.btcComparision {(_: BitcoinExchange?) in
             XCTAssertNotNil(self.sut.btcRates)
+            XCTAssertEqual(self.sut.btcRates?.usd.name, "US Dollar")
+            XCTAssertEqual(self.sut.btcRates?.usd.value, USDRate)
             expectation.fulfill()
         }
         self.wait(for: [expectation], timeout: 3)
     }
 
+    func test_loadCoinInformation_WhenSuccessfulRequest_ReturnsCoinInformation() {
+        
+        let expectation = self.expectation(description: "Loads coin information and price history")
+        let searchTerm = "bitcoin"
+        let rank = 1
+        let total = 21000000.0
+        let circulating = 18968081.0
+        let currentPrice = "{\"usd\": 39220.0, \"gbp\": 29282.0, \"eur\": 34906.0, \"aud\": 54286.0, \"cad\": 50080.0, \"cny\": 248767.0, \"hkd\": 307502.0, \"inr\": 2957863.0, \"jpy\": 4552872.0, \"twd\": 1102451.0}"
+        let highPrice = "{\"usd\": 69045.0, \"gbp\": 51032.0, \"eur\": 59717.0, \"aud\": 93482.0, \"cad\": 85656.0, \"cny\": 440948.0, \"hkd\": 537865.0, \"inr\": 5128383.0, \"jpy\": 7828814.0, \"twd\": 1914232.0}"
+        let lowPrice = "{\"usd\": 67.81, \"gbp\": 43.9, \"eur\": 51.3, \"aud\": 72.61, \"cad\": 69.81, \"cny\": 407.23, \"hkd\": 514.37, \"inr\": 3993.42, \"jpy\": 6641.83, \"twd\": 1998.66}"
+        let capPrice = "{\"usd\": 746674075370.0, \"gbp\": 556248292581.0, \"eur\": 662776282914.0, \"aud\": 1032494191356.0, \"cad\": 950975302503.0, \"cny\": 4717113471153.0, \"hkd\": 5830750974301.0, \"inr\": 56065811233598.0, \"jpy\": 86289949525738.0, \"twd\": 20895673252567.0}"
+        let high24Price = "{\"usd\": 39610.0, \"gbp\": 29572.0, \"eur\": 35287.0, \"aud\": 54829.0, \"cad\": 50560.0, \"cny\": 250115.0, \"hkd\": 309282.0, \"inr\": 2976416.0, \"jpy\": 4552872.0, \"twd\": 1102451.0}"
+        let low24Price = "{\"usd\": 35907.0, \"gbp\": 26854.0, \"eur\": 32146.0, \"aud\": 50306.0, \"cad\": 46107.0, \"cny\": 227228.0, \"hkd\": 280360.0, \"inr\": 2719116.0, \"jpy\": 4139018.0, \"twd\": 1009992.0}"
+        let image = "{\"small\": \"https://assets.coingecko.com/coins/images/1/small/bitcoin.png?1547033579\"}"
+        let marketData = "{\"total_supply\": \(total), \"circulating_supply\": \(circulating), \"current_price\": \(currentPrice), \"ath\": \(highPrice), \"atl\": \(lowPrice), \"market_cap\": \(capPrice), \"high_24h\": \(high24Price), \"low_24h\": \(low24Price)}"
+        let jsonString = "{\"name\": \"Bitcoin\", \"symbol\": \"btc\", \"market_cap_rank\": \(rank), \"market_data\": \(marketData), \"image\": \(image)}"
+        
+        MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
+        
+        sut.loadCoinInformation(userSearch: searchTerm) { (_: CoinDetail?) in
+            XCTAssertNotNil(self.sut.coinDetail)
+            XCTAssertEqual(self.sut.coinDetail?.market_cap_rank, rank)
+            XCTAssertEqual(self.sut.coinDetail?.market_data.total_supply, total)
+            XCTAssertEqual(self.sut.coinDetail?.market_data.circulating_supply, circulating)
+            XCTAssertEqual(self.sut.coinDetail?.market_data.ath.usd, 69045.0)
+            expectation.fulfill()
+        }
+        self.wait(for: [expectation], timeout: 3)
+    }
+    
+    func test_loadCoinPriceHistory() {
+        
+        let expectation = self.expectation(description: "Loads last 7 days price history")
+        let searchTerm = "bitcoin"
+        let jsonString = "{\"prices\": [[1645228800000, 40073.495362369824], [1645315200000, 40192.75912143141], [1645401600000, 38514.00853622455], [1645488000000, 37059.979402287514], [1645574400000, 38337.2038554348], [1645660800000, 37372.2926803477], [1645747200000, 38363.345488570165], [1645812330000, 39082.76215785049]]}"
+        
+        MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
+        sut.currentCurrency = "usd"
+        
+        sut.loadCoinPriceHistory(userSearch: searchTerm) { (_: CoinHistory?) in
+            XCTAssertNotNil(self.sut.historicalRates)
+            XCTAssertEqual(self.sut.historicalRates![0][0], 1645228800000)
+            XCTAssertEqual(self.sut.historicalRates![0][1], 40073.495362369824)
+            expectation.fulfill()
+        }
+        self.wait(for: [expectation], timeout: 3)
+    }
+    
     
 }
