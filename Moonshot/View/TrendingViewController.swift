@@ -106,7 +106,7 @@ class TrendingViewController: UIViewController {
     
     let hkdPrice: UILabel = {
         var label = UILabel(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
-        label.center = CGPoint(x: 310, y: 560)
+        label.center = CGPoint(x: 300, y: 560)
         label.font = UIFont(name: "Nasalization", size: 16)
         label.textColor = .systemYellow
         label.adjustsFontSizeToFitWidth = true

@@ -93,7 +93,7 @@ class CoinViewController: UIViewController, ChartViewDelegate {
         var label = UILabel(frame: CGRect(x: 0, y: 70, width: 240, height: 25))
         label.center = CGPoint(x: 208, y: 210)
         label.font = UIFont(name: "Nasalization", size: 14)
-        label.textColor = .systemYellow
+        label.textColor = .systemBlue
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         label.text = "Coin history last 7 days"
@@ -105,7 +105,7 @@ class CoinViewController: UIViewController, ChartViewDelegate {
         label.center = CGPoint(x: 208, y: 560)
         label.textAlignment = .center
         label.font = UIFont(name: "Nasalization", size: 18)
-        label.textColor = .systemYellow
+        label.textColor = .systemBlue
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
@@ -268,7 +268,7 @@ class CoinViewController: UIViewController, ChartViewDelegate {
         chartView.xAxis.axisLineColor = .systemYellow
         chartView.xAxis.axisLineWidth = 2
         
-        chartView.animate(xAxisDuration: 1.5)
+        chartView.animate(xAxisDuration: 1.2)
         chartView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(chartView)
         NSLayoutConstraint.activate([

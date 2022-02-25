@@ -45,6 +45,9 @@
 		34E0C8AE277628A700CEDA95 /* TrendCoins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E0C8AD277628A700CEDA95 /* TrendCoins.swift */; };
 		34E3149B27C142AD00B49F3C /* CoinHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E3149A27C142AD00B49F3C /* CoinHistory.swift */; };
 		34E3149D27C1595200B49F3C /* BitcoinExchange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E3149C27C1595200B49F3C /* BitcoinExchange.swift */; };
+		34E314A427C926AC00B49F3C /* Demo1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 34E314A127C926AC00B49F3C /* Demo1.gif */; };
+		34E314A527C926AC00B49F3C /* Demo2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 34E314A227C926AC00B49F3C /* Demo2.gif */; };
+		34E314A627C926AC00B49F3C /* HomeScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 34E314A327C926AC00B49F3C /* HomeScreen.png */; };
 		FCECC74E14E9E1AE4C2E4500 /* Pods_Moonshot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87CFF8B7A389BECBA735E44 /* Pods_Moonshot.framework */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +102,9 @@
 		34E0C8AD277628A700CEDA95 /* TrendCoins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendCoins.swift; sourceTree = "<group>"; };
 		34E3149A27C142AD00B49F3C /* CoinHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinHistory.swift; sourceTree = "<group>"; };
 		34E3149C27C1595200B49F3C /* BitcoinExchange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitcoinExchange.swift; sourceTree = "<group>"; };
+		34E314A127C926AC00B49F3C /* Demo1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Demo1.gif; sourceTree = "<group>"; };
+		34E314A227C926AC00B49F3C /* Demo2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Demo2.gif; sourceTree = "<group>"; };
+		34E314A327C926AC00B49F3C /* HomeScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeScreen.png; sourceTree = "<group>"; };
 		8238BC482CA5012A620DEE41 /* Pods-Moonshot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moonshot.release.xcconfig"; path = "Target Support Files/Pods-Moonshot/Pods-Moonshot.release.xcconfig"; sourceTree = "<group>"; };
 		AEA2FB348DAD6459F6F0FA74 /* Pods-Moonshot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moonshot.debug.xcconfig"; path = "Target Support Files/Pods-Moonshot/Pods-Moonshot.debug.xcconfig"; sourceTree = "<group>"; };
 		D87CFF8B7A389BECBA735E44 /* Pods_Moonshot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Moonshot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +133,7 @@
 		341578A32739679000179049 = {
 			isa = PBXGroup;
 			children = (
+				34E314A027C9261F00B49F3C /* Documentation */,
 				341578C32739685900179049 /* README.md */,
 				341578AE2739679000179049 /* Moonshot */,
 				347E9EC72799D38300993426 /* MoonshotTests */,
@@ -236,6 +243,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		34E314A027C9261F00B49F3C /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				34E314A127C926AC00B49F3C /* Demo1.gif */,
+				34E314A227C926AC00B49F3C /* Demo2.gif */,
+				34E314A327C926AC00B49F3C /* HomeScreen.png */,
+			);
+			path = Documentation;
+			sourceTree = "<group>";
+		};
 		CAC9224DF5C45FE1AE8EBE57 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,7 +359,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34E314A427C926AC00B49F3C /* Demo1.gif in Resources */,
 				348872E127C0470C00ECE00D /* Icon.png in Resources */,
+				34E314A627C926AC00B49F3C /* HomeScreen.png in Resources */,
 				348872BC27B2D13D00ECE00D /* Astrolab.ttf in Resources */,
 				348872C827B41A2A00ECE00D /* SearchTableViewCell.xib in Resources */,
 				348872CE27B525C700ECE00D /* FavouriteTableViewCell.xib in Resources */,
@@ -353,6 +372,7 @@
 				348872D427B5512C00ECE00D /* CoinGecko.png in Resources */,
 				341578C42739685900179049 /* README.md in Resources */,
 				341578B72739679000179049 /* Main.storyboard in Resources */,
+				34E314A527C926AC00B49F3C /* Demo2.gif in Resources */,
 				348872B927B2CFF800ECE00D /* Typodermic-NasalizationRg-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

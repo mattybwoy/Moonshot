@@ -266,6 +266,7 @@ class DataManager {
                     let response = try
                     JSONDecoder().decode(CoinDetail.self, from: data)
                     self.coinDetail = response
+                    print(response)
                     DispatchQueue.main.async {
                         completed()
                     }
@@ -288,7 +289,6 @@ class DataManager {
                 do {
                     let response = try
                     JSONDecoder().decode(CoinHistory.self, from: data)
-                    print(response.prices)
                     self.historicalRates = response.prices
                     DispatchQueue.main.async {
                         completed()

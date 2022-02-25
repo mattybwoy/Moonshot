@@ -29,7 +29,7 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - UI Testing
 - Save features
 
-## Testing
+## Testing (XCT)
 11/11 Tests passing
 
 ## Installation
@@ -38,6 +38,11 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 2. Install cocoapods
 
 ## Screenshots
+![HomeScreen](Documentation/HomeScreen.png)
+
+## Demo
+![Home Tab](Documentation/Demo1.gif)
+![Other Tabs](Documentation/Demo2.gif)
 
 ## Tech Stack
 Swift
