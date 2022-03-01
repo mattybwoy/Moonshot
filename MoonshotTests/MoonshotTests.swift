@@ -31,7 +31,7 @@ class MoonshotTests: XCTestCase {
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         let expectation = self.expectation(description: "Testing API Status")
         
-        sut.testAPIStatus { (Status) in
+        sut.testAPIStatus { (Status, NetworkError)  in
             XCTAssertEqual(Status?.gecko_says, "(V3) To the Moon!")
             expectation.fulfill()
         }
@@ -48,7 +48,7 @@ class MoonshotTests: XCTestCase {
         let jsonString = "[{\"name\": \"Bitcoin\", \"id\": \"bitcoin\", \"current_price\": \(current_price), \"image\": \"https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579\", \"price_change_24h\": \(priceChange)}]"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
 
-        sut.loadCoins { (_: [Coins]?) in
+        sut.loadCoins { (_: [Coins]?, NetworkError) in
             XCTAssertEqual(self.sut.coins![0].name, "Bitcoin")
             XCTAssertEqual(self.sut.coins![0].id, "bitcoin")
             XCTAssertEqual(self.sut.coins![0].current_price, 38346)
@@ -69,7 +69,7 @@ class MoonshotTests: XCTestCase {
         let jsonString = "[{\"name\": \"Bitcoin\", \"id\": \"bitcoin\", \"current_price\": \(current_price), \"image\": \"https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579\", \"price_change_24h\": \(priceChange)}]"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         
-        sut.loadCoins(currency: "gbp") { (_: [Coins]?) in
+        sut.loadCoins(currency: "gbp") { (_: [Coins]?, NetworkError) in
             XCTAssertEqual(self.sut.currentCurrency, "gbp")
             XCTAssertEqual(self.sut.coins![0].name, "Bitcoin")
             XCTAssertEqual(self.sut.coins![0].id, "bitcoin")
@@ -91,7 +91,7 @@ class MoonshotTests: XCTestCase {
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         sut.currentCurrency = "usd"
         
-        sut.scrollCoin(pagination: true) {
+        sut.scrollCoin(pagination: true) {_ in
             expectation.fulfill()
         }
         XCTAssertEqual(sut.pageCount, 3)
@@ -108,7 +108,7 @@ class MoonshotTests: XCTestCase {
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         sut.currentCurrency = "gbp"
         
-        sut.reloadCoins { (_: [Coins]?) in
+        sut.reloadCoins { (_: [Coins]?, NetworkError) in
             XCTAssertEqual(self.sut.coins![0].name, "Bitcoin")
             XCTAssertEqual(self.sut.coins![0].id, "bitcoin")
             XCTAssertEqual(self.sut.coins![0].current_price, 28794)
@@ -125,7 +125,7 @@ class MoonshotTests: XCTestCase {
         let jsonString = "{\"coins\": [{\"item\": {\"id\": \"cellframe\", \"name\": \"Cellframe\", \"thumb\": \"https://assets.coingecko.com/coins/images/14465/thumb/cellframe_logo.png\"}}]}"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         
-        sut.trendingCoins { (_: TrendCoins?) in
+        sut.trendingCoins { (_: TrendCoins?, NetworkError) in
             XCTAssertNotNil(self.sut.trendCoins)
             XCTAssertEqual(self.sut.trendCoins?.count, 1)
             XCTAssertEqual(self.sut.trendCoins![0].item.id, "cellframe")
@@ -153,7 +153,7 @@ class MoonshotTests: XCTestCase {
         let jsonString = "{\"data\": {\"total_market_cap\": {\"usd\": \(totalUSDMarket), \"gbp\": \(totalGBPMarket), \"eur\": \(totalEURMarket), \"aud\": \(totalAUDMarket), \"cad\": \(totalCADMarket), \"cny\": \(totalCNYMarket), \"hkd\": \(totalHKDMarket), \"inr\": \(totalINRMarket), \"jpy\": \(totalJPYMarket), \"sgd\": \(totalSGDMarket), \"twd\": \(totalTWDMarket)}}}"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         
-        sut.loadMarketData { (_: MarketData?) in
+        sut.loadMarketData { (_: MarketData?, NetworkError) in
             XCTAssertNotNil(self.sut.totalMarketCap)
             XCTAssertEqual(self.sut.totalMarketCap, 1862718374088.0632)
             expectation.fulfill()
@@ -179,7 +179,7 @@ class MoonshotTests: XCTestCase {
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         sut.currentCurrency = "gbp"
         
-        sut.loadMarketData { (_: MarketData?) in
+        sut.loadMarketData { (_: MarketData?, NetworkError) in
             XCTAssertNotNil(self.sut.totalMarketCap)
             XCTAssertEqual(self.sut.totalMarketCap, 1378260716636.8645)
             expectation.fulfill()
@@ -194,7 +194,7 @@ class MoonshotTests: XCTestCase {
         let jsonString = "{\"coins\": [{\"id\": \"bitcoin\", \"name\": \"Bitcoin\", \"thumb\": \"https://assets.coingecko.com/coins/images/1/thumb/bitcoin.png\"}]}"
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         
-        sut.searchCoin(userSearch: "Bitcoin") { (_: SearchCoin?, error) in
+        sut.searchCoin(userSearch: "Bitcoin") { (_: SearchCoin?, NetworkError) in
             XCTAssertNotNil(self.sut.searchResults)
             XCTAssertEqual(self.sut.searchResults![0].id, "bitcoin")
             XCTAssertEqual(self.sut.searchResults![0].name, "Bitcoin")
@@ -236,7 +236,7 @@ class MoonshotTests: XCTestCase {
         
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         
-        sut.btcComparision {(_: BitcoinExchange?) in
+        sut.btcComparision {(_: BitcoinExchange?, NetworkError) in
             XCTAssertNotNil(self.sut.btcRates)
             XCTAssertEqual(self.sut.btcRates?.usd.name, "US Dollar")
             XCTAssertEqual(self.sut.btcRates?.usd.value, USDRate)
@@ -264,7 +264,7 @@ class MoonshotTests: XCTestCase {
         
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         
-        sut.loadCoinInformation(userSearch: searchTerm) { (_: CoinDetail?) in
+        sut.loadCoinInformation(userSearch: searchTerm) { (_: CoinDetail?, NetworkError) in
             XCTAssertNotNil(self.sut.coinDetail)
             XCTAssertEqual(self.sut.coinDetail?.market_cap_rank, rank)
             XCTAssertEqual(self.sut.coinDetail?.market_data.total_supply, total)
@@ -284,7 +284,7 @@ class MoonshotTests: XCTestCase {
         MockURLProtocol.stubResponseData = jsonString.data(using: .utf8)
         sut.currentCurrency = "usd"
         
-        sut.loadCoinPriceHistory(userSearch: searchTerm) { (_: CoinHistory?) in
+        sut.loadCoinPriceHistory(userSearch: searchTerm) { (_: CoinHistory?, NetworkError) in
             XCTAssertNotNil(self.sut.historicalRates)
             XCTAssertEqual(self.sut.historicalRates![0][0], 1645228800000)
             XCTAssertEqual(self.sut.historicalRates![0][1], 40073.495362369824)

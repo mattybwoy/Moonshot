@@ -29,10 +29,10 @@ class TrendingViewController: UIViewController {
         view.addSubview(jpyPrice)
         view.addSubview(inrPrice)
         setupTableView()
-        DataManager.sharedInstance.trendingCoins {_ in 
+        DataManager.sharedInstance.trendingCoins {_,_  in
             self.tableView.reloadData()
         }
-        DataManager.sharedInstance.btcComparision {_ in
+        DataManager.sharedInstance.btcComparision {_,_  in
             self.loadCurrencies()
         }
         

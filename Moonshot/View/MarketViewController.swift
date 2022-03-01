@@ -54,10 +54,10 @@ class MarketViewController: UIViewController {
         view.addSubview(topLineView)
         view.addSubview(bottomLineView)
         view.backgroundColor = .darkGray
-        DataManager.sharedInstance.loadMarketData {_ in 
+        DataManager.sharedInstance.loadMarketData {_,_  in
             self.addMarketTotal(total: DataManager.sharedInstance.totalMarketCap!)
         }
-        DataManager.sharedInstance.loadCoins {_ in 
+        DataManager.sharedInstance.loadCoins {_,_  in 
             self.tableView.reloadData()
         }
     }
@@ -169,10 +169,10 @@ class MarketViewController: UIViewController {
             print("index \(index) and \(title)")
             self.currencySelector.setTitle(title, for: .normal)
             let newCurrency = title.lowercased()
-            DataManager.sharedInstance.loadCoins(currency: newCurrency, completed: {_ in 
+            DataManager.sharedInstance.loadCoins(currency: newCurrency, completed: {_,_  in 
                 self.tableView.reloadData()
             })
-            DataManager.sharedInstance.loadMarketData {_ in 
+            DataManager.sharedInstance.loadMarketData {_,_  in 
                 self.addMarketTotal(total: DataManager.sharedInstance.totalMarketCap!)
             }
         }
@@ -192,7 +192,7 @@ extension MarketViewController: UIScrollViewDelegate {
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
             if (velocity.y < -0.2)
             {
-                DataManager.sharedInstance.reloadCoins {_ in 
+                DataManager.sharedInstance.reloadCoins {_,_  in 
                     self.tableView.reloadData()
                 }
                     self.refreshControl.endRefreshing()
@@ -203,7 +203,7 @@ extension MarketViewController: UIScrollViewDelegate {
         let position = scrollView.contentOffset.y
         if position > (tableView.contentSize.height-100-scrollView.frame.size.height) {
             self.tableView.tableFooterView = createSpinnerFooter()
-            DataManager.sharedInstance.scrollCoin(pagination: true, completed: {
+            DataManager.sharedInstance.scrollCoin(pagination: true, completed: {_ in 
                 DispatchQueue.main.async {
                     self.tableView.tableFooterView = nil
                     self.tableView.reloadData()

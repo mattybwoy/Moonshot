@@ -40,19 +40,21 @@ class DataManager {
         self.urlSession = urlSession
     }
     
-    func testAPIStatus(completionHandler: @escaping (Status?) -> Void) {
+    func testAPIStatus(completionHandler: @escaping (Status?, NetworkError?) -> Void) {
         let statusURL = "https://api.coingecko.com/api/v3/ping"
         if let url = URL(string: statusURL) {
             let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
+                    completionHandler(nil, NetworkError.failedRequest)
                     return
                 }
                 do {
                     let status = try
                     JSONDecoder().decode(Status.self, from: data)
-                    completionHandler(status)
+                    completionHandler(status, nil)
                 }
                 catch {
+                    completionHandler(nil, NetworkError.invalidRequestError)
                     return
                 }
             }
@@ -60,13 +62,14 @@ class DataManager {
         }
     }
     
-    func loadCoins(currency: String = "usd", completed: @escaping ([Coins]?) -> Void) {
+    func loadCoins(currency: String = "usd", completed: @escaping ([Coins]?, NetworkError?) -> Void) {
 
         currentCurrency = currency
         
         if let url = URL(string: baseURL + currentCurrency!) {
             let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
+                    completed(nil, NetworkError.failedRequest)
                     return
                 }
                 do {
@@ -74,11 +77,12 @@ class DataManager {
                     JSONDecoder().decode([Coins].self, from: data)
                     self.coins = response
                     DispatchQueue.main.async {
-                        completed(response)
+                        completed(response, nil)
                     }
                     self.pageCount = 2
                 }
                 catch {
+                    completed(nil, NetworkError.invalidRequestError)
                     return
                 }
             }
@@ -86,13 +90,14 @@ class DataManager {
         }
     }
     
-    func scrollCoin(pagination: Bool, completed: @escaping () -> ()) {
+    func scrollCoin(pagination: Bool, completed: @escaping (NetworkError?) -> ()) {
         
         isPaginating = true
         
         if let url = URL(string: baseURL + currentCurrency! + pageNum + String(pageCount)) {
             let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
+                    completed(NetworkError.failedRequest)
                     return
                 }
                 do {
@@ -101,13 +106,14 @@ class DataManager {
                     let newCoins = response
                     self.coins?.append(contentsOf: newCoins)
                     DispatchQueue.main.async {
-                        completed()
+                        completed(nil)
                     }
                     if pagination {
                         self.isPaginating = false
                     }
                 }
                 catch {
+                    completed(NetworkError.invalidRequestError)
                     return
                 }
             }
@@ -116,11 +122,12 @@ class DataManager {
         pageCount += 1
     }
     
-    func reloadCoins(pagination: Bool = false, completed: @escaping ([Coins]?) -> Void) {
+    func reloadCoins(pagination: Bool = false, completed: @escaping ([Coins]?, NetworkError?) -> Void) {
         
         if let url = URL(string: baseURL + currentCurrency!) {
             let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
+                    completed(nil, NetworkError.failedRequest)
                     return
                 }
                 do {
@@ -128,11 +135,12 @@ class DataManager {
                     JSONDecoder().decode([Coins].self, from: data)
                     self.coins = response
                     DispatchQueue.main.async {
-                        completed(response)
+                        completed(response, nil)
                     }
                     self.pageCount = 2
                 }
                 catch {
+                    completed(nil, NetworkError.invalidRequestError)
                     return
                 }
             }
@@ -140,11 +148,12 @@ class DataManager {
         }
     }
     
-    func trendingCoins(pagination: Bool = false, completed: @escaping (TrendCoins?) -> ()) {
+    func trendingCoins(pagination: Bool = false, completed: @escaping (TrendCoins?, NetworkError?) -> ()) {
         
         if let url = URL(string: trendingURL) {
             let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
+                    completed(nil, NetworkError.failedRequest)
                     return
                 }
                 do {
@@ -152,10 +161,11 @@ class DataManager {
                     JSONDecoder().decode(TrendCoins.self, from: data)
                     self.trendCoins = response.coins
                     DispatchQueue.main.async {
-                        completed(response)
+                        completed(response, nil)
                     }
                 }
                 catch {
+                    completed(nil, NetworkError.invalidRequestError)
                     return
                 }
             }
@@ -163,11 +173,12 @@ class DataManager {
         }
     }
     
-    func loadMarketData(completed: @escaping (MarketData?) -> Void) {
+    func loadMarketData(completed: @escaping (MarketData?, NetworkError?) -> Void) {
         
         if let url = URL(string: totalURL) {
             let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
+                    completed(nil, NetworkError.failedRequest)
                     return
                 }
                 do {
@@ -196,10 +207,11 @@ class DataManager {
                         self.totalMarketCap = response.data.total_market_cap.usd
                     }
                     DispatchQueue.main.async {
-                        completed(response)
+                        completed(response, nil)
                     }
                 }
                 catch {
+                    completed(nil, NetworkError.invalidRequestError)
                     return
                 }
             }
@@ -232,11 +244,12 @@ class DataManager {
         }
     }
     
-    func btcComparision(completed: @escaping (BitcoinExchange?) -> Void) {
+    func btcComparision(completed: @escaping (BitcoinExchange?, NetworkError?) -> Void) {
         
         if let url = URL(string: btcToFiat) {
             let task = urlSession.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else {
+                    completed(nil, NetworkError.failedRequest)
                     return
                 }
                 do {
@@ -244,10 +257,11 @@ class DataManager {
                     JSONDecoder().decode(BitcoinExchange.self, from: data)
                     DispatchQueue.main.async {
                         self.btcRates = response.rates
-                        completed(response)
+                        completed(response, nil)
                     }
                 }
                 catch {
+                    completed(nil, NetworkError.invalidRequestError)
                     return
                 }
             }
@@ -255,11 +269,12 @@ class DataManager {
         }
     }
     
-    func loadCoinInformation(userSearch: String, completed: @escaping (CoinDetail?) -> Void) {
+    func loadCoinInformation(userSearch: String, completed: @escaping (CoinDetail?, NetworkError?) -> Void) {
         
         if let url = URL(string: coinHistory + userSearch + coinInformationParams) {
             let task = urlSession.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else {
+                    completed(nil, NetworkError.failedRequest)
                     return
                 }
                 do {
@@ -268,10 +283,11 @@ class DataManager {
                     self.coinDetail = response
                     print(response)
                     DispatchQueue.main.async {
-                        completed(response)
+                        completed(response, nil)
                     }
                 }
                 catch {
+                    completed(nil, NetworkError.invalidRequestError)
                     return
                 }
             }
@@ -279,23 +295,24 @@ class DataManager {
         }
     }
     
-    func loadCoinPriceHistory(userSearch: String, completed: @escaping (CoinHistory?) -> Void) {
+    func loadCoinPriceHistory(userSearch: String, completed: @escaping (CoinHistory?, NetworkError?) -> Void) {
         
         if let url = URL(string: coinHistory + userSearch + coinHistoryCurrency + currentCurrency! + coinHistoryInterval) {
             let task = urlSession.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else {
+                    completed(nil, NetworkError.failedRequest)
                     return
                 }
                 do {
                     let response = try
                     JSONDecoder().decode(CoinHistory.self, from: data)
                     self.historicalRates = response.prices
-                    print(response)
                     DispatchQueue.main.async {
-                        completed(response)
+                        completed(response, nil)
                     }
                 }
                 catch {
+                    completed(nil, NetworkError.invalidRequestError)
                     return
                 }
             }

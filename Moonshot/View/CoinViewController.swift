@@ -31,11 +31,11 @@ class CoinViewController: UIViewController, ChartViewDelegate {
         view.addSubview(highAllTimePrice)
         view.addSubview(lowAllTimePrice)
         view.addSubview(coinHistoryLabel)
-        DataManager.sharedInstance.loadCoinInformation(userSearch: self.coin) {_ in 
+        DataManager.sharedInstance.loadCoinInformation(userSearch: self.coin) {_,_  in 
             self.setupScreen()
             self.setupCoinImage()
         }
-        DataManager.sharedInstance.loadCoinPriceHistory(userSearch: self.coin) { _ in [self]
+        DataManager.sharedInstance.loadCoinPriceHistory(userSearch: self.coin) {_,_  in
             self.setData()
         }
         setupGraph()
