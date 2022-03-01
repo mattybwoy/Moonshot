@@ -14,16 +14,6 @@ class DataManager {
     var pageCount = 2
     var currentCurrency: String?
     var isPaginating = false
-    let baseURL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency="
-    let trendingURL = "https://api.coingecko.com/api/v3/search/trending"
-    let totalURL = "https://api.coingecko.com/api/v3/global"
-    let searchURL = "https://api.coingecko.com/api/v3/search?query="
-    let coinHistory = "https://api.coingecko.com/api/v3/coins/"
-    let coinHistoryCurrency = "/market_chart?vs_currency="
-    let coinHistoryInterval = "&days=7&interval=daily"
-    let coinInformationParams = "?localization=false&tickers=false&community_data=false&developer_data=false"
-    let btcToFiat = "https://api.coingecko.com/api/v3/exchange_rates"
-    let pageNum = "&page="
     var coins: [Coins]?
     var trendCoins: [TrendCoins.coins]?
     var totalMarketCap: Double?
@@ -31,7 +21,6 @@ class DataManager {
     var coinDetail: CoinDetail?
     var btcRates: Tokens?
     var historicalRates: [[Double]]?
-    
     var favoriteCoins: [WatchCoins] = [WatchCoins]()
     
     private var urlSession: URLSession
@@ -41,8 +30,7 @@ class DataManager {
     }
     
     func testAPIStatus(completionHandler: @escaping (Status?, NetworkError?) -> Void) {
-        let statusURL = "https://api.coingecko.com/api/v3/ping"
-        if let url = URL(string: statusURL) {
+        if let url = URL(string: Url.status.rawValue) {
             let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
                     completionHandler(nil, NetworkError.failedRequest)
@@ -66,7 +54,7 @@ class DataManager {
 
         currentCurrency = currency
         
-        if let url = URL(string: baseURL + currentCurrency!) {
+        if let url = URL(string: Url.base.rawValue + currentCurrency!) {
             let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
                     completed(nil, NetworkError.failedRequest)
@@ -94,7 +82,7 @@ class DataManager {
         
         isPaginating = true
         
-        if let url = URL(string: baseURL + currentCurrency! + pageNum + String(pageCount)) {
+        if let url = URL(string: Url.base.rawValue + currentCurrency! + Url.pageNum.rawValue + String(pageCount)) {
             let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
                     completed(NetworkError.failedRequest)
@@ -124,7 +112,7 @@ class DataManager {
     
     func reloadCoins(pagination: Bool = false, completed: @escaping ([Coins]?, NetworkError?) -> Void) {
         
-        if let url = URL(string: baseURL + currentCurrency!) {
+        if let url = URL(string: Url.base.rawValue + currentCurrency!) {
             let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
                     completed(nil, NetworkError.failedRequest)
@@ -150,7 +138,7 @@ class DataManager {
     
     func trendingCoins(pagination: Bool = false, completed: @escaping (TrendCoins?, NetworkError?) -> ()) {
         
-        if let url = URL(string: trendingURL) {
+        if let url = URL(string: Url.trending.rawValue) {
             let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
                     completed(nil, NetworkError.failedRequest)
@@ -175,7 +163,7 @@ class DataManager {
     
     func loadMarketData(completed: @escaping (MarketData?, NetworkError?) -> Void) {
         
-        if let url = URL(string: totalURL) {
+        if let url = URL(string: Url.total.rawValue) {
             let task = urlSession.dataTask(with: url) { (data, response, error) in
                 guard let data = data, error == nil else {
                     completed(nil, NetworkError.failedRequest)
@@ -221,7 +209,7 @@ class DataManager {
     
     func searchCoin(userSearch: String, completed: @escaping (SearchCoin?, NetworkError?) -> Void) {
         
-        if let url = URL(string: searchURL + userSearch) {
+        if let url = URL(string: Url.search.rawValue + userSearch) {
             let task = urlSession.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else {
                     completed(nil, NetworkError.failedRequest)
@@ -246,7 +234,7 @@ class DataManager {
     
     func btcComparision(completed: @escaping (BitcoinExchange?, NetworkError?) -> Void) {
         
-        if let url = URL(string: btcToFiat) {
+        if let url = URL(string: Url.btc.rawValue) {
             let task = urlSession.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else {
                     completed(nil, NetworkError.failedRequest)
@@ -271,7 +259,7 @@ class DataManager {
     
     func loadCoinInformation(userSearch: String, completed: @escaping (CoinDetail?, NetworkError?) -> Void) {
         
-        if let url = URL(string: coinHistory + userSearch + coinInformationParams) {
+        if let url = URL(string: Url.coinHistory.rawValue + userSearch + Url.coinParams.rawValue) {
             let task = urlSession.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else {
                     completed(nil, NetworkError.failedRequest)
@@ -297,7 +285,7 @@ class DataManager {
     
     func loadCoinPriceHistory(userSearch: String, completed: @escaping (CoinHistory?, NetworkError?) -> Void) {
         
-        if let url = URL(string: coinHistory + userSearch + coinHistoryCurrency + currentCurrency! + coinHistoryInterval) {
+        if let url = URL(string: Url.coinHistory.rawValue + userSearch + Url.coinHistoryCurrency.rawValue + currentCurrency! + Url.coinInterval.rawValue) {
             let task = urlSession.dataTask(with: url) { data, response, error in
                 guard let data = data, error == nil else {
                     completed(nil, NetworkError.failedRequest)
