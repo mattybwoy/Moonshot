@@ -31,6 +31,7 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 
 ## Testing (XCT)
 13/13 Tests passing
+2/2 UI Tests passing
 
 ## Installation
 

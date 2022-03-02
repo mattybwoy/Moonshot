@@ -17,6 +17,7 @@
 		341578C42739685900179049 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 341578C32739685900179049 /* README.md */; };
 		341578CA273982A800179049 /* MarketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341578C9273982A800179049 /* MarketViewController.swift */; };
 		343E2DAE27CE3EE8003BB98F /* Url.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343E2DAD27CE3EE8003BB98F /* Url.swift */; };
+		343E2DB027CE8517003BB98F /* SearchControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343E2DAF27CE8517003BB98F /* SearchControllerTest.swift */; };
 		34526E0627399E6000ECD673 /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34526E0527399E6000ECD673 /* TabViewController.swift */; };
 		34526E0A273BD85200ECD673 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34526E09273BD85200ECD673 /* DataManager.swift */; };
 		34526E0C273BD96800ECD673 /* Coins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34526E0B273BD96800ECD673 /* Coins.swift */; };
@@ -75,6 +76,7 @@
 		341578C32739685900179049 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		341578C9273982A800179049 /* MarketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketViewController.swift; sourceTree = "<group>"; };
 		343E2DAD27CE3EE8003BB98F /* Url.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Url.swift; sourceTree = "<group>"; };
+		343E2DAF27CE8517003BB98F /* SearchControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerTest.swift; sourceTree = "<group>"; };
 		34526E0527399E6000ECD673 /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		34526E09273BD85200ECD673 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		34526E0B273BD96800ECD673 /* Coins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coins.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				347E9EC82799D38300993426 /* MoonshotTests.swift */,
+				343E2DAF27CE8517003BB98F /* SearchControllerTest.swift */,
 				34962E8027A835DB002FFF94 /* Models */,
 			);
 			path = MoonshotTests;
@@ -467,6 +470,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				343E2DB027CE8517003BB98F /* SearchControllerTest.swift in Sources */,
 				347E9EC92799D38300993426 /* MoonshotTests.swift in Sources */,
 				34962E7F27A835D5002FFF94 /* MockURLProtocol.swift in Sources */,
 			);
