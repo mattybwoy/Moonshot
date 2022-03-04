@@ -26,15 +26,13 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 - All Tabs now connnected to coin screen
 
 ## Improvements
-- UI Testing
 - Save features
 
 ## Testing (XCT)
-13/13 Tests passing
+15/15 Tests passing
 2/2 UI Tests passing
 
 ## Installation
-
 1. Clone repository
 2. Install cocoapods
 
