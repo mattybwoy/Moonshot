@@ -30,7 +30,7 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 
 ## Testing (XCT)
 15/15 Tests passing
-2/2 UI Tests passing
+3/3 UI Tests passing
 
 ## Installation
 1. Clone repository

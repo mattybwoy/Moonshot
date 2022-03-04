@@ -34,6 +34,13 @@ class MoonshotUITests: XCTestCase {
         let searchField = app.searchFields["Search"]
         XCTAssertEqual(searchField.placeholderValue, "Search")
     }
+    
+    func testSearchViewController_DisplaysAlert_WhenNoSearchTermIsTyped() {
+        _ = app.searchFields["Search"]
+        app.buttons.matching(identifier: "Search").staticTexts["Search"].tap()
+        
+        XCTAssertTrue(app.alerts["Invalid Search Term"].waitForExistence(timeout: 1))
+    }
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {

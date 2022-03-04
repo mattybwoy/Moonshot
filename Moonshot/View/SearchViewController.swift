@@ -82,6 +82,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         guard let text = searchBar.text, !text.isEmpty else {
             let alert = UIAlertController(title: "Alert", message: "Invalid search term, please try again", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+            alert.view.accessibilityIdentifier = "Invalid Search Term"
             self.present(alert, animated: true, completion: nil)
             return
         }
