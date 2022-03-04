@@ -41,6 +41,17 @@ class MoonshotUITests: XCTestCase {
         
         XCTAssertTrue(app.alerts["Invalid Search Term"].waitForExistence(timeout: 1))
     }
+    
+    func testSearchViewController_DisplaysResults_WhenSearchTermIsTyped() {
+        let search = app.searchFields["Search"]
+        search.tap()
+        search.typeText("Bitcoin")
+        app.buttons.matching(identifier: "Search").staticTexts["Search"].tap()
+        let result = app.tables/*@START_MENU_TOKEN@*/.staticTexts["Bitcoin"]/*[[".cells.staticTexts[\"Bitcoin\"]",".staticTexts[\"Bitcoin\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        
+        XCTAssertTrue(result.isHittable)
+        XCTAssertNoThrow(app.alerts["Invalid Search Term"])
+    }
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
