@@ -49,6 +49,7 @@ class MoonshotUITests: XCTestCase {
         let savedCoin = app.tables/*@START_MENU_TOKEN@*/.staticTexts["Bitcoin"]/*[[".cells.staticTexts[\"Bitcoin\"]",".staticTexts[\"Bitcoin\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
         
         XCTAssertNotNil(savedCoin)
+        XCTAssertEqual(tablesQuery.count, 1)
         XCTAssertTrue(savedCoin.isHittable)
     }
     
@@ -62,7 +63,6 @@ class MoonshotUITests: XCTestCase {
         
         XCTAssertTrue(app.alerts["Coin already saved"].waitForExistence(timeout: 1))
     }
-
 
     func testSearchViewController_DisplaysSearchBar() throws {
         let searchField = app.searchFields["Search"]
