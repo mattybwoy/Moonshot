@@ -153,6 +153,7 @@ class TrendingViewController: UIViewController {
         self.tableView.reloadData()
         let alert = UIAlertController(title: "Alert", message: "Coin already in Watchlist", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        alert.view.accessibilityIdentifier = "Coin already saved"
         self.present(alert, animated: true, completion: nil)
     }
     

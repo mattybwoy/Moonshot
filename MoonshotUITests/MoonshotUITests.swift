@@ -51,6 +51,17 @@ class MoonshotUITests: XCTestCase {
         XCTAssertNotNil(savedCoin)
         XCTAssertTrue(savedCoin.isHittable)
     }
+    
+    func testMarketViewController_WhenFavouritingDuplicateCoin_DisplaysAlert() {
+        app.tabBars.buttons["Market"].tap()
+        let tablesQuery = app.tables
+        tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["Bitcoin"]/*[[".cells.staticTexts[\"Bitcoin\"]",".staticTexts[\"Bitcoin\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeLeft()
+        tablesQuery/*@START_MENU_TOKEN@*/.buttons["Favourite"]/*[[".cells.buttons[\"Favourite\"]",".buttons[\"Favourite\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["Bitcoin"]/*[[".cells.staticTexts[\"Bitcoin\"]",".staticTexts[\"Bitcoin\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeLeft()
+        tablesQuery/*@START_MENU_TOKEN@*/.buttons["Favourite"]/*[[".cells.buttons[\"Favourite\"]",".buttons[\"Favourite\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        XCTAssertTrue(app.alerts["Coin already saved"].waitForExistence(timeout: 1))
+    }
 
 
     func testSearchViewController_DisplaysSearchBar() throws {
