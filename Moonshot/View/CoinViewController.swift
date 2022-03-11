@@ -285,15 +285,19 @@ class CoinViewController: UIViewController, ChartViewDelegate {
     
     func setData() {
         
+        guard let oldTime = DataManager.sharedInstance.historicalRates else {
+            return
+        }
+        
         let yValues: [ChartDataEntry] = [
-            ChartDataEntry(x: 0.0, y: DataManager.sharedInstance.historicalRates![0][1]),
-            ChartDataEntry(x: 1.0, y: DataManager.sharedInstance.historicalRates![1][1]),
-            ChartDataEntry(x: 2.0, y: DataManager.sharedInstance.historicalRates![2][1]),
-            ChartDataEntry(x: 3.0, y: DataManager.sharedInstance.historicalRates![3][1]),
-            ChartDataEntry(x: 4.0, y: DataManager.sharedInstance.historicalRates![4][1]),
-            ChartDataEntry(x: 5.0, y: DataManager.sharedInstance.historicalRates![5][1]),
-            ChartDataEntry(x: 6.0, y: DataManager.sharedInstance.historicalRates![6][1]),
-            ChartDataEntry(x: 7.0, y: DataManager.sharedInstance.historicalRates![7][1])
+            ChartDataEntry(x: 0.0, y: oldTime[0][1]),
+            ChartDataEntry(x: 1.0, y: oldTime[1][1]),
+            ChartDataEntry(x: 2.0, y: oldTime[2][1]),
+            ChartDataEntry(x: 3.0, y: oldTime[3][1]),
+            ChartDataEntry(x: 4.0, y: oldTime[4][1]),
+            ChartDataEntry(x: 5.0, y: oldTime[5][1]),
+            ChartDataEntry(x: 6.0, y: oldTime[6][1]),
+            ChartDataEntry(x: 7.0, y: oldTime[7][1])
         ]
         
         guard let previousRates = DataManager.sharedInstance.historicalRates else {

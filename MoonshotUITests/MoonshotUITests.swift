@@ -24,6 +24,13 @@ class MoonshotUITests: XCTestCase {
     override func tearDownWithError() throws {
         app = nil
     }
+    
+    func testMarketViewController_DisplaysChangeCurrencyDropDown() {
+        app.tabBars.buttons["Market"].tap()
+        let dropDown = app/*@START_MENU_TOKEN@*/.staticTexts["USD"]/*[[".buttons[\"USD\"].staticTexts[\"USD\"]",".staticTexts[\"USD\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+
+        XCTAssertNotNil(dropDown)
+    }
 
     func testSearchViewController_DisplaysSearchBar() throws {
         let searchField = app.searchFields["Search"]
