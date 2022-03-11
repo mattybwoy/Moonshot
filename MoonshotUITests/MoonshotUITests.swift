@@ -31,6 +31,14 @@ class MoonshotUITests: XCTestCase {
 
         XCTAssertNotNil(dropDown)
     }
+    
+    func testMarketViewController_AllowsUserToChangeCurrency() {
+        app.tabBars.buttons["Market"].tap()
+        app/*@START_MENU_TOKEN@*/.staticTexts["USD"]/*[[".buttons[\"USD\"].staticTexts[\"USD\"]",".staticTexts[\"USD\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        let gbpStaticText = app/*@START_MENU_TOKEN@*/.tables.staticTexts["GBP"]/*[[".otherElements[\"drop_down\"].tables",".cells.staticTexts[\"GBP\"]",".staticTexts[\"GBP\"]",".tables"],[[[-1,3,1],[-1,0,1]],[[-1,2],[-1,1]]],[0,0]]@END_MENU_TOKEN@*/
+        gbpStaticText.tap()
+        XCTAssertNoThrow(Error.self)
+    }
 
     func testSearchViewController_DisplaysSearchBar() throws {
         let searchField = app.searchFields["Search"]
