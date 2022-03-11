@@ -39,6 +39,19 @@ class MoonshotUITests: XCTestCase {
         gbpStaticText.tap()
         XCTAssertNoThrow(Error.self)
     }
+    
+    func testMarketViewControllerConnectedToWatchList_AllowsFavouriteCoinToBePassed() {
+        app.tabBars.buttons["Market"].tap()
+        let tablesQuery = app.tables
+        tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["Bitcoin"]/*[[".cells.staticTexts[\"Bitcoin\"]",".staticTexts[\"Bitcoin\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.swipeLeft()
+        tablesQuery/*@START_MENU_TOKEN@*/.buttons["Favourite"]/*[[".cells.buttons[\"Favourite\"]",".buttons[\"Favourite\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.tabBars["Tab Bar"].buttons["Watchlist"].tap()
+        let savedCoin = app.tables/*@START_MENU_TOKEN@*/.staticTexts["Bitcoin"]/*[[".cells.staticTexts[\"Bitcoin\"]",".staticTexts[\"Bitcoin\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        
+        XCTAssertNotNil(savedCoin)
+        XCTAssertTrue(savedCoin.isHittable)
+    }
+
 
     func testSearchViewController_DisplaysSearchBar() throws {
         let searchField = app.searchFields["Search"]
