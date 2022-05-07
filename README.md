@@ -44,7 +44,11 @@ Results will be displayed in a tableView with screen navigation handled by a tab
 ![Other Tabs](Documentation/Demo2.gif)
 
 ## Tech Stack
-Swift
+Swift, UIKit
+
+## Dependencies
+- Dropdown
+- Charts
 
 ## Collaborators
 @mattybwoy
